@@ -13,38 +13,48 @@ const Header = (props) => {
 }
 
 // Componente para construir las secciones de Content
-const Part = (props) => {
+const Part = ({ part }) => {
   return (
     <>
       <p>
-        {props.part.name} : {props.part.exercises}
+        {part.name} : {part.exercises}
       </p>
     </>
   )
 }
 
-const Content = (props) => {  
+const Content = ({ parts }) => {  
   return (
     <>
-      <Part part={props.parts[0]} />
-      <Part part={props.parts[1]} />
-      <Part part={props.parts[2]} />
+      <Part part={parts[1]} />
+      <Part part={parts[2]} />
+      <Part part={parts[0]} />
     </>
   )
 }
 
-const Counter = (props) => {
+// Componentes para la sección Footer
+const Button = ({ onClick, text }) => <button onClick={onClick}> {text} </button>
+
+const Footer = (props) => {
   const sumOfExercises = props.parts.reduce((counter, element) => {
     return counter + element.exercises;
   }, 0);  
 
   const [count, setCount] = useState(sumOfExercises)
+  const decreaseByOne = () => setCount(count - 1) 
+  const setToZero = () => setCount(0) 
+  const increaseByOne = () => setCount(count + 1)
+  console.log('rendering...', count)
 
   return (
     <div className="card">
-      <button onClick={() => setCount((count) => count + 1)}>
-      Number of exercises: {count}
-      </button>
+      <h3>Number of exercises:{count}</h3>
+      <div>
+        <Button onClick={decreaseByOne} text={'-'} />
+        <Button onClick={setToZero} text={'Set to zero'} />
+        <Button onClick={increaseByOne} text={'+'} />
+      </div>
     </div>
   )
 }
@@ -72,7 +82,7 @@ const App = () => {
     <>
       <Header course={course.name}/>
       <Content parts={course.parts}/>
-      <Counter parts={course.parts}/>
+      <Footer parts={course.parts}/>
     </>
   )
 }
