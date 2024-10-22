@@ -1,45 +1,44 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 
 const Header = (props) => {
   return (
     <>
-      <div>
-        <img src={viteLogo} className="logo" alt="Vite logo" />
-        <img src={reactLogo} className="logo react" alt="React logo" />
-      </div>
-
+      <img src={reactLogo} className="logo react" alt="React logo" />
       <h1>{props.course}</h1>
     </>
   )
 }
 
-const Content = (props) => {
+// Componente para construir las secciones de Content
+const Part = (props) => {
   return (
     <>
-    {/* TO-DO: Refactorizar para que cada parrafo sea un componente
-      <Part/>
-      <Part/>
-      <Part/> */}
-
       <p>
-        {props.parts[0]} {props.exercises[0]}
-      </p>
-      <p>
-      {props.parts[1]} {props.exercises[1]}
-      </p>
-      <p>
-        {props.parts[2]} {props.exercises[2]}
+        {props.part.name} : {props.part.exercises}
       </p>
     </>
   )
 }
 
+const Content = (props) => {  
+  return (
+    <>
+      <Part part={props.parts[0]} />
+      <Part part={props.parts[1]} />
+      <Part part={props.parts[2]} />
+    </>
+  )
+}
+
 const Counter = (props) => {
-  const [count, setCount] = useState(props.number)
+  const sumOfExercises = props.parts.reduce((counter, element) => {
+    return counter + element.exercises;
+  }, 0);  
+
+  const [count, setCount] = useState(sumOfExercises)
 
   return (
     <div className="card">
@@ -51,23 +50,29 @@ const Counter = (props) => {
 }
 
 const App = () => {
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
 
   return (
     <>
-
-      <Header course={course}/>
-
-      <Content parts={[part1, part2, part3]} exercises={[exercises1, exercises2, exercises3]}/>
-
-      <Counter number={exercises1 + exercises2 + exercises3}/>
-
+      <Header course={course.name}/>
+      <Content parts={course.parts}/>
+      <Counter parts={course.parts}/>
     </>
   )
 }
