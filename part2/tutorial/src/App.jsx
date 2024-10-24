@@ -75,9 +75,6 @@ const App = () => {
       <img src={reactLogo} className="logo react" alt="React logo" />
         {courses.map((course, index) => (
           <div key={index}>
-            {/* <Header course={course.name} />
-            <Content parts={course.parts} />
-            <Footer parts={course.parts} /> */}
             <Course course={course}/> 
           </div>
         ))}
