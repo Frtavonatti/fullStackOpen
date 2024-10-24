@@ -1,7 +1,5 @@
 import Part from './Part';
 
-<h1></h1>
-
 const Content = ({ parts }) => {  
     return (
       <>

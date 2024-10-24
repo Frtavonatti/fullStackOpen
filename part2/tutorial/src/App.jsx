@@ -1,8 +1,7 @@
 import { useState } from 'react'
 // import Login from '/components/Login';
-import Header from '../components/Header';
-import Content from '../components/content/Content';
-import Footer from '../components/Footer';
+import Course from '/components/Course'
+import reactLogo from './assets/react.svg';
 import './App.css'
 
 const App = () => {
@@ -61,14 +60,6 @@ const App = () => {
     }
   ]
 
-  // Get the names of each course
-  const courseNames = courses.map(course => course.name);
-  // console.log('Courses: ', courseNames)
-
-  // Get array of parts from each course
-  const courseParts = courses.flatMap(course => course.parts);
-  console.log('Parts: ', courseParts)
-
   return (
     <>
       {/* {isLoggedIn ? (
@@ -81,12 +72,17 @@ const App = () => {
         <Login onLogin={handleLogin} />
       )} */}
 
-          <Header course={courseNames}/>
-          <Content parts={courseParts}/>
-          <Footer parts={courseParts}/>
-    </>
+      <img src={reactLogo} className="logo react" alt="React logo" />
+        {courses.map((course, index) => (
+          <div key={index}>
+            {/* <Header course={course.name} />
+            <Content parts={course.parts} />
+            <Footer parts={course.parts} /> */}
+            <Course course={course}/> 
+          </div>
+        ))}
+      </>
   );
 };
-
 
 export default App
