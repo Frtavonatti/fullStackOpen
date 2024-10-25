@@ -5,7 +5,9 @@ import './App.css'
 
 function App(props) {
   const [notes, setNotes] = useState(props.notes)
+  const [showAll, setShowAll] = useState(true)
 
+  // Funcionalidad para agregar nuevas notas
   const addNote = (event) => {
     event.preventDefault()
     const query = event.target[0].value
@@ -15,9 +17,17 @@ function App(props) {
         important: false 
       } 
     setNotes(notes.concat(newNote))
+    event.target[0].value = ''
   }
   
-  console.log(notes);
+  // Funcionalidad para filtrar notas por importancia
+  const onlyImportantNotes = notes.filter(note => note.important)
+
+  const handleNotesDisplay = () => {
+    setShowAll(!showAll)
+  }
+
+  const notesToShow = showAll ? notes : onlyImportantNotes
 
   return (
     <>
@@ -29,7 +39,7 @@ function App(props) {
       </div>
         
       <ul>
-        {notes.map(note => 
+        {notesToShow.map(note => 
           <Note key={note.id} note={note} />
         )}
       </ul>
@@ -38,6 +48,8 @@ function App(props) {
         <input/>
         <button type="submit">save</button>
       </form>   
+
+      <button onClick={handleNotesDisplay}>Show only important notes</button>
     </>
   )
 }
