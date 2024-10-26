@@ -1,28 +1,25 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+// import { StrictMode } from 'react'
+// import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
+import App from './App'
 
-const notes = [
-  {
-    id: 1,
-    content: 'HTML is easy',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only JavaScript',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    important: true
-  }
-]
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App notes={notes}/>
-  </StrictMode>,
-)
+// const fetchNotes = async () => {
+//   try {
+//     const res = await axios.get('http://localhost:3001/notes')
+//     // console.log(res.data);
+//     return res.data
+//   } catch (error) {
+//     console.error('Error fetching notes:', error)
+//     return []
+//   }
+// }
+
+// const renderApp = async () => {
+//   const notes = await fetchNotes()
+//   ReactDOM.createRoot(document.getElementById('root')).render(<App notes={notes} />)
+// }
+
+// renderApp()

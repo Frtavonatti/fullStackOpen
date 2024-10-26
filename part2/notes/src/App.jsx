@@ -1,22 +1,37 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 import Note from './components/Note'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
-function App(props) {
-  const [notes, setNotes] = useState(props.notes)
+const App = () => {
+  const [notes, setNotes] = useState([])
   const [showAll, setShowAll] = useState(true)
+
+  // la función useEffect toma dos parámetros:
+  // El primero es una función, el efecto en sí mismo.
+  // El segundo parámetro de useEffect se usa para especificar la frecuencia con la que se ejecuta el efecto. 
+  // Si el segundo parámetro es una matriz vacía [], entonces el efecto solo se ejecuta junto con el primer renderizado del componente.
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        setNotes(response.data)
+      })
+  }, [])
 
   // Funcionalidad para agregar nuevas notas
   const addNote = (event) => {
     event.preventDefault()
     const query = event.target[0].value
     const newNote = { 
-        id: notes.length + 1, 
+        id: (notes.length + 1).toString(), 
         content: query, 
         important: false 
-      } 
-    setNotes(notes.concat(newNote))
+      }
+    axios
+      .post('http://localhost:3001/notes', newNote) 
+      .then(setNotes(notes.concat(newNote)))
     event.target[0].value = ''
   }
   
