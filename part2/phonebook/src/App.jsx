@@ -4,26 +4,34 @@ import './App.css'
 
 function App() {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas',
+      number: '',
+     }
   ]) 
 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
 
-  const handleInput = (event) => {
+  const handleNameInput = (event) => {
     setNewName(event.target.value)
+  }
+
+  const handlePhoneInput = (event) => {
+    setNewNumber(event.target.value)
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
     if (persons.some(person => person.name === newName)) {
       console.log(`${newName} is already added to phonebook`); 
-    } else if (newName === "") {
+    } else if (newName === "" || newNumber === "") {
       console.log('You should input a name')
     } else {
-      setPersons(persons.concat({name: newName}))
-      setNewName('')
+      setPersons(persons.concat({name: newName, number: newNumber}))
+      setNewName('') && setNewNumber('')
     }
   }
+
 
   return (
     <>
@@ -36,9 +44,8 @@ function App() {
       
       <div>
       <form onSubmit={handleSubmit}> 
-        <div>
-          name: <input value={newName} onChange={handleInput}/>
-        </div>
+        <div>name: <input value={newName} onChange={handleNameInput}/></div>
+        <div>number: <input value={newNumber} onChange={handlePhoneInput}/></div>
         <div>
           <button type="submit">add</button>
         </div>
@@ -46,7 +53,7 @@ function App() {
 
       <h2>Numbers</h2>
       {persons.map((person, index) => (
-        <li key={index}>{person.name}</li>
+        <li key={index}>{person.name} : {person.number}</li>
         ))}
     </div>
 
