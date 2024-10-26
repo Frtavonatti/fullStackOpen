@@ -3,9 +3,7 @@ import React from "react";
 const Search = ({ setNewSearch }) => {
     const handleSearchInput = (event) => {
         setNewSearch(event.target.value)
-        console.log(event.target.value);
-        
-      }
+    }
 
     return ( 
         <>
