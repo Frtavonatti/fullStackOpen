@@ -15,8 +15,14 @@ function App() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setPersons(persons.concat({name: newName}))
-    setNewName('')
+    if (persons.some(person => person.name === newName)) {
+      console.log(`${newName} is already added to phonebook`); 
+    } else if (newName === "") {
+      console.log('You should input a name')
+    } else {
+      setPersons(persons.concat({name: newName}))
+      setNewName('')
+    }
   }
 
   return (
