@@ -31,8 +31,25 @@ const App = () => {
       }
     axios
       .post('http://localhost:3001/notes', newNote) 
-      .then(setNotes(notes.concat(newNote)))
+      .then(res => {
+        // console.log(res);
+        setNotes(notes.concat(res.data))
+      })
     event.target[0].value = ''
+  }
+
+  // Funcionalidad para cambiar importancia
+  const toggleImportanceOf = (id) => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = {...note, important: !note.important}
+
+    axios
+      .put(`http://localhost:3001/notes/${id}`, changedNote)
+        .then(res => {
+            console.log(res.data)
+            const setUpdatedNotes = notes.map(n => n.id !== id ? n : res.data)
+            setNotes(setUpdatedNotes)
+        })
   }
   
   // Funcionalidad para filtrar notas por importancia
@@ -55,7 +72,7 @@ const App = () => {
         
       <ul>
         {notesToShow.map(note => 
-          <Note key={note.id} note={note} />
+          <Note key={note.id} note={note} toggleImportance={()=> toggleImportanceOf(note.id)}/>
         )}
       </ul>
 
