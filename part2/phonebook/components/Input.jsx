@@ -11,8 +11,18 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
 
       const handleSubmit = (event) => {
         event.preventDefault()
-        if (persons.some(person => person.name === newName)) {
-          alert(`${newName} is already added to phonebook`); 
+        const isPersonMatched = persons.some(person => person.name.toLowerCase() === newName.toLowerCase())
+        const personMatched = persons.find(person => person.name.toLowerCase() === newName.toLowerCase())
+
+        if (isPersonMatched) {
+          window.confirm(`${newName} is already added to phonebook, do you want to update his/her information?`)
+          ? backService
+            .update(personMatched.id, {name: newName, number: newNumber})
+            .then(res => {
+              setPersons(persons.map(person => person !== personMatched ? person : res))
+            })
+          : alert('No changes applied');
+      
 
         } else if (newName.length < 3 || newNumber.length < 3) {
           alert('The name and number must each be at least 3 characters long. Please provide valid inputs.')
@@ -22,7 +32,7 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
 
           backService.create(addedPerson)
             .then(res => {           
-              setPersons(persons.concat(res))
+              setPersons([...persons, res])
               setNewName('') 
               setNewNumber('')
             })

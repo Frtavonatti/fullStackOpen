@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
+import Header from '../components/Header'
 import Search from '../components/Search'
-import Input from '../components/Input.jsx'
+import Input from '../components/Input'
 import Numbers from '../components/Numbers'
 import backService from '../services/backend.js'
-import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
@@ -25,12 +25,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-          <h1>Phonebook App</h1>  
-        </a>
-      </div>
+      <Header/>
 
       <Search setNewSearch={setNewSearch} />
 
