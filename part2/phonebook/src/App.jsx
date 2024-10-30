@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Search from '../components/Search'
-import Input from '../components/Input'
+import Input from '../components/Input.jsx'
 import Numbers from '../components/Numbers'
 import backService from '../services/backend.js'
 import reactLogo from './assets/react.svg'
@@ -43,7 +43,11 @@ function App() {
         setNewNumber={setNewNumber}
       />
 
-      <Numbers filteredPersons={filteredPersons}/>
+      <Numbers 
+        filteredPersons={filteredPersons}
+        persons={persons}
+        setPersons={setPersons}
+      />
     </>
   )
 } 
