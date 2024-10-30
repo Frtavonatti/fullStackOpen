@@ -21,6 +21,8 @@ Esta es la segunda parte de una aplicación full stack para gestionar notas. La 
     cd full-stack-app/part2/notes
     ```
 3. Instala las dependencias:
+    ```bash
+    npm install
 
 ## Uso
 
@@ -41,4 +43,4 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](../LICEN
 
 - **Autor**: Tu Nombre
 - **Email**: tu.email@example.com
-- **GitHub**: [tu-usuario](https://github.com/tu-usuario)
+- **GitHub**: [frtav](https://github.com/Frtavonatti)
