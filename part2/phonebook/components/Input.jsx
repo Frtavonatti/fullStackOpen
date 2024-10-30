@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumber }) => {
     const handleNameInput = (event) => {
         setNewName(event.target.value)
@@ -11,8 +13,10 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
         event.preventDefault()
         if (persons.some(person => person.name === newName)) {
           console.log(`${newName} is already added to phonebook`); 
+
         } else if (newName === "" || newNumber === "") {
           console.log('You should input a name')
+
         } else {
           setPersons(persons.concat({name: newName, number: newNumber}))
           setNewName('') 
