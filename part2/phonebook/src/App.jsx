@@ -20,7 +20,7 @@ function App() {
     fetchData()
   }, [])
 
-  const filteredPersons = persons.filter(person => person.name.toLocaleLowerCase().includes(newSearch))
+  const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(newSearch.toLowerCase()))
 
   return (
     <>

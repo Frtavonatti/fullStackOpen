@@ -12,21 +12,27 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
       const handleSubmit = (event) => {
         event.preventDefault()
         if (persons.some(person => person.name === newName)) {
-          console.log(`${newName} is already added to phonebook`); 
+          alert(`${newName} is already added to phonebook`); 
 
-        } else if (newName === "" || newNumber === "") {
-          console.log('You should input a name')
+        } else if (newName.length < 3 || newNumber.length < 3) {
+          alert('The name and number must each be at least 3 characters long. Please provide valid inputs.')
 
         } else {
-          setPersons(persons.concat({name: newName, number: newNumber}))
-          setNewName('') 
-          setNewNumber('')
+          const addedPerson = {name: newName, number: newNumber, id: (persons.length + 1)}
+
+          axios
+            .post('http://localhost:3001/persons', addedPerson)
+            .then(res => {
+              setPersons(persons.concat(res.data))
+              setNewName('') 
+              setNewNumber('')
+            })        
         }
       }
 
     return (
         <>
-            <h2>Add a new Person</h2>
+            <h2>Add a new person</h2>
             <form onSubmit={handleSubmit}> 
             <div>name: <input value={newName} onChange={handleNameInput}/></div>
             <div>number: <input value={newNumber} onChange={handlePhoneInput}/></div>
