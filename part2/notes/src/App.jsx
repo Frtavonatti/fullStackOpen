@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+import noteService from './services/notes'
 import Note from './components/Note'
 import reactLogo from './assets/react.svg'
 import './App.css'
@@ -8,17 +8,18 @@ const App = () => {
   const [notes, setNotes] = useState([])
   const [showAll, setShowAll] = useState(true)
 
-  // la función useEffect toma dos parámetros:
+  // La función useEffect toma dos parámetros:
   // El primero es una función, el efecto en sí mismo.
   // El segundo parámetro de useEffect se usa para especificar la frecuencia con la que se ejecuta el efecto. 
   // Si el segundo parámetro es una matriz vacía [], entonces el efecto solo se ejecuta junto con el primer renderizado del componente.
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/notes')
-      .then(response => {
-        setNotes(response.data)
+    noteService
+      .getAll()
+      .then(initialNotes => {
+        setNotes(initialNotes)
       })
   }, [])
+
 
   // Funcionalidad para agregar nuevas notas
   const addNote = (event) => {
@@ -29,12 +30,35 @@ const App = () => {
         content: query, 
         important: false 
       }
-    axios
-      .post('http://localhost:3001/notes', newNote) 
-      .then(setNotes(notes.concat(newNote)))
+    noteService
+      .create(newNote)
+      .then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+      })
     event.target[0].value = ''
   }
+
+
+  // Funcionalidad para cambiar importancia
+  const toggleImportanceOf = (id) => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = {...note, important: !note.important}
+
+    noteService
+      .update(id, changedNote)
+      .then(returnedNote => {
+          const setUpdatedNotes = notes.map(n => n.id !== id ? n : returnedNote)
+          setNotes(setUpdatedNotes)
+      })
+      .catch(error => {
+        alert(
+          `the note '${note.content}' was already deleted from server`
+        )
+        setNotes(notes.filter(n => n.id !== id))
+      })
+  }
   
+
   // Funcionalidad para filtrar notas por importancia
   const onlyImportantNotes = notes.filter(note => note.important)
 
@@ -42,7 +66,21 @@ const App = () => {
     setShowAll(!showAll)
   }
 
+  
+  // Funcionalidad para mostrar solo notas importantes
   const notesToShow = showAll ? notes : onlyImportantNotes
+
+
+  // Funcionalidad para eliminar notas
+  const deleteNote = (id) => {
+    noteService
+      .remove(id)
+      .then(() => {
+        const updatedNotes = notes.filter(n => n.id !== id)
+        setNotes(updatedNotes)
+      })
+  }
+
 
   return (
     <>
@@ -55,7 +93,10 @@ const App = () => {
         
       <ul>
         {notesToShow.map(note => 
-          <Note key={note.id} note={note} />
+          <Note key={note.id} note={note} 
+            toggleImportance={() => toggleImportanceOf(note.id)}
+            deleteNote={() => deleteNote(note.id)}
+          />
         )}
       </ul>
 
