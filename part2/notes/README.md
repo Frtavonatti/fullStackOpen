@@ -1,8 +1,44 @@
-# React + Vite
+# Full Stack App - Part 2: Notes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
 
-Currently, two official plugins are available:
+Esta es la segunda parte de una aplicación full stack para gestionar notas. La aplicación permite a los usuarios crear, leer, actualizar y eliminar notas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tecnologías Utilizadas
+
+- **Frontend**: React
+- **Backend**: Node.js con Express
+- **Base de Datos**: MongoDB
+
+## Instalación
+
+1. Clona el repositorio:
+    ```bash
+    git clone https://github.com/tu-usuario/full-stack-app.git
+    ```
+2. Navega al directorio del proyecto:
+    ```bash
+    cd full-stack-app/part2/notes
+    ```
+3. Instala las dependencias:
+
+## Uso
+
+1. Inicia el servidor backend:
+    ```bash
+    npm run server
+    ```
+2. Inicia el servidor frontend:
+    ```bash
+    npm run dev
+    ```
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](../LICENSE) para más detalles.
+
+## Contacto
+
+- **Autor**: Tu Nombre
+- **Email**: tu.email@example.com
+- **GitHub**: [tu-usuario](https://github.com/tu-usuario)
