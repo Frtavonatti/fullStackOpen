@@ -1,8 +1,8 @@
-import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Search from '../components/Search'
 import Input from '../components/Input'
 import Numbers from '../components/Numbers'
+import backService from '../services/backend.js'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
@@ -13,14 +13,15 @@ function App() {
   const [newSearch, setNewSearch] = useState('')
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await axios.get('http://localhost:3001/persons')
-      setPersons(res.data)
+    const fetchData = () => {
+      backService.getAll()
+      .then(res => setPersons(res))
     }
     fetchData()
   }, [])
 
-  const filteredPersons = persons.filter(person => person.name.toLowerCase().includes(newSearch.toLowerCase()))
+  const filteredPersons = persons.filter(person => 
+    person.name.toLowerCase().includes(newSearch.toLowerCase()))
 
   return (
     <>

@@ -1,4 +1,4 @@
-import axios from "axios"
+import backService from '../services/backend'
 
 const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumber }) => {
     const handleNameInput = (event) => {
@@ -20,13 +20,12 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
         } else {
           const addedPerson = {name: newName, number: newNumber, id: (persons.length + 1)}
 
-          axios
-            .post('http://localhost:3001/persons', addedPerson)
-            .then(res => {
-              setPersons(persons.concat(res.data))
+          backService.create(addedPerson)
+            .then(res => {           
+              setPersons(persons.concat(res))
               setNewName('') 
               setNewNumber('')
-            })        
+            })
         }
       }
 
