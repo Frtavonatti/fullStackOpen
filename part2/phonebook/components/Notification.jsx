@@ -1,22 +1,23 @@
 const Notification = ({ message }) => {
-    const style = {
-        color: 'green',
-        background: '#4d4d4d',
-        fontSize: '20px',
-        borderStyle: 'solid',
-        borderRadius: '5px',
-        padding: '10px',
-        marginBottom: '10px'
-    }
+  if (message.text === '') {
+    return null;
+  }
 
-    if (message !== null)  
-    return(
-        <>
-            <div>
-                <h4 style={style}>{message}</h4>
-            </div>
-        </>
-    )
-}
+  const notificationStyle = {
+    color: message.type === 'success' ? 'green' : 'red',
+    background: 'lightgrey',
+    fontSize: '20px',
+    borderStyle: 'solid',
+    borderRadius: '5px',
+    padding: '10px',
+    marginBottom: '10px'
+  };
 
-export default Notification
+  return (
+    <div style={notificationStyle}>
+      {message.text}
+    </div>
+  );
+};
+
+export default Notification;

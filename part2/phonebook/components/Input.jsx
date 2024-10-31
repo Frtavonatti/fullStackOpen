@@ -9,6 +9,11 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
         setNewNumber(event.target.value)
       }
 
+      const deleteInputText = () => {
+        setNewName('') 
+        setNewNumber('')
+      }
+
       const handleSubmit = (event) => {
         event.preventDefault()
         const isPersonMatched = persons.some(person => person.name.toLowerCase() === newName.toLowerCase())
@@ -20,13 +25,17 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
             .update(personMatched.id, {name: newName, number: newNumber})
             .then(res => {
               setPersons(persons.map(person => person !== personMatched ? person : res))
-              setMessage(`${newName} info has been changed`)
-              setNewName('') 
-              setNewNumber('')
+              setMessage({ text: `${newName} info has been changed`, type: 'success' });
+              deleteInputText()
             })
-            .then(() => {
+            .catch (error => {
+              console.log(error);
+              setMessage({ text: `${newName} was already removed from server`, type: 'error' });
+              deleteInputText()
+            })
+            .finally(() => {
               setTimeout(() => {
-                setMessage(null)
+                setMessage({ text: '', type: '' });
               }, 5000)
             })
           : alert('No changes applied');
@@ -39,17 +48,22 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
           const addedPerson = {name: newName, number: newNumber, id: (persons.length + 1).toString()}
 
           backService.create(addedPerson)
-            .then(res => {           
-              setPersons([...persons, res])
-              setNewName('') 
-              setNewNumber('')
-              setMessage(`Added ${newName}`)
-            })
+          .then(res => {
+            setPersons([...persons, res]);
+            setMessage({ text: `${newName} added`, type: 'success' });
+            deleteInputText();
+          })
+          .catch(error => {
+            console.log(error);
+            setMessage({ text: `Failed to add ${newName}`, type: 'error' });
+          })
+          .finally(() => {
             setTimeout(() => {
-              setMessage(null)
-            }, 5000)
-        }
+              setMessage({ text: '', type: '' });
+            }, 5000);
+          });
       }
+    };
 
     return (
         <>

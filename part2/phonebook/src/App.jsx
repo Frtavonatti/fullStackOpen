@@ -12,7 +12,7 @@ function App() {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState({ text: '', type: '' });
 
   useEffect(() => {
     backService
