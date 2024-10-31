@@ -1,6 +1,6 @@
 import backService from '../services/backend'
 
-const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumber }) => {
+const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumber, setMessage }) => {
     const handleNameInput = (event) => {
         setNewName(event.target.value)
       }
@@ -20,6 +20,14 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
             .update(personMatched.id, {name: newName, number: newNumber})
             .then(res => {
               setPersons(persons.map(person => person !== personMatched ? person : res))
+              setMessage(`${newName} info has been changed`)
+              setNewName('') 
+              setNewNumber('')
+            })
+            .then(() => {
+              setTimeout(() => {
+                setMessage(null)
+              }, 5000)
             })
           : alert('No changes applied');
       
@@ -35,7 +43,11 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
               setPersons([...persons, res])
               setNewName('') 
               setNewNumber('')
+              setMessage(`Added ${newName}`)
             })
+            setTimeout(() => {
+              setMessage(null)
+            }, 5000)
         }
       }
 

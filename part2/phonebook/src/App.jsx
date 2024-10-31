@@ -3,6 +3,7 @@ import Header from '../components/Header'
 import Search from '../components/Search'
 import Input from '../components/Input'
 import Numbers from '../components/Numbers'
+import Notification from '../components/Notification'
 import backService from '../services/backend.js'
 import './App.css'
 
@@ -11,14 +12,7 @@ function App() {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
-
-  // useEffect(() => {
-  //   const fetchData = () => {
-  //     backService.getAll()
-  //     .then(res => setPersons(res))
-  //   }
-  //   fetchData()
-  // }, [])
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     backService
@@ -35,6 +29,8 @@ function App() {
     <>
       <Header/>
 
+      <Notification message={message}/>
+
       <Search setNewSearch={setNewSearch} />
 
       <Input 
@@ -44,6 +40,7 @@ function App() {
         newNumber={newNumber} 
         setNewName={setNewName} 
         setNewNumber={setNewNumber}
+        setMessage={setMessage}
       />
 
       <Numbers 
