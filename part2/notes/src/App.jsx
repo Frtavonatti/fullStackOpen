@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react'
 import noteService from './services/notes'
-import Note from './components/Note'
-import reactLogo from './assets/react.svg'
+import Header from './components/Header'
+import Note from './components/Note/Note'
+import Notification from './components/Notification'
 import './App.css'
 
 const App = () => {
   const [notes, setNotes] = useState([])
   const [showAll, setShowAll] = useState(true)
+  const [errorMessage, setErrorMessage] = useState('some error happened...')
 
-  // La función useEffect toma dos parámetros:
-  // El primero es una función, el efecto en sí mismo.
-  // El segundo parámetro de useEffect se usa para especificar la frecuencia con la que se ejecuta el efecto. 
-  // Si el segundo parámetro es una matriz vacía [], entonces el efecto solo se ejecuta junto con el primer renderizado del componente.
+  // Funcionalidad para renderizar las notas iniciales
   useEffect(() => {
     noteService
       .getAll()
@@ -51,9 +50,12 @@ const App = () => {
           setNotes(setUpdatedNotes)
       })
       .catch(error => {
-        alert(
-          `the note '${note.content}' was already deleted from server`
+        setErrorMessage(
+          `Note '${note.content}' was already removed from server`
         )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
         setNotes(notes.filter(n => n.id !== id))
       })
   }
@@ -84,21 +86,20 @@ const App = () => {
 
   return (
     <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-        <h1>Note App</h1>
-      </div>
+      <Header/>
+
+      <Notification message={errorMessage} />
         
-      <ul>
+      <div>
         {notesToShow.map(note => 
-          <Note key={note.id} note={note} 
+          <Note 
+            key={note.id} 
+            note={note} 
             toggleImportance={() => toggleImportanceOf(note.id)}
             deleteNote={() => deleteNote(note.id)}
           />
         )}
-      </ul>
+      </div>
 
       <form onSubmit={addNote}>
         <input/>

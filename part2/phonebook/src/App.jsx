@@ -12,12 +12,20 @@ function App() {
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
 
+  // useEffect(() => {
+  //   const fetchData = () => {
+  //     backService.getAll()
+  //     .then(res => setPersons(res))
+  //   }
+  //   fetchData()
+  // }, [])
+
   useEffect(() => {
-    const fetchData = () => {
-      backService.getAll()
-      .then(res => setPersons(res))
-    }
-    fetchData()
+    backService
+      .getAll()
+      .then(res => {
+        setPersons(res)
+      })
   }, [])
 
   const filteredPersons = persons.filter(person => 

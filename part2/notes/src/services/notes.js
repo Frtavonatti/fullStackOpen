@@ -3,12 +3,7 @@ const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
   const req = axios.get(baseUrl)
-  const nonExisting = {
-    id: 10000,
-    content: 'This note is not saved to server',
-    important: true,
-  }
-  return req.then(response => response.data.concat(nonExisting))
+  return req.then(res => res.data)
 }
 
 const create = newObject => {
