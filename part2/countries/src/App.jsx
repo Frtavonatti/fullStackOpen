@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useState, useEffect } from 'react'
+import CountryDetails from './components/CountryDetails'
 import reactLogo from './assets/react.svg'
 import './App.css'
 
@@ -37,6 +38,10 @@ function App() {
     setSearchValue(event.target.value)
   }
 
+  const showCountryDetails = (country) => {
+    setSearchValue(country.name.common)
+  }
+
   return (
     <>
       <div>
@@ -48,13 +53,20 @@ function App() {
         <h3>Search a Country</h3>
         <input type="text" onChange={handleInputChange}/>
         <ul>
-          {filteredCountries.length === 0 ? (
-            <li>No results available</li>
-          ) : (
-            filteredCountries.map((country, index) => (
-              <li key={index}>{country.name.common}</li>
-            ))
-          )}
+            {
+                filteredCountries.length === 0 ? (
+                    <li>No results available</li>
+                ) : filteredCountries.length === 1 ? (
+                    <CountryDetails filteredCountries={filteredCountries} />
+                ) : (
+                    filteredCountries.map((country, index) => (
+                        <div key={index}>
+                            <li>{country.name.common}</li>
+                            <button onClick={() => showCountryDetails(country)}>Show more info</button>
+                        </div>
+                    ))
+                )
+            }
         </ul>
       </div>
     </>
