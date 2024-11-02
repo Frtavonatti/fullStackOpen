@@ -6,7 +6,7 @@ import './App.css'
 
 function App() {
   const [countries, setCountries] = useState([])
-  const [searchValue, setSearchValue] = useState('') 
+  const [searchValue, setSearchValue] = useState('Denmark') 
   const [filteredCountries, setFilteredCountries] = useState([])
 
   useEffect(() => {
@@ -40,6 +40,7 @@ function App() {
 
   const showCountryDetails = (country) => {
     setSearchValue(country.name.common)
+    // console.log(country);
   }
 
   return (
