@@ -1,0 +1,13 @@
+.container {
+    background-color: #4b4b4b;
+    border-radius: 8px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.flagImage {
+    border-radius: 20px;
+    margin-top: 2rem;
+    max-height: 200px;
+}

@@ -6,7 +6,7 @@ import './App.css'
 
 function App() {
   const [countries, setCountries] = useState([])
-  const [searchValue, setSearchValue] = useState('Denmark') 
+  const [searchValue, setSearchValue] = useState('') 
   const [filteredCountries, setFilteredCountries] = useState([])
 
   useEffect(() => {
@@ -23,14 +23,10 @@ function App() {
 
     if (searchValue === '') {
       setFilteredCountries([])
-    } else if (results.length === 1) {
-      setFilteredCountries(results)
-    } else if (results.length > 1 && results.length <= 10) {
-      setFilteredCountries(results)
     } else if (results.length > 10) {
       setFilteredCountries(results.slice(0, 10))
     } else {
-      setFilteredCountries([])
+      setFilteredCountries(results)
     }
   }, [searchValue, countries])
   
@@ -40,7 +36,21 @@ function App() {
 
   const showCountryDetails = (country) => {
     setSearchValue(country.name.common)
-    // console.log(country);
+  }
+
+  const renderCountries = () => {
+    if (filteredCountries.length === 0) {
+      return <li>No results available</li>
+    } else if (filteredCountries.length === 1) {
+      return <CountryDetails filteredCountries={filteredCountries} />
+    } else {
+      return filteredCountries.map((country, index) => (
+        <div key={index}>
+          <li>{country.name.common}</li>
+          <button onClick={() => showCountryDetails(country)}>Show more info</button>
+        </div>
+      ))
+    }
   }
 
   return (
@@ -52,22 +62,9 @@ function App() {
 
       <div>
         <h3>Search a Country</h3>
-        <input type="text" onChange={handleInputChange}/>
+        <input type="text" onChange={handleInputChange} placeholder="Search countries..." />
         <ul>
-            {
-                filteredCountries.length === 0 ? (
-                    <li>No results available</li>
-                ) : filteredCountries.length === 1 ? (
-                    <CountryDetails filteredCountries={filteredCountries} />
-                ) : (
-                    filteredCountries.map((country, index) => (
-                        <div key={index}>
-                            <li>{country.name.common}</li>
-                            <button onClick={() => showCountryDetails(country)}>Show more info</button>
-                        </div>
-                    ))
-                )
-            }
+          {renderCountries()}
         </ul>
       </div>
     </>
