@@ -3,19 +3,19 @@ import { useState, useEffect} from "react"
 
 const CountryDetails = ({ filteredCountries }) => {
     const [weather, setWeather] = useState('')
-
+    
     const apiKey = import.meta.env.VITE_API_KEY
     const baseUrl = import.meta.env.VITE_BASE_URL
     const lat = 55.6761; // Latitude for Copenhagen
     const lon = 12.5683; // Longitude for Copenhagen
-
+    
     // useEffect(() => {
-    //     axios.get(`${baseUrl}/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
+    //     axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`)
     //     .then(res => {
     //         setWeather(res.data)
     //     })
     //     .catch(err => console.error(err))    
-    // }, []);
+    // }, [lat, lon, apiKey]);
     
 
     const styles = {
@@ -51,10 +51,7 @@ const CountryDetails = ({ filteredCountries }) => {
                                     <li key={idx}>{language}</li>
                                 ))}
                             </ul>
-                            
-                            <div >
-                                <img style={flagImage} src={flagPng} alt={`${country.name.common} flag`} />
-                            </div>
+                            <img style={flagImage} src={flagPng} alt={`${country.name.common} flag`} />
                         </div>
 
                         {/* <div>
