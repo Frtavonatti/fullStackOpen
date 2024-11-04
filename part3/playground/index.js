@@ -1,8 +1,6 @@
 const express = require('express')
 const app = express()
-
-// json-parser: nos permite acceder a datos enviados en body de un request (POST, PUT, PATCH)
-app.use(express.json())
+const cors = require('cors')
 
 let notes = [  
     {    
@@ -21,6 +19,28 @@ let notes = [
     }
 ]
 
+//MIDDLEWARE
+// Request logger 
+const requestLogger = (request, response, next) => {
+    console.log('Method:', request.method)
+    console.log('Path:  ', request.path)
+    console.log('Body:  ', request.body)
+    console.log('---')
+    next()
+}
+
+// json-parser: nos permite acceder a datos enviados en body de un request (POST, PUT, PATCH)
+app.use(express.json())
+app.use(cors())
+app.use(requestLogger)
+
+// Unknown endpoint 
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint' })
+  }
+
+
+// Routes
 app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
 })
@@ -69,7 +89,9 @@ app.post('/api/notes', (request, response) => {
     response.json(note)
 })
 
-const PORT = 3001
+app.use(unknownEndpoint)
+
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
