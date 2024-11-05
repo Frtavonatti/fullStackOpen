@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
-import noteService from './notes'
-import Header from '../components/Header'
-import Note from '../components/Note/Note'
-import Notification from '../components/Notification'
+import noteService from './services/notes'
+import Header from './components/Header'
+import Note from './components/Note/Note'
+import Notification from './components/Notification'
 import './App.css'
 
 const App = () => {
   const [notes, setNotes] = useState([])
   const [showAll, setShowAll] = useState(true)
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
 
   // Funcionalidad para renderizar las notas iniciales
   useEffect(() => {
