@@ -2,3 +2,4 @@ node_modules/
 
 #dev
 todo.md
+.env

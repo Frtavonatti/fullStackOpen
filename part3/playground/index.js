@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
+require('dotenv').config()
 const cors = require('cors')
+
+const Note = require('./models/note')
 
 let notes = [  
     {    
@@ -41,13 +44,15 @@ const unknownEndpoint = (request, response) => {
   }
 
 
-// Routes
+// ROUTES
 app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
 })
 
 app.get('/api/notes', (request, response) => {
-    response.json(notes)
+    Note.find({}).then(notes =>  {
+        response.json(notes)
+    })
 })
 
 app.get('/api/notes/:id', (request, response) => {
@@ -92,7 +97,7 @@ app.post('/api/notes', (request, response) => {
 
 app.use(unknownEndpoint)
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
 })
