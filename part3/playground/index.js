@@ -55,7 +55,7 @@ app.delete("/api/notes/:id", (request, response, next) => {
 });
 
 // ###POST
-app.post("/api/notes", (request, response) => {
+app.post("/api/notes", (request, response, next) => {
   const body = request.body;
 
   if (!body.content) {
@@ -69,23 +69,27 @@ app.post("/api/notes", (request, response) => {
     important: body.important || false,
   });
 
-  note.save().then((savedNote) => {
-    response.json(savedNote);
-  });
+  note
+    .save()
+    .then((savedNote) => {
+      response.json(savedNote);
+    })
+    .catch((error) => next(error));
 });
 
 // ###PUT
 app.put("/api/notes/:id", (request, response, next) => {
   const id = request.params.id;
-  const body = request.body;
+  const { content, important } = request.body;
 
-  const note = {
-    content: body.content,
-    important: body.important,
-  };
-
-  // TO-DO: entender el terncer parametro
-  Note.findByIdAndUpdate(id, note, { new: true })
+  // De forma predeterminada, el parámetro updatedNote del controlador de eventos recibe el documento original sin las modificaciones.
+  // findByIdAndUpdate recibe un tercer parametro "options" que permite una configuración personalizada del metodo
+  // Agregamos el parámetro opcional { new: true }, que hará que nuestro controlador de eventos sea llamado con el nuevo documento modificado en lugar del original.
+  Note.findByIdAndUpdate(
+    id,
+    { content, important },
+    { new: true, runValidators: true, context: "query" },
+  )
     .then((updatedNote) => {
       response.json(updatedNote);
     })
@@ -104,8 +108,9 @@ app.use((error, request, response, next) => {
 
   if (error.name === "CastError") {
     return response.status(400).send({ error: "malformatted id" });
+  } else if (error.name === "ValidationError") {
+    return response.status(400).json({ error: error.message });
   }
-
   next(error);
 });
 
