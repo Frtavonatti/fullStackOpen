@@ -29,8 +29,8 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
               deleteInputText()
             })
             .catch (error => {
-              console.log(error);
-              setMessage({ text: `${newName} was already removed from server`, type: 'error' });
+              console.log(error.response.data.error);
+              setMessage({ text: `${newName} + ${error.response.data.error}`, type: 'error' });
               deleteInputText()
             })
             .finally(() => {
@@ -53,9 +53,9 @@ const Input = ({ persons, newName, newNumber, setPersons, setNewName, setNewNumb
             setMessage({ text: `${newName} added`, type: 'success' });
             deleteInputText();
           })
-          .catch(error => {
-            console.log(error);
-            setMessage({ text: `Failed to add ${newName}`, type: 'error' });
+          .catch(error => {            
+            console.log(error.response.data.error)
+            setMessage({ text: `Failed to add ${newName}, because: ${error.response.data.error}`, type: 'error' });
           })
           .finally(() => {
             setTimeout(() => {

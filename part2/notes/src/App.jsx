@@ -34,6 +34,9 @@ const App = () => {
       .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
       })
+      .catch(error => {
+        console.log(error.response.data.error)
+      })
     event.target[0].value = ''
   }
 
