@@ -1,122 +1,32 @@
-const express = require('express')
-const app = express()
-require('dotenv').config()
+const app = require('./app') // la aplicación Express real
+const config = require('./utils/config')
+const logger = require('./utils/logger')
 
-app.use(express.static('dist'))
+app.listen(config.PORT, () => {
+  logger.info(`Server running on port ${config.PORT}`)
+})
+
+// MOVIDO A APP.JS
+// const express = require('express')
+// const app = express()
+// const cors = require('cors')
+
+// MOVIDO A CONFIG.JS
+// require('dotenv').config()
 
 // MODELS
-const Note = require('./models/note')
+// MOVIDO A ./CONTROLLER/NOTES.JS
+// const Note = require('./models/note')
 
-// MIDDLEWARE
-// Request logger
-const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:  ', request.path)
-  console.log('Body:  ', request.body)
-  console.log('---')
-  next()
-}
-
-const cors = require('cors')
-
-app.use(cors())
-app.use(express.json()) //json-parser: nos permite acceder a datos enviados en body de un request (POST, PUT, PATCH)
-app.use(requestLogger)
+// MIDDLEWARE config
+// Movidas a ./middleware e importadas a app.js:
+// app.use(middleware.unknownEndpoint)
+// app.use(middleware.errorHandler)
 
 // ROUTES
-// ###GET
-app.get('/api/notes', (request, response) => {
-  Note.find({}).then((notes) => {
-    response.json(notes)
-  })
-})
+// Movidas a ./controller/notes.js
+// Importadas a app.js => app.use('/api/notes', notesRouter)
 
-app.get('/api/notes/:id', (request, response, next) => {
-  const id = request.params.id
-  Note.findById(id)
-    .then((note) => {
-      if (note) {
-        response.json(note)
-      } else {
-        response.status(404).end()
-      }
-    })
-    .catch((error) => next(error))
-})
-
-// ###DELETE
-app.delete('/api/notes/:id', (request, response, next) => {
-  const id = request.params.id
-  Note.findByIdAndDelete(id)
-    .then((deletedNote) => {
-      response.json(deletedNote)
-    })
-    .catch((error) => next(error))
-})
-
-// ###POST
-app.post('/api/notes', (request, response, next) => {
-  const body = request.body
-
-  if (!body.content) {
-    return response.status(400).json({
-      error: 'content missing',
-    })
-  }
-
-  const note = new Note({
-    content: body.content,
-    important: body.important || false,
-  })
-
-  note
-    .save()
-    .then((savedNote) => {
-      response.json(savedNote)
-    })
-    .catch((error) => next(error))
-})
-
-// ###PUT
-app.put('/api/notes/:id', (request, response, next) => {
-  const id = request.params.id
-  const { content, important } = request.body
-
-  // De forma predeterminada, el parámetro updatedNote del controlador de eventos recibe el documento original sin las modificaciones.
-  // findByIdAndUpdate recibe un tercer parametro "options" que permite una configuración personalizada del metodo
-  // 1) Agregamos el parámetro opcional { new: true }, que hará que nuestro controlador de eventos sea llamado con el nuevo documento modificado en lugar del original.
-  // 3) Al usar context: 'query', te aseguras de que los esquemas de validación personalizada que depende de múltiples campos se ejecute correctamente.
-  Note.findByIdAndUpdate(
-    id,
-    { content, important },
-    { new: true, runValidators: true, context: 'query' },
-  )
-    .then((updatedNote) => {
-      response.json(updatedNote)
-    })
-    .catch((error) => next(error))
-})
-
-// MIDDLEWARE
-// ###UNKNOWN ENDPOINT
-app.use((request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-})
-
-// ###ERROR HANDLlER
-app.use((error, request, response, next) => {
-  console.error(error)
-
-  if (error.name === 'CastError') {
-    return response.status(400).send({ error: 'malformatted id' })
-  } else if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: error.message })
-  }
-  next(error)
-})
+// MIDDLEWARE use
 
 // PORT CONECTION
-const PORT = process.env.PORT
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})
