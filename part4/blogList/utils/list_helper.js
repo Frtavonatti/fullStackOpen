@@ -55,11 +55,51 @@ const dummy = (blogs) => {
 
 const totalLikes = (array) => {
     let sum = 0
-    for (let index = 0; index < array.length; index++) {
-        const element = array[index];
+    for (element of array) {
         sum += element.likes
     }
     return sum
 }
 
-module.exports = { blogs, dummy, totalLikes }
+const mostLiked = (array) => {
+    let comparison = 0
+    let mostLikedElement
+
+    for (const element of array) {
+        if (element.likes > comparison) {
+            comparison = element.likes
+            mostLikedElement = element
+        }
+    }
+    return mostLikedElement
+}
+
+const mostBlogs = (array) => {
+    const authorBlogCount = {}
+
+    for (const element of array) {
+        if (authorBlogCount[element.author]) {
+            authorBlogCount[element.author] += 1
+        } else {
+            authorBlogCount[element.author] = 1
+        }
+    }
+
+    let mostActiveAuthor = null
+    let maxBlogs = 0
+
+    for (const author in authorBlogCount) {
+        if (authorBlogCount[author] > maxBlogs) {
+            maxBlogs = authorBlogCount[author]
+            mostActiveAuthor = author
+        }
+    }
+
+    return mostActiveAuthor
+}
+
+console.log('TotalLikes: ', totalLikes(blogs))
+console.log('MostLiked: ', mostLiked(blogs))
+console.log('MostBlogs: ', mostBlogs(blogs))
+
+module.exports = { blogs, dummy, totalLikes, mostLiked, mostBlogs }
