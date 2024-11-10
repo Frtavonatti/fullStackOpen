@@ -74,7 +74,7 @@ const mostLiked = (array) => {
     return mostLikedElement
 }
 
-const mostBlogs = (array) => {
+const authorWithMostBlogs = (array) => {
     const authorBlogCount = {}
 
     for (const element of array) {
@@ -84,6 +84,7 @@ const mostBlogs = (array) => {
             authorBlogCount[element.author] = 1
         }
     }
+    
 
     let mostActiveAuthor = null
     let maxBlogs = 0
@@ -95,11 +96,42 @@ const mostBlogs = (array) => {
         }
     }
 
-    return mostActiveAuthor
+    return {
+        author: mostActiveAuthor,
+        blogs: maxBlogs
+    }
 }
 
-console.log('TotalLikes: ', totalLikes(blogs))
-console.log('MostLiked: ', mostLiked(blogs))
-console.log('MostBlogs: ', mostBlogs(blogs))
+const authorWithMostLikes = (array) => {
+    const authorLikesCount = {}
 
-module.exports = { blogs, dummy, totalLikes, mostLiked, mostBlogs }
+    for (const element of array) {
+        if (authorLikesCount[element.author]) {
+            authorLikesCount[element.author] += element.likes
+        } else {
+            authorLikesCount[element.author] = element.likes
+        }
+    }
+
+    let mostLikedAuthor = null
+    let maxLikes = 0 
+
+    for (const author in authorLikesCount) {
+        if (authorLikesCount[author] > maxLikes) {
+            maxLikes = authorLikesCount[author]
+            mostLikedAuthor = author
+        }
+    }
+
+    return {
+        author: mostLikedAuthor,
+        likes: maxLikes 
+    }
+}
+
+// console.log('TotalLikes: ', totalLikes(blogs))
+// console.log('MostLikedBlog: ', mostLiked(blogs))
+// console.log('AuthorWithMostBlogs: ', authorWithMostBlogs(blogs))
+// console.log('AuthorWithMostLikes: ', authorWithMostLikes(blogs))
+
+module.exports = { blogs, dummy, totalLikes, mostLiked, authorWithMostBlogs, authorWithMostLikes }
