@@ -49,89 +49,90 @@ const blogs = [
   }  
 ]
 
-const dummy = (blogs) => {
-    return 1
-}
+// const dummy = (blogs) => {
+//     return 1
+// }
 
-const totalLikes = (array) => {
-    let sum = 0
-    for (element of array) {
-        sum += element.likes
-    }
-    return sum
-}
+// const totalLikes = (array) => {
+//     let sum = 0
+//     for (element of array) {
+//         sum += element.likes
+//     }
+//     return sum
+// }
 
-const mostLiked = (array) => {
-    let comparison = 0
-    let mostLikedElement
+// const mostLiked = (array) => {
+//     let comparison = 0
+//     let mostLikedElement
 
-    for (const element of array) {
-        if (element.likes > comparison) {
-            comparison = element.likes
-            mostLikedElement = element
-        }
-    }
-    return mostLikedElement
-}
+//     for (const element of array) {
+//         if (element.likes > comparison) {
+//             comparison = element.likes
+//             mostLikedElement = element
+//         }
+//     }
+//     return mostLikedElement
+// }
 
-const authorWithMostBlogs = (array) => {
-    const authorBlogCount = {}
+// const authorWithMostBlogs = (array) => {
+//     const authorBlogCount = {}
 
-    for (const element of array) {
-        if (authorBlogCount[element.author]) {
-            authorBlogCount[element.author] += 1
-        } else {
-            authorBlogCount[element.author] = 1
-        }
-    }
+//     for (const element of array) {
+//         if (authorBlogCount[element.author]) {
+//             authorBlogCount[element.author] += 1
+//         } else {
+//             authorBlogCount[element.author] = 1
+//         }
+//     }
     
 
-    let mostActiveAuthor = null
-    let maxBlogs = 0
+//     let mostActiveAuthor = null
+//     let maxBlogs = 0
 
-    for (const author in authorBlogCount) {
-        if (authorBlogCount[author] > maxBlogs) {
-            maxBlogs = authorBlogCount[author]
-            mostActiveAuthor = author
-        }
-    }
+//     for (const author in authorBlogCount) {
+//         if (authorBlogCount[author] > maxBlogs) {
+//             maxBlogs = authorBlogCount[author]
+//             mostActiveAuthor = author
+//         }
+//     }
 
-    return {
-        author: mostActiveAuthor,
-        blogs: maxBlogs
-    }
-}
+//     return {
+//         author: mostActiveAuthor,
+//         blogs: maxBlogs
+//     }
+// }
 
-const authorWithMostLikes = (array) => {
-    const authorLikesCount = {}
+// const authorWithMostLikes = (array) => {
+//     const authorLikesCount = {}
 
-    for (const element of array) {
-        if (authorLikesCount[element.author]) {
-            authorLikesCount[element.author] += element.likes
-        } else {
-            authorLikesCount[element.author] = element.likes
-        }
-    }
+//     for (const element of array) {
+//         if (authorLikesCount[element.author]) {
+//             authorLikesCount[element.author] += element.likes
+//         } else {
+//             authorLikesCount[element.author] = element.likes
+//         }
+//     }
 
-    let mostLikedAuthor = null
-    let maxLikes = 0 
+//     let mostLikedAuthor = null
+//     let maxLikes = 0 
 
-    for (const author in authorLikesCount) {
-        if (authorLikesCount[author] > maxLikes) {
-            maxLikes = authorLikesCount[author]
-            mostLikedAuthor = author
-        }
-    }
+//     for (const author in authorLikesCount) {
+//         if (authorLikesCount[author] > maxLikes) {
+//             maxLikes = authorLikesCount[author]
+//             mostLikedAuthor = author
+//         }
+//     }
 
-    return {
-        author: mostLikedAuthor,
-        likes: maxLikes 
-    }
-}
+//     return {
+//         author: mostLikedAuthor,
+//         likes: maxLikes 
+//     }
+// }
 
 // console.log('TotalLikes: ', totalLikes(blogs))
 // console.log('MostLikedBlog: ', mostLiked(blogs))
 // console.log('AuthorWithMostBlogs: ', authorWithMostBlogs(blogs))
 // console.log('AuthorWithMostLikes: ', authorWithMostLikes(blogs))
 
-module.exports = { blogs, dummy, totalLikes, mostLiked, authorWithMostBlogs, authorWithMostLikes }
+// module.exports = { blogs, dummy, totalLikes, mostLiked, authorWithMostBlogs, authorWithMostLikes }
+module.exports = { blogs }
