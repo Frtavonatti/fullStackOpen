@@ -97,17 +97,46 @@ describe('Blog API tests', () => {
         assert.strictEqual(lastBlogPost.status, 400)
     })
 
-    //4.13
-    // DELETE TEST
-    test('', async () => {
+    //4.13 DELETE
+    test('a blog can be deleted', async () => {
+        const initialArray = await helper.blogsInDB()
+        console.log('START', initialArray.length)
 
+        const noteToDelete = initialArray[0].id
+        
+        await api
+            .delete(`/api/blogs/${noteToDelete}`)
+            .expect(204)
+        
+        const finalArray = await helper.blogsInDB()
+        console.log('END', finalArray.length);
+
+        assert.strictEqual(finalArray.length, initialArray.length - 1)
     })
 
-    //4.14
-    // POST TEST
-    test('', async () => {
+    //4.14 PUT
+    test('the likes of a blog can be updated', async () => {
+        const initialArray = await helper.blogsInDB()
+        const noteToUpdate = await initialArray[0].id
+        
+        const updates = {
+            likes: 111
+        }
 
-    })
+        const response = await api
+            .put(`/api/blogs/${noteToUpdate}`)
+            .send(updates)
+            .expect(200)
+            .expect('Content-Type', /application\/json/)
+            
+        const updatedBlog = response.body
+        console.log(updatedBlog) 
+        assert.strictEqual(updatedBlog.likes, 111)
+
+        const updatedArray = await helper.blogsInDB();       
+        const updatedBlogFromDB = updatedArray.find(blog => blog.id === noteToUpdate);
+        assert.strictEqual(updatedBlogFromDB.likes, 111);
+        })
 })
 
 after(async () => {

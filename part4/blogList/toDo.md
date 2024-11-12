@@ -19,17 +19,16 @@
 - [x] Realiza los cambios necesarios en el código para que pase la prueba.
 
 ### 4.12*: Pruebas de Lista de Blogs, paso 5
-- [ ] Escribe una prueba que verifique que si faltan las propiedades `title` o `url` en los datos solicitados, el backend responde con el código de estado 400 Bad Request.
-- [ ] Realiza los cambios necesarios en el código para que pase la prueba.
+- [x] Escribe una prueba que verifique que si faltan las propiedades `title` o `url` en los datos solicitados, el backend responde con el código de estado 400 Bad Request.
+- [x] Realiza los cambios necesarios en el código para que pase la prueba.
 
 ### 4.13: Expansiones de la Lista de Blogs, paso 1
-- [ ] Implementa la funcionalidad para eliminar un solo recurso de publicación de blog usando async/await.
-- [ ] Implementa pruebas para esta funcionalidad.
+- [x] Implementa la funcionalidad para eliminar un solo recurso de publicación de blog usando async/await.
+- [x] Implementa pruebas para esta funcionalidad.
 
 ### 4.14: Expansiones de Listas de Blogs, paso 2
-- [ ] Implementa la funcionalidad para actualizar la información de una publicación de blog individual usando async/await.
-- [ ] La aplicación debe actualizar la cantidad de likes para una publicación de blog.
-- [ ] Implementa pruebas para esta funcionalidad.
+- [x] Implementa la funcionalidad para actualizar la información (cantidad de likes) de una publicación de blog individual usando async/await.
+- [x] Implementa pruebas para esta funcionalidad.
 
 # Part4a
 ## Ejercicios 4.3.-4.7.
