@@ -42,7 +42,7 @@ describe('Blog API tests', () => {
     //4.10
     test('POST requests create a new object in blogsArray', async () => {
         const newBlog = {
-            id: "111",
+            id: "666",
             title: "Testing POST requests",
             author: "Me",
             url: "post.com",
@@ -62,7 +62,7 @@ describe('Blog API tests', () => {
     //4.11
     test('if there is no `likes` prop, it will have the value 0 by default',async () => {
         const newBlog = {
-            id: "111",
+            id: "666",
             title: "Testing POST requests",
             author: "Me",
             url: "post.com"
@@ -82,7 +82,7 @@ describe('Blog API tests', () => {
     //4.12
     test('if there is no `title` or `URL` props, the response will be 400 Bad Request', async () => {
         const newBlog = {
-            id: "111",
+            id: "666",
             title: "Testing POST requests",
             author: "Me",
         }
@@ -115,12 +115,12 @@ describe('Blog API tests', () => {
     })
 
     //4.14 PUT
-    test('the likes of a blog can be updated', async () => {
+    test.only('the likes of a blog can be updated', async () => {
         const initialArray = await helper.blogsInDB()
         const noteToUpdate = await initialArray[0].id
         
         const updates = {
-            likes: 111
+            likes: 666
         }
 
         const response = await api
@@ -131,11 +131,11 @@ describe('Blog API tests', () => {
             
         const updatedBlog = response.body
         console.log(updatedBlog) 
-        assert.strictEqual(updatedBlog.likes, 111)
+        assert.strictEqual(updatedBlog.likes, 666)
 
         const updatedArray = await helper.blogsInDB();       
         const updatedBlogFromDB = updatedArray.find(blog => blog.id === noteToUpdate);
-        assert.strictEqual(updatedBlogFromDB.likes, 111);
+        assert.strictEqual(updatedBlogFromDB.likes, 666);
         })
 })
 
