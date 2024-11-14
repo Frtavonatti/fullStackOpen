@@ -7,6 +7,7 @@ const noteSchema = new mongoose.Schema({
     required: true,
   },
   important: Boolean,
+  // Acá estamos definiendo la referencia a 'user' que luego usaremos en populare
   user: {    
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'  

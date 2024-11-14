@@ -1,9 +1,12 @@
 const notesRouter = require('express').Router()
 const Note = require('../models/note')
+const User = require('../models/user')
 
 // GET
 notesRouter.get('/', async (request, response) => {
-  const notes = await Note.find({})
+  const notes = await Note
+    .find({})
+    .populate('user')
   response.status(200).json(notes)
 })
 
@@ -29,18 +32,22 @@ notesRouter.delete('/:id', async (request, response) => {
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 
-  if (!body.content) {
-    return response.status(400).json({
-      error: 'content missing',
-    })
-  }
+  // userId será un campo requerido al momento de la solicitud
+  // lo debemos enviar de alguna manera (por ahora por POSTMAN)
+  const user = await User.findById(body.userId)
 
   const note = new Note({
     content: body.content,
-    important: body.important || false
+    important: body.important || false,
+    user: user.id, 
   })
 
   const savedNote = await note.save()
+
+  // El objeto user también cambia:
+  user.notes = user.notes.concat(savedNote._id)
+  await user.save()
+
   response.status(201).json(savedNote)
 })
 

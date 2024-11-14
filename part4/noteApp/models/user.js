@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     },
     name: String,
     passwordHash: String,
+    // Acá estamos definiendo la referencia a 'notes' que luego usaremos en populare
     notes: [
         {
             type: mongoose.Schema.Types.ObjectId,
