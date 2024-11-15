@@ -1,6 +1,7 @@
 const notesRouter = require('express').Router()
 const Note = require('../models/note')
 const User = require('../models/user')
+const jwt = require('jsonwebtoken')
 
 // GET
 notesRouter.get('/', async (request, response) => {
@@ -29,12 +30,25 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 
 // POST
+// función auxiliar para aislar authorization header
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
+  }
+  return null
+}
+
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 
-  // userId será un campo requerido al momento de la solicitud
-  // lo debemos enviar de alguna manera (por ahora por POSTMAN)
-  const user = await User.findById(body.userId)
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
+  }
+
+  //el token recibe el id porque le fue asignado al momento de crearlo en userForToken (controllers/login)
+  const user = await User.findById(decodedToken.id)
 
   const note = new Note({
     content: body.content,

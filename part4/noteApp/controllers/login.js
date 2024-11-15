@@ -7,16 +7,6 @@ loginRouter.post('/', async (request, response) => {
   const { username, password } = request.body
 
   const user = await User.findOne({ username })
-  // Validación de recibir estas variables antes de la comparacion
-  // if (!user || !user.passwordHash) {
-  //   console.log(user)
-  //   return response.status(401).json({
-  //     error: 'invalid username or password',
-  //     type: 'when requesting'
-  //   })
-  // } else {
-  //   console.log(`User: ${user} --- HASH: ${user.passwordHash}`)
-  // }
 
   const passwordCorrect = user === null
     ? false
