@@ -1,20 +1,18 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
+    name: String,
     username: {
         type: String,
         required: true,
+        minlength: 3,
         unique: true
-    },
-    name: String,
-    passwordHash: String,
-    // Acá estamos definiendo la referencia a 'notes' que luego usaremos en populate
-    notes: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Note'
-        }
-    ],
+    }, 
+    passwordHash: {
+        type: String,
+        required: true,
+        minlength: 3,
+    } 
 })
 
 userSchema.set('toJSON', {
@@ -22,8 +20,7 @@ userSchema.set('toJSON', {
         returnedObject.id = returnedObject._id.toString()
         delete returnedObject._id
         delete returnedObject.__v
-        delete returnedObject.passwordHash
-    },
+    }
 })
 
 const User = mongoose.model('User', userSchema)

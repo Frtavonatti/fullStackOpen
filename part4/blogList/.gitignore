@@ -2,6 +2,4 @@ node_modules
 hidedTests
 .env
 mongo.js
-
-utils/middleware.js
-utils/logger.js
+postman.rest
