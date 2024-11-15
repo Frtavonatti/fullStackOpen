@@ -24,8 +24,8 @@
 ### 4.16: Expansión de la Lista de Blogs, paso 4
 
 - [x] Agrega una funcionalidad que agregue las siguientes restricciones para la creación de nuevos usuarios: Deben proporcionarse tanto el username como password y ambos deben tener al menos 3 caracteres. El username debe ser único.
-- [ ] La operación debe responder con un código de estado adecuado y algún tipo de mensaje de error si se crea un usuario no válido.
-- [ ] Implementa pruebas que verifiquen que no se creen usuarios no válidos y que una operación de agregar usuario que sea no válida devuelva un código de estado adecuado y un mensaje de error.
+- [x] La operación debe responder con un código de estado adecuado y algún tipo de mensaje de error si se crea un usuario no válido.
+- [x] Implementa pruebas que verifiquen que no se creen usuarios no válidos y que una operación de agregar usuario que sea no válida devuelva un código de estado adecuado y un mensaje de error.
 
 ### 4.17: Expansión de la Lista de Blogs, paso 5
 

@@ -8,22 +8,28 @@ usersRouter.get('/', async (request, response) => {
 })
 
 usersRouter.post('/', async (request, response) => {
-    //Esto lo estamos recibiendo en el body del req de vsRest
     const { name, username, password } = request.body
+    try {
+        const existingUser = await User.findOne({ username })
+        if (existingUser) {
+            return response.status(400).json({ error: 'Username already taken' })
+        }
 
-    //Aca debemos hacer las operaciones con bcrypt
-    const saltRounds = 10
-    const passwordHash = await bcrypt.hash(password, saltRounds)
-
-    //Esto es lo que recibe el model de mongoose
-    const newUser = new User ({ 
-        name, 
-        username, 
-        passwordHash 
-    })
-
-    const savedUser = await newUser.save()
-    response.status(201).json(savedUser)
+        const saltRounds = 10
+        const passwordHash = await bcrypt.hash(password, saltRounds)
+    
+        const newUser = new User ({ 
+            name, 
+            username, 
+            passwordHash 
+        })
+    
+        const savedUser = await newUser.save()
+        response.status(201).json(savedUser)
+        
+    } catch (error) {
+        response.status(400).json({ error: 'Invalid username or password' })
+    }
 })
 
 module.exports = usersRouter
