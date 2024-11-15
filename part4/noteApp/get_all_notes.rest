@@ -1,10 +1,19 @@
-GET http://localhost:3001/api/notes/
+GET http://localhost:3001/api/users/
 
-###
-POST http://localhost:3001/api/notes/
+### 
+POST http://localhost:3001/api/users/
 Content-Type: application/json
 
 {
-    "content": "Test",
-    "important": false
+    "username": "testing auth",
+    "password": "passwd"
+}
+
+###
+POST http://localhost:3001/api/login/
+Content-Type: application/json
+
+{
+    "username": "testing auth",
+    "password": "passwd"
 }
