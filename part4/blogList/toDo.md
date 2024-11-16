@@ -8,13 +8,14 @@
 - [ ] Conectar model y controller de blog con el usuario creador (4.17)
 
 ### TO-DO (pendientes):
-- [ ] Implementar Logger Middleware y Error Handler Middleware
-- [ ] Implementar Express Async Errors
+- [x] Implementar Logger Middleware y Error Handler Middleware
+- [x] Implementar Express Async Errors
+- [x] Implementar eslint
 
 
 
+# Part4 c y d
 
-# Part4c
 ### 4.15: Expansión de la Lista de Blogs, paso 3
 
 - [x] Implementa una forma de crear nuevos usuarios realizando una solicitud POST HTTP a la dirección api/users. Los usuarios tienen username, password y name.
@@ -59,13 +60,11 @@
 - [ ] Arregla las pruebas para agregar un nuevo blog después de agregar la autenticación basada en token.
 - [ ] Escribe una nueva prueba para asegurarte de que la adición de un blog falla con el código de estado adecuado 401 Unauthorized si no se proporciona un token.
 
+
+
+
+
 # Part4b
-
-### TO-DO:
-
-- [ ] Implementar Logger Middleware y Error Handler Middleware
-- [ ] Implementar Express Async Errors
-
 ### 4.8: Pruebas de Lista de Blogs, paso 1
 
 - [x] Utiliza la librería SuperTest para escribir una prueba que realice una solicitud HTTP GET a la URL `/api/blogs`. Verifica que la aplicación de la lista de blogs devuelva la cantidad correcta de publicaciones de blog en formato JSON.
