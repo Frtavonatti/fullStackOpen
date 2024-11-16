@@ -12,7 +12,14 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 3,
-  }
+  },
+  // acá es importante notar que lo definimos con un array
+  blogs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Blog'
+    }
+  ]
 })
 
 userSchema.set('toJSON', {

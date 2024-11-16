@@ -1,18 +1,23 @@
-### Orden Logico:
+### Paso a paso:
 - [x] Crear modelo de usuarios
 - [x] Crear controlador de usuarios (GETall y POST)
 - [x] Implementar bcryptjs en controlador para crear passwordHash
 - [x] Agregar el controller a app.js
 - [x] Testear en cliente rest de VScode
 
-- [ ] Conectar model y controller de blog con el usuario creador (4.17)
+### Paso a paso (4.17):
+- [x] Modificar model de blog 
+- [x] Modificar blogs controller POST 
+- [x] Populate GET controller de blogs
+- [x] Modificar model y controller de user (usar populate)
 
+
+---
 ### TO-DO (pendientes):
 - [x] Implementar Logger Middleware y Error Handler Middleware
 - [x] Implementar Express Async Errors
 - [x] Implementar eslint
-
-
+---
 
 # Part4 c y d
 
@@ -30,10 +35,10 @@
 
 ### 4.17: Expansión de la Lista de Blogs, paso 5
 
-- [ ] Expande los blogs para que cada blog contenga información sobre el creador del blog.
-- [ ] Modifica la adición de nuevos blogs para que cuando se cree un nuevo blog, cualquier usuario de la base de datos sea designado como su creador (por ejemplo, el que se encontró primero).
-- [ ] Modifica la lista de todos los blogs para que la información de usuario del creador se muestre con el blog.
-- [ ] La lista de todos los usuarios también muestra los blogs creados por cada usuario.
+- [x] Expande los blogs para que cada blog contenga información sobre el creador del blog.
+- [x] Modifica la adición de nuevos blogs para que cuando se cree un nuevo blog, cualquier usuario de la base de datos sea designado como su creador (por ejemplo, el que se encontró primero).
+- [x] Modifica la lista de todos los blogs para que la información de usuario del creador se muestre con el blog.
+- [x] La lista de todos los usuarios también muestra los blogs creados por cada usuario.
 
 ### 4.18: Expansión de la Lista de Blogs, paso 6
 

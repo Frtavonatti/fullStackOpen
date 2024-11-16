@@ -1,0 +1,28 @@
+### GET USERS
+GET http://localhost:3003/api/users/
+
+### POST USERS
+POST http://localhost:3003/api/users/
+Content-Type: application/json
+
+{
+    "unexpectedProp": "prop",
+    "name": "proptest",
+    "username": "proptest",
+    "password": "adminPasswrd"
+}
+
+
+### GET BLOGS
+GET http://localhost:3003/api/blogs/
+
+### POST BLOGS
+POST http://localhost:3003/api/blogs/
+Content-Type: application/json
+
+{
+    "title": "Second test",
+    "author": "111",
+    "url": "mongo.com",
+    "likes": 1
+}
