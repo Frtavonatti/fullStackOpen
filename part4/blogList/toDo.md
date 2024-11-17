@@ -1,4 +1,6 @@
-### Paso a paso:
+# Part4 c y d
+
+### Paso a paso (4.15):
 - [x] Crear modelo de usuarios
 - [x] Crear controlador de usuarios (GETall y POST)
 - [x] Implementar bcryptjs en controlador para crear passwordHash
@@ -11,15 +13,40 @@
 - [x] Populate GET controller de blogs
 - [x] Modificar model y controller de user (usar populate)
 
+### ### Paso a paso (4.18 - 4.23): Auth basada en Token
+- [x] Crear controller Login 
+        1. Importar json-web-tokens (npm install jsonwebtoken)
+        2. Implementar ruta post para manejar inicio de sesión
+        3. Implementar metodo para buscar al usuario seleccionado en la BD
+        4. Implementar la verificación de la contraseña usando bcrypt (bcrypt.compare)
+        5. Generar un token JWT para el usuario autenticado (jwt.sign) (debes crear una firma en ENV)
+        6. Devolver el token y la información del usuario en la respuesta
+        7. Sumar loginRouter en app.js
+ 
+- [ ] POST blogs solo al estar autenticado (el usuario identificado por el token se designa como el creador)
+        * Crear función auxiliar para aislar authorization header
+        * Usa JWT verify
+        * Agrega excepción JsonWebTokenError al error handler en el middleware
+        * Agrega parametros para que JWT expire (en login.js) 
+
+- [ ] Refactorizar token al middleware
+- [ ] DELETE blogs solo al estar autenticado
+- [ ] Crea un nuevo middleware userExtractor
+
+- [ ] Arreglar las pruebas de POST blogs
+  [ ] Agregar prueba para validar que POST falle si se tiene una verificación incorrecta
+
+ 
 
 ---
-### TO-DO (pendientes):
+<!-- ### TO-DO (pendientes):
 - [x] Implementar Logger Middleware y Error Handler Middleware
 - [x] Implementar Express Async Errors
-- [x] Implementar eslint
+- [x] Implementar eslint -->
 ---
 
-# Part4 c y d
+
+
 
 ### 4.15: Expansión de la Lista de Blogs, paso 3
 
@@ -42,7 +69,7 @@
 
 ### 4.18: Expansión de la Lista de Blogs, paso 6
 
-- [ ] Implementar la autenticación basada en token según la parte 4 Autenticación basada en token.
+- [x] Implementar la autenticación basada en token según la parte 4 Autenticación basada en token.
 
 ### 4.19: Expansión de la Lista de Blogs, paso 7
 
@@ -69,7 +96,7 @@
 
 
 
-# Part4b
+<!-- # Part4b
 ### 4.8: Pruebas de Lista de Blogs, paso 1
 
 - [x] Utiliza la librería SuperTest para escribir una prueba que realice una solicitud HTTP GET a la URL `/api/blogs`. Verifica que la aplicación de la lista de blogs devuelva la cantidad correcta de publicaciones de blog en formato JSON.
@@ -105,9 +132,13 @@
 ### 4.14: Expansiones de Listas de Blogs, paso 2
 
 - [x] Implementa la funcionalidad para actualizar la información (cantidad de likes) de una publicación de blog individual usando async/await.
-- [x] Implementa pruebas para esta funcionalidad.
+- [x] Implementa pruebas para esta funcionalidad. -->
 
-# Part4a
+
+
+
+
+<!-- # Part4a
 
 ### TO-DO:
 
@@ -140,4 +171,4 @@
 ### 4.7\*: Funciones Auxiliares y Pruebas Unitarias, paso 5
 
 - [x] Crear una función `mostLikes` que reciba una lista de blogs y devuelva el autor con la mayor cantidad de likes.
-- [x] Escribir pruebas para `mostLikes` usando un bloque `describe`.
+- [x] Escribir pruebas para `mostLikes` usando un bloque `describe`. -->

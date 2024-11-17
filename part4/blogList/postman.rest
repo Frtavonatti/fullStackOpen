@@ -6,10 +6,18 @@ POST http://localhost:3003/api/users/
 Content-Type: application/json
 
 {
-    "unexpectedProp": "prop",
-    "name": "proptest",
-    "username": "proptest",
-    "password": "adminPasswrd"
+    "username": "user",
+    "password": "passwrd"
+}
+
+
+### POST LOGIN
+POST http://localhost:3003/api/login/
+Content-Type: application/json
+
+{
+    "username": "user",
+    "password": "passwrd"
 }
 
 

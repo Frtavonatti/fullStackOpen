@@ -7,6 +7,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
+const loginRouter = require('./controllers/login')
 const middleware = require('./utils/middleware')
 
 // Configuración de Mongoose
@@ -23,6 +24,7 @@ app.use(middleware.requestLogger)
 // ROUTES
 app.use('/api/blogs', blogsRouter)
 app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
 
 // MIDDLEWARE manejo de rutas
 app.use(middleware.errorHandler)
