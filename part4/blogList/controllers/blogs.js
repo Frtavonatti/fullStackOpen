@@ -1,6 +1,8 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
+const jwt = require('jsonwebtoken')
+// const { getTokenFrom } = require('../utils/middleware')
 
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog
@@ -16,23 +18,37 @@ blogsRouter.get('/:id', async (request, response) => {
 })
 
 // POST
+// Funcion auxiliar
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
+  }
+  return null
+}
+
+// Post request
 blogsRouter.post('/', async (request, response) => {
   const body = request.body
 
-  const user = await User.findById('6737b881fe066af6a0509220')
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  if (!decodedToken) {
+    response.status(400).json({error: 'invalid token'})
+  }
+
+  const user = await User.findById(decodedToken.id)
 
   const blog = new Blog({
     title: body.title || 'default title',
     author: body.author,
     url: body.url,
     likes: body.likes,
-    user: user._id
+    user: user.id
   })
 
-  const newBlog = await blog.save() //al guardarlo recibimos su id como: new ObjectId('acá va el id)
+  const newBlog = await blog.save()
   console.log(newBlog)
   
-  // tambien modificamos el objeto user
   user.blogs = user.blogs.concat(newBlog._id) 
   await user.save()
 

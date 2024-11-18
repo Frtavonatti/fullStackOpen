@@ -58,7 +58,6 @@ notesRouter.post('/', async (request, response) => {
 
   const savedNote = await note.save()
 
-  // El objeto user también cambia:
   user.notes = user.notes.concat(savedNote._id)
   await user.save()
 

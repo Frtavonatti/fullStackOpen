@@ -24,13 +24,12 @@ Content-Type: application/json
 ### GET BLOGS
 GET http://localhost:3003/api/blogs/
 
-### POST BLOGS
+### POST BLOGS from authorized user user
 POST http://localhost:3003/api/blogs/
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjY3M2E1NTc2MmMwNTM2ZDYxMzA3NWE3MyIsImlhdCI6MTczMTk1MzcyNCwiZXhwIjoxNzMxOTUzNzg0fQ.-8iHHsvm9xWuLOjoPOMS63j0Uots5N4ACBf5YPK0ufw
 
 {
-    "title": "Second test",
-    "author": "111",
-    "url": "mongo.com",
-    "likes": 1
+    "author": "000",
+    "url": "mongo.com"
 }

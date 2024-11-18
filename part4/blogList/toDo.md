@@ -23,11 +23,11 @@
         6. Devolver el token y la información del usuario en la respuesta
         7. Sumar loginRouter en app.js
  
-- [ ] POST blogs solo al estar autenticado (el usuario identificado por el token se designa como el creador)
-        * Crear función auxiliar para aislar authorization header
-        * Usa JWT verify
-        * Agrega excepción JsonWebTokenError al error handler en el middleware
-        * Agrega parametros para que JWT expire (en login.js) 
+- [x] POST blogs solo al estar autenticado (el usuario identificado por el token se designa como el creador)
+        - [x] Crear función auxiliar para aislar authorization header
+        - [x] Usar JWT verify
+        - [x] Agregar excepción JsonWebTokenError al error handler en el middleware
+        - [x] Agregar parámetros para que JWT expire (en login.js)
 
 - [ ] Refactorizar token al middleware
 - [ ] DELETE blogs solo al estar autenticado
@@ -73,7 +73,7 @@
 
 ### 4.19: Expansión de la Lista de Blogs, paso 7
 
-- [ ] Modifica la adición de nuevos blogs para que solo sea posible si se envía un token válido con la solicitud HTTP POST. El usuario identificado por el token se designa como el creador del blog.
+- [x] Modifica la adición de nuevos blogs para que solo sea posible si se envía un token válido con la solicitud HTTP POST. El usuario identificado por el token se designa como el creador del blog.
 
 ### 4.20\*: Expansión de la Lista de Blogs, paso 8
 
