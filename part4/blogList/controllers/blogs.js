@@ -2,8 +2,9 @@ const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-// const { getTokenFrom } = require('../utils/middleware')
+const { getTokenFrom } = require('../utils/middleware')
 
+// GET
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog
     .find({})
@@ -18,23 +19,13 @@ blogsRouter.get('/:id', async (request, response) => {
 })
 
 // POST
-// Funcion auxiliar
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '')
-  }
-  return null
-}
-
-// Post request
 blogsRouter.post('/', async (request, response) => {
   const body = request.body
 
   const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
   if (!decodedToken) {
     response.status(400).json({error: 'invalid token'})
-  }
+  }  
 
   const user = await User.findById(decodedToken.id)
 
@@ -55,12 +46,14 @@ blogsRouter.post('/', async (request, response) => {
   response.status(201).json(newBlog)
 })
 
+// DELETE
 blogsRouter.delete('/:id', async (request, response) => {
   const id = request.params.id
   const deletedNote = await Blog.findByIdAndDelete(id)
   response.status(204).json(deletedNote)
 })
 
+// PUT
 blogsRouter.put('/:id', async (request, response) => {
   const id = request.params.id
   const { likes } = request.body
