@@ -11,7 +11,7 @@ Content-Type: application/json
 }
 
 
-### POST LOGIN
+### LOGIN
 POST http://localhost:3003/api/login/
 Content-Type: application/json
 
@@ -27,7 +27,7 @@ GET http://localhost:3003/api/blogs/
 ### POST BLOGS from authorized user user
 POST http://localhost:3003/api/blogs/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjY3M2E1NTc2MmMwNTM2ZDYxMzA3NWE3MyIsImlhdCI6MTczMTk1NDI1NCwiZXhwIjoxNzMyMDQwNjU0fQ.foR_6najR4Fgs3oFi1uBdE2QdBPJXZtVq_kaEsJ0Fbk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJpZCI6IjY3M2E1NTc2MmMwNTM2ZDYxMzA3NWE3MyIsImlhdCI6MTczMjAxMzUxMCwiZXhwIjoxNzMyMDk5OTEwfQ.1noIuHiLFWX_N8gpkXpZnhzrCc4b8OtnuFF2FMaYe54
 
 {
     "author": "000",

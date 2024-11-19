@@ -30,12 +30,15 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-const getTokenFrom = request => {
+const getTokenFrom = (request, response, next) => {
   const authorization = request.get('authorization')
-  if (authorization && authorization.startsWith('Bearer ')) {
-    return authorization.replace('Bearer ', '')
-  }
-  return null
+    if (authorization && authorization.startsWith('Bearer ')) {
+      const token = authorization.replace('Bearer ', '')
+      request.token = token // ahora las rutas pueden acceder a request.token
+    } else {
+      request.token = null
+    }
+  next()
 }
 
 

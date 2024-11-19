@@ -29,7 +29,7 @@
         - [x] Agregar excepción JsonWebTokenError al error handler en el middleware
         - [x] Agregar parámetros para que JWT expire (en login.js)
 
-- [ ] Refactorizar token al middleware
+- [x] Refactorizar token al middleware
 - [ ] DELETE blogs solo al estar autenticado
 - [ ] Crea un nuevo middleware userExtractor
 
@@ -77,7 +77,7 @@
 
 ### 4.20\*: Expansión de la Lista de Blogs, paso 8
 
-- [ ] Refactoriza para llevar el token a un middleware. El middleware debe tomar el token del encabezado Authorization y debe asignarlo al campo token del objeto request.
+- [x] Refactoriza para llevar el token a un middleware. El middleware debe tomar el token del encabezado Authorization y debe asignarlo al campo token del objeto request.
 
 ### 4.21\*: Expansión de la Lista de Blogs, paso 9
 

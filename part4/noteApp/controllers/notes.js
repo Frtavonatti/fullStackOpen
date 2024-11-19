@@ -39,6 +39,7 @@ const getTokenFrom = request => {
   return null
 }
 
+// post request
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 

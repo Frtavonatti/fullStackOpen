@@ -2,7 +2,6 @@ const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-const { getTokenFrom } = require('../utils/middleware')
 
 // GET
 blogsRouter.get('/', async (request, response) => {
@@ -22,7 +21,7 @@ blogsRouter.get('/:id', async (request, response) => {
 blogsRouter.post('/', async (request, response) => {
   const body = request.body
 
-  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  const decodedToken = jwt.verify(request.token, process.env.SECRET) // podemos acceder a request.token gracias al middleware global getTokenFrom
   if (!decodedToken) {
     response.status(400).json({error: 'invalid token'})
   }  
