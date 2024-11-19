@@ -15,8 +15,8 @@ describe.only('Blog API tests', () => {
 
   beforeEach(async () => {
     await Blog.deleteMany({})
-    await User.deleteMany({});
-    
+    await User.deleteMany({})
+
     await createTestUser() // using createTestUser helper
 
     for (let blog of helper.blogs) {
@@ -25,6 +25,7 @@ describe.only('Blog API tests', () => {
     }
   })
 
+  // GET
   test('blogs are returned as json', async () => {
     await api
       .get('/api/blogs')
@@ -46,10 +47,10 @@ describe.only('Blog API tests', () => {
     assert(blog.hasOwnProperty('id') && !blog.hasOwnProperty('_id'))
   })
 
-  //4.10
-  test.only('POST requests create a new object in blogsArray', async () => {
+  //4.10 POST
+  test('POST requests create a new object in blogsArray', async () => {
     const token = await getAuthToken('testuser', 'password') // using getAuthToken helper
-    
+
     const newBlog = {
       title: 'Testing POST requests',
       author: 'Me',
@@ -70,6 +71,8 @@ describe.only('Blog API tests', () => {
 
   //4.11
   test('if there is no `likes` prop, it will have the value 0 by default',async () => {
+    const token = await getAuthToken('testuser', 'password') // using getAuthToken helper
+
     const newBlog = {
       id: '666',
       title: 'Testing POST requests',
@@ -79,6 +82,7 @@ describe.only('Blog API tests', () => {
 
     const lastBlogPost = await api
       .post('/api/blogs')
+      .set('Authorization', `Bearer ${token}`)
       .send(newBlog)
       .expect(201)
       .expect('Content-Type', /application\/json/)
@@ -90,6 +94,8 @@ describe.only('Blog API tests', () => {
 
   //4.12
   test('if there is no `title` or `URL` props, the response will be 400 Bad Request', async () => {
+    const token = await getAuthToken('testuser', 'password') // using getAuthToken helper
+
     const newBlog = {
       id: '666',
       title: 'Testing POST requests',
@@ -98,6 +104,7 @@ describe.only('Blog API tests', () => {
 
     const lastBlogPost = await api
       .post('/api/blogs')
+      .set('Authorization', `Bearer ${token}`)
       .send(newBlog)
       .expect(400)
       .expect('Content-Type', /application\/json/)
@@ -106,8 +113,28 @@ describe.only('Blog API tests', () => {
     assert.strictEqual(lastBlogPost.status, 400)
   })
 
-  //4.13 DELETE
-  test('a blog can be deleted', async () => {
+  //4.23 AUTH
+  test('if the user is not authenticated the response will be 401 Unauthorized', async () => {
+    const newBlog = {
+      title: 'Unauthorized POST request',
+      author: 'Anonymous',
+      url: 'unauthorized.com',
+      likes: 0,
+    }
+
+    const postAttempt = await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(401)
+      .expect('Content-Type', /application\/json/)
+
+    assert.strictEqual(postAttempt.status, 401)
+  })
+
+  //4.13 DELETE: Pending to fix
+  test.only('a blog can be deleted', async () => {
+    const token = await getAuthToken('testuser', 'password') // using getAuthToken helper
+
     const initialArray = await helper.blogsInDB()
     console.log('START', initialArray.length)
 
@@ -115,6 +142,7 @@ describe.only('Blog API tests', () => {
 
     await api
       .delete(`/api/blogs/${noteToDelete}`)
+      .set('Authorization', `Bearer ${token}`)
       .expect(204)
 
     const finalArray = await helper.blogsInDB()

@@ -22,7 +22,7 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
   const user = request.user
 
   if (!user) {
-    return response.status(401).json({ error: 'user not authenticated' });
+    return response.status(401).json({ error: 'user not authenticated' })
   }
 
   const blog = new Blog({

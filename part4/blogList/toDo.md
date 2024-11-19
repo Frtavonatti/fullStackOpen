@@ -40,8 +40,8 @@
 
 - [x] Crea un nuevo middleware userExtractor
 
-- [ ] Arreglar las pruebas de POST blogs
-        - [ ] Agregar prueba para validar que POST falle si se tiene una verificación incorrecta
+- [x] Arreglar las pruebas de POST blogs
+        - [x] Agregar prueba para validar que POST falle si se tiene una verificación incorrecta
 
  
 
@@ -96,8 +96,8 @@
 
 ### 4.23\*: Expansión de la Lista de Blogs, paso 11
 
-- [ ] Arregla las pruebas para agregar un nuevo blog después de agregar la autenticación basada en token.
-- [ ] Escribe una nueva prueba para asegurarte de que la adición de un blog falla con el código de estado adecuado 401 Unauthorized si no se proporciona un token.
+- [x] Arregla las pruebas para agregar un nuevo blog después de agregar la autenticación basada en token.
+- [x] Escribe una nueva prueba para asegurarte de que la adición de un blog falla con el código de estado adecuado 401 Unauthorized si no se proporciona un token.
 
 
 
