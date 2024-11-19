@@ -38,11 +38,10 @@
         - [x] Comparar el ID del usuario del blog con el ID del usuario autenticado
         - [x] Devolver un código de estado adecuado si el token no está presente o el usuario no es el creador del blog
 
-- [ ] Crea un nuevo middleware userExtractor
-        - [ ] Debe encontrar el user y guardarlo en el request (request.user)
-        
+- [x] Crea un nuevo middleware userExtractor
+
 - [ ] Arreglar las pruebas de POST blogs
-  [ ] Agregar prueba para validar que POST falle si se tiene una verificación incorrecta
+        - [ ] Agregar prueba para validar que POST falle si se tiene una verificación incorrecta
 
  
 
@@ -93,7 +92,7 @@
 
 ### 4.22\*: Expansión de la Lista de Blogs, paso 10
 
-- [ ] Crea un nuevo middleware userExtractor, que encuentre al usuario y lo guarde en el objeto de solicitud.
+- [x] Crea un nuevo middleware userExtractor, que encuentre al usuario y lo guarde en el objeto de solicitud.
 
 ### 4.23\*: Expansión de la Lista de Blogs, paso 11
 

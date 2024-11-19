@@ -1,4 +1,6 @@
 const logger = require('./logger')
+const jwt = require('jsonwebtoken')
+const User = require('../models/user')
 
 const requestLogger = (request, response, next) => {
   logger.info('Method:', request.method)
@@ -41,5 +43,16 @@ const getTokenFrom = (request, response, next) => {
   next()
 }
 
+const userExtractor = async (request, response, next) => {
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  if (decodedToken) {
+    const user = await User.findById(decodedToken.id)
+    request.user = user // ahora las rutas pueden acceder a request.user
+  } else {
+    request.user = null
+  }
+  next()
+}
 
-module.exports = { requestLogger, unknownEndpoint, errorHandler, getTokenFrom }
+
+module.exports = { requestLogger, unknownEndpoint, errorHandler, getTokenFrom, userExtractor }

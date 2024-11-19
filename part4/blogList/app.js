@@ -23,6 +23,7 @@ app.use(middleware.requestLogger)
 app.use(middleware.getTokenFrom)
 
 // ROUTES
+// app.use('/api/blogs', middleware.userExtractor, blogsRouter) -> Versión para que los usuarios vean solo los blogs que ellos crearon
 app.use('/api/blogs', blogsRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)

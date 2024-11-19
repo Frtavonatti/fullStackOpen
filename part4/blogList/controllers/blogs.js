@@ -2,6 +2,7 @@ const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+const { userExtractor } = require('../utils/middleware')
 
 // GET
 blogsRouter.get('/', async (request, response) => {
@@ -18,12 +19,9 @@ blogsRouter.get('/:id', async (request, response) => {
 })
 
 // POST
-blogsRouter.post('/', async (request, response) => {
+blogsRouter.post('/', userExtractor, async (request, response) => {
   const body = request.body
-
-  const decodedToken = jwt.verify(request.token, process.env.SECRET) // podemos acceder a request.token gracias al middleware global getTokenFrom
-
-  const user = await User.findById(decodedToken.id)
+  const user = request.user
 
   const blog = new Blog({
     title: body.title || 'default title',
@@ -43,18 +41,15 @@ blogsRouter.post('/', async (request, response) => {
 })
 
 // DELETE
-blogsRouter.delete('/:id', async (request, response) => {
-  const decodedToken = jwt.verify(request.token, process.env.SECRET)
-
+blogsRouter.delete('/:id', userExtractor, async (request, response) => {
   const blogId = request.params.id
 
   const blogToBeDeleted = await Blog.findById(blogId)
   if (!blogToBeDeleted) {
-    console.log('The blog doesnt exist')
+    response.status(400).json({error: 'The blog doesnt exist'})
   }
 
-  const user = await User.findById(decodedToken.id)
-
+  const user = request.user // podemos acceder a request.user gracias al middleware global userExtractor
   const userCreatedtheBlog = blogToBeDeleted.user.toString() === user.id.toString()
 
   if (userCreatedtheBlog) {
@@ -62,7 +57,7 @@ blogsRouter.delete('/:id', async (request, response) => {
 
     user.blogs = user.blogs.filter(blog => blog.toString() !== blogId) // Actualizar el objeto User para eliminar la referencia al blog eliminado
     await user.save()
-    
+
     response.status(204).json(deletedNote)
   } else {
     response.status(401).json({ error: 'You are not authorized to delete blogs that you did not create' })
