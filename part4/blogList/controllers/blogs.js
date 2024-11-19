@@ -22,9 +22,6 @@ blogsRouter.post('/', async (request, response) => {
   const body = request.body
 
   const decodedToken = jwt.verify(request.token, process.env.SECRET) // podemos acceder a request.token gracias al middleware global getTokenFrom
-  if (!decodedToken) {
-    response.status(400).json({error: 'invalid token'})
-  }  
 
   const user = await User.findById(decodedToken.id)
 
@@ -47,9 +44,29 @@ blogsRouter.post('/', async (request, response) => {
 
 // DELETE
 blogsRouter.delete('/:id', async (request, response) => {
-  const id = request.params.id
-  const deletedNote = await Blog.findByIdAndDelete(id)
-  response.status(204).json(deletedNote)
+  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+
+  const blogId = request.params.id
+
+  const blogToBeDeleted = await Blog.findById(blogId)
+  if (!blogToBeDeleted) {
+    console.log('The blog doesnt exist')
+  }
+
+  const user = await User.findById(decodedToken.id)
+
+  const userCreatedtheBlog = blogToBeDeleted.user.toString() === user.id.toString()
+
+  if (userCreatedtheBlog) {
+    const deletedNote = await Blog.findByIdAndDelete(blogId)
+
+    user.blogs = user.blogs.filter(blog => blog.toString() !== blogId) // Actualizar el objeto User para eliminar la referencia al blog eliminado
+    await user.save()
+    
+    response.status(204).json(deletedNote)
+  } else {
+    response.status(401).json({ error: 'You are not authorized to delete blogs that you did not create' })
+  }
 })
 
 // PUT

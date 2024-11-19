@@ -30,9 +30,17 @@
         - [x] Agregar parámetros para que JWT expire (en login.js)
 
 - [x] Refactorizar token al middleware
-- [ ] DELETE blogs solo al estar autenticado
-- [ ] Crea un nuevo middleware userExtractor
 
+- [x] DELETE blogs solo al estar autenticado
+        - [x] Verificar que el token esté presente en la solicitud
+        - [x] Obtener el blog de la base de datos usando `Blog.findById(...)`
+        - [x] Convertir el campo `blog.user` a una cadena usando `blog.user.toString()`
+        - [x] Comparar el ID del usuario del blog con el ID del usuario autenticado
+        - [x] Devolver un código de estado adecuado si el token no está presente o el usuario no es el creador del blog
+
+- [ ] Crea un nuevo middleware userExtractor
+        - [ ] Debe encontrar el user y guardarlo en el request (request.user)
+        
 - [ ] Arreglar las pruebas de POST blogs
   [ ] Agregar prueba para validar que POST falle si se tiene una verificación incorrecta
 
@@ -81,7 +89,7 @@
 
 ### 4.21\*: Expansión de la Lista de Blogs, paso 9
 
-- [ ] Cambia la operación de eliminar blogs para que el blog solo pueda ser eliminado por el usuario que lo agregó. Si se intenta eliminar un blog sin un token o por un usuario incorrecto, la operación debe devolver un código de estado adecuado.
+- [x] Cambia la operación de eliminar blogs para que el blog solo pueda ser eliminado por el usuario que lo agregó. Si se intenta eliminar un blog sin un token o por un usuario incorrecto, la operación debe devolver un código de estado adecuado.
 
 ### 4.22\*: Expansión de la Lista de Blogs, paso 10
 
