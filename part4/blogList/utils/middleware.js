@@ -34,12 +34,12 @@ const errorHandler = (error, request, response, next) => {
 
 const getTokenFrom = (request, response, next) => {
   const authorization = request.get('authorization')
-    if (authorization && authorization.startsWith('Bearer ')) {
-      const token = authorization.replace('Bearer ', '')
-      request.token = token // ahora las rutas pueden acceder a request.token
-    } else {
-      request.token = null
-    }
+  if (authorization && authorization.startsWith('Bearer ')) {
+    const token = authorization.replace('Bearer ', '')
+    request.token = token // ahora las rutas pueden acceder a request.token
+  } else {
+    request.token = null
+  }
   next()
 }
 

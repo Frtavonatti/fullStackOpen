@@ -1,7 +1,5 @@
 const blogsRouter = require('express').Router()
 const Blog = require('../models/blog')
-const User = require('../models/user')
-const jwt = require('jsonwebtoken')
 const { userExtractor } = require('../utils/middleware')
 
 // GET
@@ -23,6 +21,10 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
   const body = request.body
   const user = request.user
 
+  if (!user) {
+    return response.status(401).json({ error: 'user not authenticated' });
+  }
+
   const blog = new Blog({
     title: body.title || 'default title',
     author: body.author,
@@ -32,9 +34,8 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
   })
 
   const newBlog = await blog.save()
-  console.log(newBlog)
-  
-  user.blogs = user.blogs.concat(newBlog._id) 
+
+  user.blogs = user.blogs.concat(newBlog._id)
   await user.save()
 
   response.status(201).json(newBlog)
@@ -46,7 +47,7 @@ blogsRouter.delete('/:id', userExtractor, async (request, response) => {
 
   const blogToBeDeleted = await Blog.findById(blogId)
   if (!blogToBeDeleted) {
-    response.status(400).json({error: 'The blog doesnt exist'})
+    response.status(400).json({ error: 'The blog doesnt exist' })
   }
 
   const user = request.user // podemos acceder a request.user gracias al middleware global userExtractor

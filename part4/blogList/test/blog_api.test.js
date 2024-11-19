@@ -3,14 +3,21 @@ const assert = require('node:assert')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const helper = require('../utils/list_helper')
+const { getAuthToken, createTestUser } = require('../utils/test_helper')
 const app = require('../app')
 const api = supertest(app)
 
 const Blog = require('../models/blog')
+const User = require('../models/user')
 
-describe('Blog API tests', () => {
+
+describe.only('Blog API tests', () => {
+
   beforeEach(async () => {
     await Blog.deleteMany({})
+    await User.deleteMany({});
+    
+    await createTestUser() // using createTestUser helper
 
     for (let blog of helper.blogs) {
       let blogObject = new Blog(blog)
@@ -40,9 +47,10 @@ describe('Blog API tests', () => {
   })
 
   //4.10
-  test('POST requests create a new object in blogsArray', async () => {
+  test.only('POST requests create a new object in blogsArray', async () => {
+    const token = await getAuthToken('testuser', 'password') // using getAuthToken helper
+    
     const newBlog = {
-      id: '666',
       title: 'Testing POST requests',
       author: 'Me',
       url: 'post.com',
@@ -51,6 +59,7 @@ describe('Blog API tests', () => {
 
     await api
       .post('/api/blogs')
+      .set('Authorization', `Bearer ${token}`)
       .send(newBlog)
       .expect(201)
       .expect('Content-Type', /application\/json/)
@@ -115,7 +124,7 @@ describe('Blog API tests', () => {
   })
 
   //4.14 PUT
-  test.only('the likes of a blog can be updated', async () => {
+  test('the likes of a blog can be updated', async () => {
     const initialArray = await helper.blogsInDB()
     const noteToUpdate = await initialArray[0].id
 

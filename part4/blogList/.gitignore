@@ -1,5 +1,4 @@
 node_modules
-hidedTests
 .env
 mongo.js
-# postman.rest
+postman.rest
