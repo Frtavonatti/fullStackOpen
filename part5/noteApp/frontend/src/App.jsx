@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react'
 import noteService from './services/notes'
+import loginService from './services/login'
 import Header from './components/Header'
+import Login from './components/Login'
 import Note from './components/Note/Note'
 import Notification from './components/Notification'
+import NoteForm from './components/NoteForm'
 import './App.css'
 
 const App = () => {
   const [notes, setNotes] = useState([])
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState(null)
+  const [username, setUsername] = useState('') 
+  const [password, setPassword] = useState('') 
+  const [user, setUser] = useState(null)
 
   // Funcionalidad para renderizar las notas iniciales
   useEffect(() => {
@@ -17,6 +23,17 @@ const App = () => {
       .then(initialNotes => {
         setNotes(initialNotes)
       })
+  }, [])
+
+  // Funcionalidad para revisar si el navegador ya cuenta con un token autenticado
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      noteService.setToken(user.token)
+    }
   }, [])
 
 
@@ -86,30 +103,58 @@ const App = () => {
       })
   }
 
+  // Funcionalidad para manejar el login
+  const handleLogin = async (event) => {
+    event.preventDefault()
+
+    try {
+      const user = await loginService.login({ username, password })
+      
+      window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user)) 
+
+      noteService.setToken(user.token)
+      setUser(user)
+
+      setPassword('')
+      setUsername('')
+    } catch (error) {
+      setErrorMessage('invalid usr or psw')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000);
+    }
+  }
+
+  const handleLogout = () => {
+    const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
+    if (loggedUserJSON) {
+      window.localStorage.removeItem('loggedNoteappUser')
+    }
+    setUser(null)
+  }
 
   return (
     <>
-      <Header/>
+      <Header user={user} handleLogout={handleLogout} />
 
       <Notification message={errorMessage} />
-        
-      <div>
-        {notesToShow.map(note => 
-          <Note 
-            key={note.id} 
-            note={note} 
-            toggleImportance={() => toggleImportanceOf(note.id)}
-            deleteNote={() => deleteNote(note.id)}
+
+      {user === null
+        ? <Login 
+          handleLogin={handleLogin}
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+          /> 
+        : <NoteForm 
+          addNote={addNote}
+          notesToShow={notesToShow}
+          toggleImportance={toggleImportanceOf}
+          deleteNote={deleteNote}
+          handleNotesDisplay={handleNotesDisplay}  
           />
-        )}
-      </div>
-
-      <form onSubmit={addNote}>
-        <input/>
-        <button type="submit">save</button>
-      </form>   
-
-      <button onClick={handleNotesDisplay}>Show only important notes</button>
+        }
     </>
   )
 }
