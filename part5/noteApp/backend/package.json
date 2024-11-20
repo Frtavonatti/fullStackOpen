@@ -6,7 +6,7 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "test": "NODE_ENV=test node --test",
-    "build:ui": "rm -rf dist && (cd ../../part2/notes && npm run build) && cp -r ../../part2/notes/dist ./",
+    "build:ui": "rm -rf dist && (cd ../frontend && npm run build) && cp -r ../frontend/dist ./",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "lint": "eslint .",
     "lint:fix": "npx eslint --fix"
