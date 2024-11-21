@@ -1,12 +1,16 @@
-import reactLogo from './assets/react.svg'
 import { useState, useEffect } from 'react'
+import Login from './components/Login'
+import Header from './components/Header'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
-
+import loginService from './services/login'
 import './App.css'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -14,18 +18,39 @@ const App = () => {
     )  
   }, [])
 
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+
+    try {
+      const user = await loginService.login({ username, password })
+      
+      blogService.setToken(user.token)
+      setUser(user)
+      setUsername('')
+      setPassword('')
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
-      <div>
-        <h1>Blogs</h1>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
+      <Header />
 
-      {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
-      )}
+      {
+        user 
+          ? blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )
+          : <Login 
+            username={username}
+            setUsername={setUsername}
+            password={password}
+            setPassword={setPassword}
+            handleLogin={handleLogin}
+          />
+      }
     </>
   )
 }

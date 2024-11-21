@@ -13,7 +13,7 @@ loginRouter.post('/', async (request, response) => {
 
   const passwordMatch = await bcrypt.compare(password, user.passwordHash)
   if (!passwordMatch) {
-    response.status(400).json({ error: 'Invalid password' })
+    return response.status(400).json({ error: 'Invalid password' })
   }
 
   const userForToken = {
@@ -27,7 +27,9 @@ loginRouter.post('/', async (request, response) => {
     { expiresIn: '24h' } // options
   )
 
-  response.status(200).json({ token, username: user.username, name: user.name })
+  response
+    .status(200)
+    .json({ token, username: user.username, name: user.name })
 })
 
 
