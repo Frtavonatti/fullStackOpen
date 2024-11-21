@@ -7,7 +7,7 @@ const Header = ({ user, handleLogout }) => {
         <div>
             {user && (
                 <div style={{ display: 'flex', justifyContent: 'right' }}>
-                    <h4>Logged in as: {username}</h4>
+                    <h4>Logged in: {username}</h4>
                     <button
                         style={{ marginLeft: '2rem' }}
                         onClick={handleLogout}

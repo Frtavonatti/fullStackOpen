@@ -15,9 +15,13 @@
 
 ### 5.3: Frontend de la Lista de Blogs, paso 3
 
-- [ ] Expande tu aplicación para permitir que un usuario que haya iniciado sesión agregue nuevos blogs.
+- [x] Expande tu aplicación para permitir que un usuario que haya iniciado sesión agregue nuevos blogs.
 
 ### 5.4: Frontend de la Lista de Blogs, paso 4
 
 - [ ] Implementa notificaciones que informen al usuario sobre operaciones exitosas y no exitosas en la parte superior de la página.
 - [ ] Las notificaciones deben estar visibles durante unos segundos. No es obligatorio agregar colores.
+
+
+### Opcionales: 
+- [ ] Mejorar styles de Blog component

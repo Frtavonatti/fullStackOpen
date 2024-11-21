@@ -7,9 +7,31 @@ const setToken = newToken => {
   token = `Bearer ${newToken}`
 }
 
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+// Si el navegador es refrescado, debemos setear el token nuevamente con la información que tenemos en localStorage
+const getToken =  () => {
+  const unformattedUser = window.localStorage.getItem("loggedUser")
+  if (unformattedUser) {
+    const JSONuser = JSON.parse(unformattedUser)
+    setToken(JSONuser.token)
+    console.log('using getToken'); 
+  }
 }
 
-export default { getAll, setToken }
+const getAll = async () => {
+  const response = await axios.get(baseUrl)
+  return response.data
+}
+
+const create = async (newBlog) => {
+  if(!token) {
+    getToken()
+  }
+
+  let config = {
+    headers: { Authorization: token } 
+  }
+  const response = await axios.post(baseUrl, newBlog, config)
+  return response.data 
+}
+
+export default { getAll, create, setToken }
