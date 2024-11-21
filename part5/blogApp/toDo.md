@@ -9,8 +9,8 @@
 
 ### 5.2: Frontend de la Lista de Blogs, paso 2
 
-- [ ] Haz que el inicio de sesión sea "permanente" mediante el uso de local storage.
-- [ ] Implementa una forma de cerrar sesión.
+- [x] Haz que el inicio de sesión sea "permanente" mediante el uso de local storage.
+- [x] Implementa una forma de cerrar sesión.
 - Asegúrate de que el navegador no recuerde los detalles del usuario después de cerrar la sesión.
 
 ### 5.3: Frontend de la Lista de Blogs, paso 3
