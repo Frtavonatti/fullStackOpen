@@ -1,6 +1,6 @@
-import Blog from './Blog'
+import Blog from './Blog/Blog'
 
-const BlogList = ({ blogs, deleteBlog }) => {
+const BlogList = ({ blogs, user, deleteBlog }) => {
     return (
         <div style={{ 
             display: 'grid', 
@@ -9,8 +9,12 @@ const BlogList = ({ blogs, deleteBlog }) => {
             marginTop: '20px'
         }}>
             {blogs.map(blog =>
-                <Blog key={blog.id} blog={blog} deleteBlog={() => {deleteBlog(blog.id)}} />
-                )}
+                <Blog key={blog.id} 
+                    blog={blog} 
+                    user={user} 
+                    deleteBlog={() => {deleteBlog(blog.id) 
+                }} />
+            )}
         </div>
     )
 }

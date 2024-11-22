@@ -1,4 +1,36 @@
-## Part 5a
+## Part5b
+
+### 5.5: Frontend de la Lista de Blogs, paso 5
+- [ ] Cambia el formulario para crear publicaciones de blog para que solo se muestre cuando sea apropiado.
+     - El formulario no es visible por defecto y se expande cuando se hace clic en el botón "create new blog".
+     - El formulario se esconde otra vez luego de que un nuevo blog es creado.
+
+### 5.6: Frontend de la Lista de Blogs, paso 6
+- [x] Separa el formulario para crear un nuevo blog en su propio componente.
+- [x] Mueve todos los estados necesarios para crear un nuevo blog a este componente.
+
+### 5.7: Frontend de la Lista de Blogs, paso 7
+- [ ] Agrega un botón a cada blog que controle si se muestran o no todos los detalles sobre el blog.
+     - Los detalles completos del blog se abren cuando se hace clic en el botón y se ocultan cuando se vuelve a hacer clic en el botón.
+
+### 5.8: Frontend de la Lista de Blogs, paso 8
+- [ ] Implementa la funcionalidad para el botón "like".
+     - Los likes aumentan al hacer una solicitud HTTP PUT a la dirección única de la publicación del blog en el backend.
+
+### 5.9: Frontend de la Lista de Blogs, paso 9
+- [ ] Corrige el problema donde el nombre del usuario que añadió el blog no se muestra en sus detalles después de dar "me gusta".
+
+### 5.10: Frontend de la Lista de Blogs, paso 10
+- [ ] Modifica la aplicación para enumerar las publicaciones de blog por el número de likes.
+
+### 5.11: Frontend de la Lista de Blogs, paso 11
+- [x] Agrega un nuevo botón para eliminar publicaciones de blog.
+- [x] Implementa la lógica para eliminar publicaciones de blog en el backend.
+- [x] Muestra el botón para eliminar una publicación de blog solo si la publicación de blog fue agregada por el usuario.
+
+
+
+<!-- ## Part 5a
 
 ### 5.1: Frontend de la Lista de Blogs, paso 1
 - [x] Implementa la funcionalidad de inicio de sesión en el frontend. El token devuelto con un inicio de sesión exitoso se guarda en el estado `user` de la aplicación.
@@ -22,7 +54,6 @@
 - [x] Implementa notificaciones que informen al usuario sobre operaciones exitosas y no exitosas en la parte superior de la página.
 - [x] Las notificaciones deben estar visibles durante unos segundos.
 
-
 ### Opcionales: 
 - [x] Agregar funcionalidad DELETE
-- [x] Mejorar styles de Blog component
+- [x] Mejorar styles de Blog component -->

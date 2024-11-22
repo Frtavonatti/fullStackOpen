@@ -1,6 +1,14 @@
 const Login = ({ username, setUsername, password, setPassword, handleLogin }) => {
     return (      
-        <form style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        <form 
+        style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: '10px', 
+            maxWidth: '400px',
+            margin: '0 auto'
+        }}>
+
             <input 
                 type="text" 
                 placeholder='username'

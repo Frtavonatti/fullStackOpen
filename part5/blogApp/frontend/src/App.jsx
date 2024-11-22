@@ -15,11 +15,6 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState({ type: '', text: '' })
 
-  // States for BlogList
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [link, setLink] = useState('')
-
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
@@ -30,10 +25,11 @@ const App = () => {
     const unformattedUser = window.localStorage.getItem('loggedUser')
     if (unformattedUser) {
       const JSONuser = JSON.parse(unformattedUser)
-      setUser(JSONuser)
       blogService.setToken(JSONuser.token)
+      setUser(JSONuser)
     }
   }, []);
+  
 
   // Effect to automatically clear notifications after 5 seconds
   useEffect(() => {
@@ -68,22 +64,12 @@ const App = () => {
     setUser(null)
   }
 
-  const createNewBlog = async (event) => {
-    event.preventDefault()
-
+  // La conectamos con addBlog en BlogFrom para poder manejar los estados locales del formulario
+  const createNewBlog = async (newBlog) => {
     try {
-      const newBlog = {
-        title: title,
-        author: author,
-        url: link
-      }
-      
       const createdBlog = await blogService.create(newBlog)
       setBlogs(blogs.concat(createdBlog))
       setMessage({type: 'success', text: 'Blog created succesfully'})
-      setTitle('')
-      setAuthor('')
-      setLink('')
     } catch (error) {
       setMessage({type: 'error', text: 'Failed to create new blog'})
     }
@@ -106,7 +92,7 @@ const App = () => {
         handleLogout={handleLogout}
       />
 
-      { message.text && <Notification message={message}/>}
+      { message.text && <Notification message={message}/> }
 
       {
         user 
@@ -114,15 +100,10 @@ const App = () => {
           <div>
             <BlogList 
             blogs={blogs}
+            user={user}
             deleteBlog={deleteBlog}
             />
             <BlogForm
-            title={title}
-            setTitle={setTitle}
-            author={author}
-            setAuthor={setAuthor}
-            link={link}
-            setLink={setLink}
             createNewBlog={createNewBlog}
             />
           </div>
