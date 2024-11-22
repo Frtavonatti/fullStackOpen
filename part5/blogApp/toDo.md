@@ -19,10 +19,10 @@
 
 ### 5.4: Frontend de la Lista de Blogs, paso 4
 
-- [ ] Implementa notificaciones que informen al usuario sobre operaciones exitosas y no exitosas en la parte superior de la página.
-- [ ] Las notificaciones deben estar visibles durante unos segundos. No es obligatorio agregar colores.
+- [x] Implementa notificaciones que informen al usuario sobre operaciones exitosas y no exitosas en la parte superior de la página.
+- [x] Las notificaciones deben estar visibles durante unos segundos.
 
 
 ### Opcionales: 
-- [ ] Mejorar styles de Blog component
-- [ ] Agregar funcionalidad DELETE
+- [x] Agregar funcionalidad DELETE
+- [x] Mejorar styles de Blog component

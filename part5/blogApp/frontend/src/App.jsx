@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Login from './components/Login'
 import Header from './components/Header'
 import BlogList from './components/BlogList'
+import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -88,6 +89,16 @@ const App = () => {
     }
   }
 
+  const deleteBlog = async (id) => {
+    try {
+      await blogService.remove(id)
+      setBlogs(blogs.filter(blog => blog.id !== id))
+      setMessage({ type: 'success', text: 'blog deleted successfully' })
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Its not possible to delete this blog' })
+    }
+  }
+
   return (
     <>
       <Header 
@@ -99,8 +110,13 @@ const App = () => {
 
       {
         user 
-          ? <BlogList 
+          ? 
+          <div>
+            <BlogList 
             blogs={blogs}
+            deleteBlog={deleteBlog}
+            />
+            <BlogForm
             title={title}
             setTitle={setTitle}
             author={author}
@@ -108,7 +124,9 @@ const App = () => {
             link={link}
             setLink={setLink}
             createNewBlog={createNewBlog}
-          />
+            />
+          </div>
+
           : <Login 
             username={username}
             setUsername={setUsername}

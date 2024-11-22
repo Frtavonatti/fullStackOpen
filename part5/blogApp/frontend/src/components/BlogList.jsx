@@ -1,46 +1,17 @@
 import Blog from './Blog'
 
-const BlogList = ({ blogs, title, setTitle, author, setAuthor, link, setLink, createNewBlog }) => {
+const BlogList = ({ blogs, deleteBlog }) => {
     return (
-        <>
+        <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', 
+            gap: '10px', 
+            marginTop: '20px'
+        }}>
             {blogs.map(blog =>
-                <Blog key={blog.id} blog={blog} />)}
-
-            <form 
-                onSubmit={createNewBlog}
-                style={{ display:'flex', flexDirection:'column' }}
-                >
-
-                Title: 
-                <input 
-                    type="text" 
-                    placeholder='Title'
-                    name='title'
-                    onChange={(event) => { setTitle(event.target.value) }}
-                    value={title}
-                />
-                Author*: 
-                <input 
-                    type="text" 
-                    placeholder='Author'
-                    name='author'
-                    onChange={(event) => { setAuthor(event.target.value) }}
-                    value={author}
-                />
-                Link*: 
-                <input 
-                    type="text" 
-                    placeholder='Link'
-                    name='link'
-                    onChange={(event) => { setLink(event.target.value) }}
-                    value={link}
-                />
-                <button type='submit'> Create </button>
-            </form>
-
-        </>
-
-
+                <Blog key={blog.id} blog={blog} deleteBlog={() => {deleteBlog(blog.id)}} />
+                )}
+        </div>
     )
 }
 
