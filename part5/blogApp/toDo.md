@@ -25,3 +25,4 @@
 
 ### Opcionales: 
 - [ ] Mejorar styles de Blog component
+- [ ] Agregar funcionalidad DELETE
