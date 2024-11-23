@@ -14,6 +14,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState({ type: '', text: '' })
+  const [addBlogVisible, setAddBlogVisible] = useState(false)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -105,6 +106,8 @@ const App = () => {
             />
             <BlogForm
             createNewBlog={createNewBlog}
+            addBlogVisible={addBlogVisible}
+            setAddBlogVisible={setAddBlogVisible}
             />
           </div>
 

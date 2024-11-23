@@ -1,7 +1,7 @@
 ## Part5b
 
 ### 5.5: Frontend de la Lista de Blogs, paso 5
-- [ ] Cambia el formulario para crear publicaciones de blog para que solo se muestre cuando sea apropiado.
+- [x] Cambia el formulario para crear publicaciones de blog para que solo se muestre cuando sea apropiado.
      - El formulario no es visible por defecto y se expande cuando se hace clic en el botón "create new blog".
      - El formulario se esconde otra vez luego de que un nuevo blog es creado.
 
@@ -28,7 +28,11 @@
 - [x] Implementa la lógica para eliminar publicaciones de blog en el backend.
 - [x] Muestra el botón para eliminar una publicación de blog solo si la publicación de blog fue agregada por el usuario.
 
-
+### 5.12: Frontend de la Lista de Blogs, paso 12
+- [ ] Define PropTypes para uno de los componentes de tu aplicación.
+- [ ] Agrega ESlint al proyecto.
+     - Define la configuración según tu preferencia en el archivo `.eslintrc.cjs`.
+     - Corrige todos los errores del linter.
 
 <!-- ## Part 5a
 
