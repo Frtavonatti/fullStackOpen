@@ -24,8 +24,6 @@ const Blog = ({ blog, user, deleteBlog, updateLikes }) => {
   }
 
   const isCreatedByUser = blog.user.username === user.username
-  // TO-DO: fix delete button problem: when creating a new note, user is undefined because it must wait for the POST request to complete
-  // console.log('USER:', user.username, 'BLOG:', blog.user.username)
 
   return (
     <div className="blog-container">

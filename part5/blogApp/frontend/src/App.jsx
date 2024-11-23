@@ -31,8 +31,6 @@ const App = () => {
     }
   }, []);
   
-
-  // Effect to automatically clear notifications after 5 seconds
   useEffect(() => {
     if (message.text) {
         setTimeout(() => {
@@ -69,6 +67,7 @@ const App = () => {
   const createNewBlog = async (newBlog) => {
     try {
       const createdBlog = await blogService.create(newBlog)
+      createdBlog.user = user
       setBlogs(blogs.concat(createdBlog))
       setMessage({type: 'success', text: 'Blog created succesfully'})
     } catch (error) {
@@ -86,6 +85,7 @@ const App = () => {
     }
   }
 
+  // Is connected with handleLikes in blogform to handle de likes state of the blog
   const updateLikes = async (id, likes) => {
     try {
       const updatedBlog = await blogService.update(id, likes)

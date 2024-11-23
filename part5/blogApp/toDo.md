@@ -18,8 +18,8 @@
      - Los likes aumentan al hacer una solicitud HTTP PUT a la dirección única de la publicación del blog en el backend.
 
 ### 5.9: Frontend de la Lista de Blogs, paso 9
-- [ ] Corrige el problema donde el nombre del usuario que añadió el blog no se muestra en sus detalles después de dar "me gusta".
-- [ ] Arregla el problema del botón de eliminar: cuando se crea una nueva nota, el usuario no está definido porque debe esperar a que se complete la solicitud POST.
+- [x] Corrige el problema donde el nombre del usuario que añadió el blog no se muestra en sus detalles después de dar "me gusta".
+- [x] Arregla el problema del botón de eliminar: cuando se crea una nueva nota, el usuario no está definido porque debe esperar a que se complete la solicitud POST.
 
 ### 5.10: Frontend de la Lista de Blogs, paso 10
 - [ ] Modifica la aplicación para enumerar las publicaciones de blog por el número de likes.
