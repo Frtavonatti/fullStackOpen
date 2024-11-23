@@ -1,36 +1,40 @@
 import React from 'react'
+import { useState } from 'react'
 import './Blog.css'
 
 const Blog = ({ blog, user, deleteBlog }) => {
-  const isCreatedByUser = blog.user.username === user.username
+  const [visible, setVisible] = useState(false)
 
-  // 5.7
-  // [ ] Agrega un botón a cada blog que controle si se muestran o no todos los detalles sobre el blog.
-  const toggleButton = () => {
-    console.log('Clicked')
+  const showWhenVisible = { display: visible ? '' : 'none' }
+  const buttonText = visible ? 'Hide' : 'Show'
+
+  const toggleVisibility = () => {
+    setVisible(!visible);
   }
+
+  const isCreatedByUser = blog.user.username === user.username
+  // TO-DO: fix delete button problem: when creating a new note, user is undefined because it must wait for the POST request to complete
+  // console.log('USER:', user.username, 'BLOG:', blog.user.username)
 
   return (
     <div className="blog-container">
+
       <div className="blog-content">
         <strong>{blog.title}:</strong> <br/> 
 
-        {/* Quiero que esto se oculte */}
-        {blog.author} <br/> 
-        {blog.url} <br/> 
-        {/* ************************* */}
+        <div style={showWhenVisible}>
+          {blog.author} <br/> 
+          {blog.url} <br/> 
+        </div>
 
         Likes: {blog.likes}
       </div>
 
       <div className="blog-actions">
-
-
-        <button onClick={toggleButton}>View</button>
-
-
+        <button onClick={toggleVisibility}>{buttonText}</button>
         { isCreatedByUser && <button onClick={deleteBlog} className="delete-button">Delete</button> }
       </div>
+
     </div>  
   )
 }

@@ -4,6 +4,7 @@ import Header from './components/Header'
 import BlogList from './components/BlogList'
 import BlogForm from './components/BlogForm'
 import Notification from './components/Notification'
+import Togglable from './components/Togglable'
 import blogService from './services/blogs'
 import loginService from './services/login'
 import './App.css'
@@ -14,7 +15,6 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState({ type: '', text: '' })
-  const [addBlogVisible, setAddBlogVisible] = useState(false)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -65,7 +65,7 @@ const App = () => {
     setUser(null)
   }
 
-  // La conectamos con addBlog en BlogFrom para poder manejar los estados locales del formulario
+  // Is connected with addBlog in BlogForm to handle the local states of the form
   const createNewBlog = async (newBlog) => {
     try {
       const createdBlog = await blogService.create(newBlog)
@@ -104,11 +104,12 @@ const App = () => {
             user={user}
             deleteBlog={deleteBlog}
             />
-            <BlogForm
-            createNewBlog={createNewBlog}
-            addBlogVisible={addBlogVisible}
-            setAddBlogVisible={setAddBlogVisible}
-            />
+            <Togglable buttonLabel={'Create new Blog'}> 
+              <BlogForm
+              createNewBlog={createNewBlog}
+              setMessage={setMessage}
+              />
+            </Togglable>
           </div>
 
           : <Login 

@@ -1,34 +1,34 @@
 import { useState } from "react"
 
-const BlogForm = ({ createNewBlog, addBlogVisible, setAddBlogVisible}) => {
-    const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
-    const [link, setLink] = useState('')
+const BlogForm = ({ createNewBlog, setMessage, setVisible }) => {
+    const [formData, setFormData] = useState({
+        title: '',
+        author: '',
+        url: ''
+    })
 
-    const hideWhenVisible = { display: addBlogVisible ? 'none' : '' }
-    const showWhenVisible = { display: addBlogVisible ? '' : 'none' }
-
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({
+            ...formData,
+            [name]: value
+        })
+    }
+    
     const addBlog = (event) => {
         event.preventDefault()
-        const newBlog = {
-            title: title,
-            author: author,
-            url: link
+        if (!formData.author) {
+            setMessage({ type: 'error', text: 'You have to complete all fields' })
+        } else {
+            createNewBlog(formData)
         }
-        createNewBlog(newBlog)
-        setTitle('')
-        setAuthor('')
-        setLink('')
+        setFormData({ title: '', author: '', url: '' })
+        setVisible(false)
     }
-
+    
     return (
-    <>
-        <div style={hideWhenVisible}>
-            <button onClick={() => setAddBlogVisible(!addBlogVisible)}> Create a new Blog </button>            
-        </div>
-
-            
-        <div style={showWhenVisible}>
+    <>      
+        <div>
             <form 
                 onSubmit={addBlog}
                 style={{ 
@@ -45,8 +45,8 @@ const BlogForm = ({ createNewBlog, addBlogVisible, setAddBlogVisible}) => {
                     type="text" 
                     placeholder='Title'
                     name='title'
-                    onChange={(event) => { setTitle(event.target.value) }}
-                    value={title}
+                    onChange={handleChange} 
+                    value={formData.title}
                 />
 
                 Author*: 
@@ -54,8 +54,8 @@ const BlogForm = ({ createNewBlog, addBlogVisible, setAddBlogVisible}) => {
                     type="text" 
                     placeholder='Author'
                     name='author'
-                    onChange={(event) => { setAuthor(event.target.value) }}
-                    value={author}
+                    onChange={handleChange} 
+                    value={formData.author}
                 />
 
                 Link*: 
@@ -63,11 +63,11 @@ const BlogForm = ({ createNewBlog, addBlogVisible, setAddBlogVisible}) => {
                     type="text" 
                     placeholder='Link'
                     name='link'
-                    onChange={(event) => { setLink(event.target.value) }}
-                    value={link}
+                    onChange={handleChange} 
+                    value={formData.link}
                 />
 
-                <button type='submit' onClick={() => setAddBlogVisible(false)}> Create </button>
+                <button type='submit'> Create </button>
             </form>
         </div>
 

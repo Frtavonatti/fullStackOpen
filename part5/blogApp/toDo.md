@@ -10,7 +10,7 @@
 - [x] Mueve todos los estados necesarios para crear un nuevo blog a este componente.
 
 ### 5.7: Frontend de la Lista de Blogs, paso 7
-- [ ] Agrega un botón a cada blog que controle si se muestran o no todos los detalles sobre el blog.
+- [x] Agrega un botón a cada blog que controle si se muestran o no todos los detalles sobre el blog.
      - Los detalles completos del blog se abren cuando se hace clic en el botón y se ocultan cuando se vuelve a hacer clic en el botón.
 
 ### 5.8: Frontend de la Lista de Blogs, paso 8

@@ -21,10 +21,6 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
   const body = request.body
   const user = request.user
 
-  // console.log('BODY: ', body)
-  // console.log('USER: ', user)
-  
-
   if (!user) {
     return response.status(401).json({ error: 'user not authenticated' })
   }
@@ -32,7 +28,7 @@ blogsRouter.post('/', userExtractor, async (request, response) => {
   const blog = new Blog({
     title: body.title || 'default title',
     author: body.author,
-    url: body.url,
+    url: body.url || 'default.com',
     likes: body.likes,
     user: user.id
   })
