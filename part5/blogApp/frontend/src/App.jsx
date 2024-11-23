@@ -86,6 +86,15 @@ const App = () => {
     }
   }
 
+  const updateLikes = async (id, likes) => {
+    try {
+      const updatedBlog = await blogService.update(id, likes)
+      setBlogs(blogs.map(blog => blog.id === id ? { ...blog, likes: updatedBlog.likes } : blog))
+    } catch (error) {
+      setMessage({ type: 'error', text: 'Its not possible to like this blog' })
+    }
+  }
+
   return (
     <>
       <Header 
@@ -102,6 +111,7 @@ const App = () => {
             <BlogList 
             blogs={blogs}
             user={user}
+            updateLikes={updateLikes}
             deleteBlog={deleteBlog}
             />
             <Togglable buttonLabel={'Create new Blog'}> 

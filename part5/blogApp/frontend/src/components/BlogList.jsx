@@ -1,6 +1,6 @@
 import Blog from './Blog/Blog'
 
-const BlogList = ({ blogs, user, deleteBlog }) => {
+const BlogList = ({ blogs, user, deleteBlog, updateLikes }) => {
     return (
         <div style={{ 
             display: 'grid', 
@@ -12,8 +12,9 @@ const BlogList = ({ blogs, user, deleteBlog }) => {
                 <Blog key={blog.id} 
                     blog={blog} 
                     user={user} 
-                    deleteBlog={() => {deleteBlog(blog.id) 
-                }} />
+                    deleteBlog={deleteBlog} 
+                    updateLikes={updateLikes}
+                />
             )}
         </div>
     )

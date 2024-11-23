@@ -16,8 +16,9 @@
   }
   
   .blog-actions {
-    align-self: flex-end;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 10px;
   }
   
