@@ -8,14 +8,19 @@ const BlogList = ({ blogs, user, deleteBlog, updateLikes }) => {
             gap: '10px', 
             marginTop: '20px'
         }}>
-            {blogs.map(blog =>
-                <Blog key={blog.id} 
-                    blog={blog} 
-                    user={user} 
-                    deleteBlog={deleteBlog} 
-                    updateLikes={updateLikes}
-                />
-            )}
+            {blogs
+                .sort((blogA, blogB) => {
+                    return blogB.likes - blogA.likes
+                })
+                .map(blog => 
+                    <Blog key={blog.id} 
+                        blog={blog} 
+                        user={user} 
+                        deleteBlog={deleteBlog} 
+                        updateLikes={updateLikes}
+                    />
+                )
+            }
         </div>
     )
 }

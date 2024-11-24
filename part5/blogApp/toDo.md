@@ -22,7 +22,7 @@
 - [x] Arregla el problema del botón de eliminar: cuando se crea una nueva nota, el usuario no está definido porque debe esperar a que se complete la solicitud POST.
 
 ### 5.10: Frontend de la Lista de Blogs, paso 10
-- [ ] Modifica la aplicación para enumerar las publicaciones de blog por el número de likes.
+- [x] Modifica la aplicación para enumerar las publicaciones de blog por el número de likes.
 
 ### 5.11: Frontend de la Lista de Blogs, paso 11
 - [x] Agrega un nuevo botón para eliminar publicaciones de blog.

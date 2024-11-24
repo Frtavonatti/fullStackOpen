@@ -76,13 +76,15 @@ const App = () => {
   }
 
   const deleteBlog = async (id) => {
-    try {
-      await blogService.remove(id)
-      setBlogs(blogs.filter(blog => blog.id !== id))
-      setMessage({ type: 'success', text: 'blog deleted successfully' })
-    } catch (error) {
-      setMessage({ type: 'error', text: 'Its not possible to delete this blog' })
-    }
+    if (window.confirm('Are you sure you want to delete this blog?')) {
+      try {
+        await blogService.remove(id)
+        setBlogs(blogs.filter(blog => blog.id !== id))
+        setMessage({ type: 'success', text: 'blog deleted successfully' })
+      } catch (error) {
+        setMessage({ type: 'error', text: 'Its not possible to delete this blog' })
+      }
+    } 
   }
 
   // Is connected with handleLikes in blogform to handle de likes state of the blog
