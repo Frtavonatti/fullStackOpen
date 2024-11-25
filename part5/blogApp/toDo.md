@@ -30,8 +30,8 @@
 - [x] Muestra el botón para eliminar una publicación de blog solo si la publicación de blog fue agregada por el usuario.
 
 ### 5.12: Frontend de la Lista de Blogs, paso 12
-- [ ] Define PropTypes para uno de los componentes de tu aplicación.
-- [ ] Agrega ESlint al proyecto.
+- [x] Define PropTypes para uno de los componentes de tu aplicación.
+- [x] Agrega ESlint al proyecto.
      - Define la configuración según tu preferencia en el archivo `.eslintrc.cjs`.
      - Corrige todos los errores del linter.
 

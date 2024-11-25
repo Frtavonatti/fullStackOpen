@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Login from './components/Login'
 import Header from './components/Header'
 import BlogList from './components/BlogList'
@@ -16,10 +16,12 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState({ type: '', text: '' })
 
+  const blogFormRef = useRef()
+
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -29,13 +31,13 @@ const App = () => {
       blogService.setToken(JSONuser.token)
       setUser(JSONuser)
     }
-  }, []);
-  
+  }, [])
+
   useEffect(() => {
     if (message.text) {
-        setTimeout(() => {
-            setMessage({ type: '', text: '' });
-        }, 5000)
+      setTimeout(() => {
+        setMessage({ type: '', text: '' })
+      }, 5000)
     }
   }, [message])
 
@@ -46,7 +48,7 @@ const App = () => {
       const user = await loginService.login({ username, password })
 
       window.localStorage.setItem('loggedUser', JSON.stringify(user))
-      
+
       blogService.setToken(user.token)
       setUser(user)
       setUsername('')
@@ -66,12 +68,13 @@ const App = () => {
   // Is connected with addBlog in BlogForm to handle the local states of the form
   const createNewBlog = async (newBlog) => {
     try {
+      blogFormRef.current.toggleVisibility() // obtained through refs
       const createdBlog = await blogService.create(newBlog)
       createdBlog.user = user
       setBlogs(blogs.concat(createdBlog))
-      setMessage({type: 'success', text: 'Blog created succesfully'})
+      setMessage({ type: 'success', text: 'Blog created succesfully' })
     } catch (error) {
-      setMessage({type: 'error', text: 'Failed to create new blog'})
+      setMessage({ type: 'error', text: 'Failed to create new blog' })
     }
   }
 
@@ -84,7 +87,7 @@ const App = () => {
       } catch (error) {
         setMessage({ type: 'error', text: 'Its not possible to delete this blog' })
       }
-    } 
+    }
   }
 
   // Is connected with handleLikes in blogform to handle de likes state of the blog
@@ -99,7 +102,7 @@ const App = () => {
 
   return (
     <>
-      <Header 
+      <Header
         user={user}
         handleLogout={handleLogout}
       />
@@ -107,24 +110,24 @@ const App = () => {
       { message.text && <Notification message={message}/> }
 
       {
-        user 
-          ? 
+        user
+          ?
           <div>
-            <BlogList 
-            blogs={blogs}
-            user={user}
-            updateLikes={updateLikes}
-            deleteBlog={deleteBlog}
+            <BlogList
+              blogs={blogs}
+              user={user}
+              updateLikes={updateLikes}
+              deleteBlog={deleteBlog}
             />
-            <Togglable buttonLabel={'Create new Blog'}> 
+            <Togglable buttonLabel={'Create new Blog'} ref={blogFormRef}>
               <BlogForm
-              createNewBlog={createNewBlog}
-              setMessage={setMessage}
+                createNewBlog={createNewBlog}
+                setMessage={setMessage}
               />
             </Togglable>
           </div>
 
-          : <Login 
+          : <Login
             username={username}
             setUsername={setUsername}
             password={password}
