@@ -1,4 +1,21 @@
-## Part5b
+## Part5c: Testing React Apps
+
+### 5.13: Pruebas de Listas de Blogs, paso 1
+- [ ] Verifica que el componente de blog muestra el título y el autor, pero no la URL ni el número de likes por defecto.
+- [ ] Agrega clases de CSS al componente para facilitar las pruebas.
+
+### 5.14: Pruebas de Listas de Blogs, paso 2
+- [ ] Verifica que la URL del blog y el número de likes se muestran al hacer clic en el botón de detalles.
+
+### 5.15: Pruebas de Listas de Blogs, paso 3
+- [ ] Verifica que al hacer clic dos veces en el botón de like, se llama dos veces al controlador de eventos.
+ 
+### 5.16: Pruebas de Listas de Blogs, paso 4
+- [ ] Verifica que el formulario de nuevo blog llama al controlador de eventos con los detalles correctos al crear un nuevo blog.
+
+
+
+<!-- ## Part5b: Props Children y PropTypes
 
 ### 5.5: Frontend de la Lista de Blogs, paso 5
 - [x] Cambia el formulario para crear publicaciones de blog para que solo se muestre cuando sea apropiado.
@@ -33,7 +50,7 @@
 - [x] Define PropTypes para uno de los componentes de tu aplicación.
 - [x] Agrega ESlint al proyecto.
      - Define la configuración según tu preferencia en el archivo `.eslintrc.cjs`.
-     - Corrige todos los errores del linter.
+     - Corrige todos los errores del linter. -->
 
 <!-- ## Part 5a
 

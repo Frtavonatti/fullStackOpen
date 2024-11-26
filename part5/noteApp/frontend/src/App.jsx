@@ -68,7 +68,8 @@ const App = () => {
           const setUpdatedNotes = notes.map(n => n.id !== id ? n : returnedNote)
           setNotes(setUpdatedNotes)
       })
-      .catch(error => {
+      .catch((error) => {
+        console.error('toggle importance failed:', error);
         setErrorMessage(
           `Note '${note.content}' was already removed from server`
         )
@@ -117,6 +118,7 @@ const App = () => {
       setPassword('')
       setUsername('')
     } catch (error) {
+      console.error('Login failed:', error)
       setErrorMessage('invalid usr or psw')
       setTimeout(() => {
         setErrorMessage(null)
