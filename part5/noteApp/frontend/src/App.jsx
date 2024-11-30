@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import noteService from './services/notes'
 import loginService from './services/login'
-import Header from './components/Header'
 import Login from './components/Login'
 import Notification from './components/Notification'
 import NoteForm from './components/NoteForm'
@@ -9,7 +8,7 @@ import './App.css'
 
 const App = () => {
   const [notes, setNotes] = useState([])
-  const [showAll, setShowAll] = useState(true)
+
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
@@ -35,7 +34,6 @@ const App = () => {
     }
   }, [])
 
-
   // Funcionalidad para agregar nuevas notas
   const addNote = (event) => {
     event.preventDefault()
@@ -55,7 +53,6 @@ const App = () => {
       })
     event.target[0].value = ''
   }
-
 
   // Funcionalidad para cambiar importancia
   const toggleImportanceOf = (id) => {
@@ -80,19 +77,6 @@ const App = () => {
       })
   }
   
-
-  // Funcionalidad para filtrar notas por importancia
-  const onlyImportantNotes = notes.filter(note => note.important)
-
-  const handleNotesDisplay = () => {
-    setShowAll(!showAll)
-  }
-
-  
-  // Funcionalidad para mostrar solo notas importantes
-  const notesToShow = showAll ? notes : onlyImportantNotes
-
-
   // Funcionalidad para eliminar notas
   const deleteNote = (id) => {
     noteService
@@ -140,18 +124,19 @@ const App = () => {
 
       {user === null
         ? <Login 
-          handleLogin={handleLogin}
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
+            handleLogin={handleLogin}
+            username={username}
+            setUsername={setUsername}
+            password={password}
+            setPassword={setPassword}
           /> 
         : <NoteForm 
+          notes={notes}
           addNote={addNote}
-          notesToShow={notesToShow}
+          // notesToShow={notesToShow}
           toggleImportance={toggleImportanceOf}
           deleteNote={deleteNote}
-          handleNotesDisplay={handleNotesDisplay}  
+          // handleNotesDisplay={handleNotesDisplay}  
           user={user}
           handleLogout={handleLogout}
           />

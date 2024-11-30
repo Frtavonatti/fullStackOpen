@@ -1,7 +1,21 @@
+import { useState } from "react"
+
 import Note from "./Note/Note"
 import Header from "./Header"
+import Togglable from './Togglable'
 
-const NoteForm = ({ addNote, notesToShow, handleNotesDisplay, toggleImportance, deleteNote, user, handleLogout } ) => {
+const NoteForm = ({ notes, user, addNote, toggleImportance, deleteNote, handleLogout } ) => {
+    const [showAll, setShowAll] = useState(true)
+    
+    // Funcionalidad para filtrar notas por importancia
+    const onlyImportantNotes = notes.filter(note => note.important)
+    const handleNotesDisplay = () => {
+        setShowAll(!showAll)
+    }
+
+    // Solo mostrar notas importantes
+    const notesToShow = showAll ? notes : onlyImportantNotes
+    
     return (
         <>
             <Header user={user} handleLogout={handleLogout} />
@@ -16,12 +30,19 @@ const NoteForm = ({ addNote, notesToShow, handleNotesDisplay, toggleImportance, 
                 )}
             </div>
 
-            <form onSubmit={addNote}>
-                <input />
-                <button type="submit">save</button>
-            </form>   
+            <Togglable buttonLabel={'Create new Note'}>
+                <form onSubmit={addNote}>
+                    <input />
+                    <button type="submit">save</button>
+                </form>   
+            </Togglable>
 
-            <button onClick={handleNotesDisplay}>Show only important notes</button>
+
+            <button onClick={handleNotesDisplay}
+                style={{marginTop: '15px'}}
+            >
+                Show only important notes
+            </button>
         </>
     )
 }
