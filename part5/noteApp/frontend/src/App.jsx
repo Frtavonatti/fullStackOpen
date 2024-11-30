@@ -8,7 +8,6 @@ import './App.css'
 
 const App = () => {
   const [notes, setNotes] = useState([])
-
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
@@ -35,14 +34,7 @@ const App = () => {
   }, [])
 
   // Funcionalidad para agregar nuevas notas
-  const addNote = (event) => {
-    event.preventDefault()
-    const query = event.target[0].value
-    const newNote = { 
-        id: (notes.length + 1).toString(), 
-        content: query, 
-        important: false 
-      }
+  const addNote = (newNote) => {
     noteService
       .create(newNote)
       .then(returnedNote => {
@@ -51,7 +43,6 @@ const App = () => {
       .catch(error => {
         console.log(error.response.data.error)
       })
-    event.target[0].value = ''
   }
 
   // Funcionalidad para cambiar importancia
@@ -133,10 +124,8 @@ const App = () => {
         : <NoteForm 
           notes={notes}
           addNote={addNote}
-          // notesToShow={notesToShow}
           toggleImportance={toggleImportanceOf}
           deleteNote={deleteNote}
-          // handleNotesDisplay={handleNotesDisplay}  
           user={user}
           handleLogout={handleLogout}
           />

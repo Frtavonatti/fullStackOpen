@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 import Note from "./Note/Note"
 import Header from "./Header"
@@ -6,15 +6,30 @@ import Togglable from './Togglable'
 
 const NoteForm = ({ notes, user, addNote, toggleImportance, deleteNote, handleLogout } ) => {
     const [showAll, setShowAll] = useState(true)
+    const newNoteForm = useRef()
     
     // Funcionalidad para filtrar notas por importancia
     const onlyImportantNotes = notes.filter(note => note.important)
     const handleNotesDisplay = () => {
         setShowAll(!showAll)
     }
-
     // Solo mostrar notas importantes
     const notesToShow = showAll ? notes : onlyImportantNotes
+
+    // Funcionalidad para agregar nuevas notas
+    const createNote = (event) => {
+        event.preventDefault() 
+
+        newNoteForm.current.toggleVisibility()
+        const query = event.target[0].value
+        const newNote = { 
+            id: (notes.length + 1).toString(), 
+            content: query, 
+            important: false 
+        }
+        addNote(newNote)        
+        event.target[0].value = ''
+    }
     
     return (
         <>
@@ -30,8 +45,8 @@ const NoteForm = ({ notes, user, addNote, toggleImportance, deleteNote, handleLo
                 )}
             </div>
 
-            <Togglable buttonLabel={'Create new Note'}>
-                <form onSubmit={addNote}>
+            <Togglable buttonLabel={'Create new Note'} ref={newNoteForm}>
+                <form onSubmit={createNote}>
                     <input />
                     <button type="submit">save</button>
                 </form>   
