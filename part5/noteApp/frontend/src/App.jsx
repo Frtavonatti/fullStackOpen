@@ -136,8 +136,6 @@ const App = () => {
 
   return (
     <>
-      <Header user={user} handleLogout={handleLogout} />
-
       <Notification message={errorMessage} />
 
       {user === null
@@ -154,6 +152,8 @@ const App = () => {
           toggleImportance={toggleImportanceOf}
           deleteNote={deleteNote}
           handleNotesDisplay={handleNotesDisplay}  
+          user={user}
+          handleLogout={handleLogout}
           />
         }
     </>

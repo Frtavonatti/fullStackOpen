@@ -1,8 +1,10 @@
 import Note from "./Note/Note"
+import Header from "./Header"
 
-const NoteForm = ({ addNote, notesToShow, handleNotesDisplay, toggleImportance, deleteNote } ) => {
+const NoteForm = ({ addNote, notesToShow, handleNotesDisplay, toggleImportance, deleteNote, user, handleLogout } ) => {
     return (
         <>
+            <Header user={user} handleLogout={handleLogout} />
             <div>
                 {notesToShow.map(note => 
                     <Note 
