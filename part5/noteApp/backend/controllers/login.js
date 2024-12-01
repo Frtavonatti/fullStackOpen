@@ -27,7 +27,7 @@ loginRouter.post('/', async (request, response) => {
     userForToken, 
     process.env.SECRET,
     //config
-    { expiresIn: 60*60 }
+    { expiresIn: '24h' }
   )
 
   response

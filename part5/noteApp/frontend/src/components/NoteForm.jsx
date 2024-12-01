@@ -2,7 +2,7 @@ import { useState, useRef } from "react"
 
 import Note from "./Note/Note"
 import Header from "./Header"
-import Togglable from './Togglable'
+import Togglable from '../components/Togglable/Togglable'
 
 const NoteForm = ({ notes, user, addNote, toggleImportance, deleteNote, handleLogout } ) => {
     const [showAll, setShowAll] = useState(true)
