@@ -30,11 +30,12 @@ const Blog = ({ blog, user, deleteBlog, updateLikes }) => {
 
       <div className="blog-content">
         <strong>{blog.title}:</strong> <br/>
+        {blog.author} <br/>
+
         <div style={showWhenVisible}>
-          {blog.author} <br/>
           {blog.url} <br/>
+          Likes: {likes} <br/>
         </div>
-        Likes: {likes}
       </div>
 
       <div className="blog-actions">
