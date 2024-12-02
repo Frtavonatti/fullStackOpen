@@ -1,14 +1,13 @@
 ## Part5c: Testing React Apps
 
 ### 5.13: Pruebas de Listas de Blogs, paso 1
-- [ ] Verifica que el componente de blog muestra el título y el autor, pero no la URL ni el número de likes por defecto.
-- [ ] Agrega clases de CSS al componente para facilitar las pruebas.
+- [x] Verifica que el componente de blog muestra el título y el autor, pero no la URL ni el número de likes por defecto.
 
 ### 5.14: Pruebas de Listas de Blogs, paso 2
-- [ ] Verifica que la URL del blog y el número de likes se muestran al hacer clic en el botón de detalles.
+- [x] Verifica que la URL del blog y el número de likes se muestran al hacer clic en el botón de detalles.
 
 ### 5.15: Pruebas de Listas de Blogs, paso 3
-- [ ] Verifica que al hacer clic dos veces en el botón de like, se llama dos veces al controlador de eventos.
+- [x] Verifica que al hacer clic dos veces en el botón de like, se llama dos veces al controlador de eventos.
  
 ### 5.16: Pruebas de Listas de Blogs, paso 4
 - [ ] Verifica que el formulario de nuevo blog llama al controlador de eventos con los detalles correctos al crear un nuevo blog.

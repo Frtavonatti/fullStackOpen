@@ -32,7 +32,7 @@ const Blog = ({ blog, user, deleteBlog, updateLikes }) => {
         <strong>{blog.title}:</strong> <br/>
         {blog.author} <br/>
 
-        <div style={showWhenVisible}>
+        <div id={'toggleContent'} style={showWhenVisible}>
           {blog.url} <br/>
           Likes: {likes} <br/>
         </div>
