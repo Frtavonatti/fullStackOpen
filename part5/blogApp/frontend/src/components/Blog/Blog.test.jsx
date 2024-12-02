@@ -48,8 +48,9 @@ describe('blog component test', () => {
     const button = screen.getByText('👍') 
     
     await UIuser.click(button)
+    await UIuser.click(button)
     
-    expect(mockHandler.mock.calls).toHaveLength(1)
+    expect(mockHandler.mock.calls).toHaveLength(2)
   })
 })
 
