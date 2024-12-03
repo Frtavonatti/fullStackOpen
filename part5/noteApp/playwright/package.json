@@ -1,8 +1,8 @@
 {
-  "name": "blogapp",
+  "name": "playwright",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {
+  "scripts": {  
     "test": "playwright test",
     "test:report": "playwright show-report"
   },
