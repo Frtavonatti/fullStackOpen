@@ -10,11 +10,11 @@
 - [x] Vacía la base de datos en el bloque `beforeEach`.
 
 ### **5.19: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 3**
-- [ ] Comprueba que un usuario que ha iniciado sesión puede crear un nuevo blog.
-- [ ] Asegúrate de que el nuevo blog es visible en la lista de todos los blogs.
+- [x] Comprueba que un usuario que ha iniciado sesión puede crear un nuevo blog.
+- [x] Asegúrate de que el nuevo blog es visible en la lista de todos los blogs.
 
 ### **5.20: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 4**
-- [ ] Comprueba que el blog puede editarse.
+- [x] Comprueba que el blog puede editarse.
 
 ### 5.21: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 5
 - [ ] Realiza una prueba para asegurarte de que el usuario que creó un blog pueda eliminarlo. Si utilizas el diálogo `window.confirm` en la operación de eliminación, quizás tengas que investigar cómo usar el diálogo en las pruebas de Playwright.
