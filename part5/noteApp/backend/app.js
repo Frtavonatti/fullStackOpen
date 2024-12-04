@@ -34,6 +34,11 @@ app.use(middleware.requestLogger)
 app.use('/api/notes', notesRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
+// testing route
+if (process.env.NODE_ENV === 'test') {  
+  const testingRouter = require('./controllers/testing')  
+  app.use('/api/testing', testingRouter)
+}
 
 //MIDDLEWARE manejo de rutas (deben ir despues de las rutas)
 app.use(middleware.unknownEndpoint)

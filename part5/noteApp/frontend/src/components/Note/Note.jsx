@@ -6,7 +6,7 @@ const Note = ({ note, toggleImportance, deleteNote }) => {
   
     return (
       <div className="note">
-        <p>{note.content}</p>
+        <span>{note.content}</span>
         <br></br>
 
         <div className="buttonContainer">
