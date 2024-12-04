@@ -12,6 +12,7 @@ const Login = ({ username, setUsername, password, setPassword, handleLogin }) =>
       }}>
 
       <input
+        data-testid='username'
         type="text"
         placeholder='username'
         name="username"
@@ -19,6 +20,7 @@ const Login = ({ username, setUsername, password, setPassword, handleLogin }) =>
         value={username}
       />
       <input
+        data-testid='password'
         type="password"
         placeholder='password'
         name="password"
