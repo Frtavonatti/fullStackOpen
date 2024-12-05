@@ -10,7 +10,14 @@ const createBlog = async (page, title, author) => {
   await page.getByRole('textbox', {name:'author'}).fill(author)
   await page.getByRole('button', {name: 'Create'}).click()
   
-  await page.getByText(title, author).waitFor()
+  // await page.getByText(title, author).waitFor()
+  await page.waitForSelector(`text=${title}`) // Esperar a que el nuevo blog aparezca en la página
 }
 
-export { loginWith, createBlog }
+const clickAmmount = (locator, ammountOfClicks) => {
+  for (let index = 0; index < ammountOfClicks; index++) {
+    locator.click()
+  }
+}
+
+export { loginWith, createBlog, clickAmmount }

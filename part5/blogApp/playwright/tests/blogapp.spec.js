@@ -1,5 +1,5 @@
 const { test, describe, beforeEach, expect } = require('@playwright/test');
-const { loginWith, createBlog } = require('./helper');
+const { loginWith, createBlog, clickAmmount } = require('./helper');
 
 describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
@@ -56,6 +56,33 @@ describe('Blog app', () => {
       await expect(page.getByText('blog to be edited')).not.toBeVisible()
     })
 
+    describe('When multiple blogs exists', () => {
+      beforeEach(async ({ page })=> {
+        await createBlog(page, 'new blog 2', 'testuser')
+        await createBlog(page, 'new blog 3', 'testuser')
+        await createBlog(page, 'new blog 4', 'testuser')
+      })
+
+      test.only('blogs are ordered according to the ammount of likes they had', async ({ page }) => {
+        await page.pause()
+        const locator2LikeButton =  getByRole('button', { name: '👍' }).nth(1)
+        clickAmmount(locator2LikeButton, 2)
+        
+        // await locator2.getByRole('button', {name: 'Show'}).click()
+        getByRole('button', { name: 'Show' }).nth(1).click()
+
+        const locator2 = page.getByText('new blog 2')
+        expect(locator2.getByText('Likes: 2'))
+
+        // const locator3 = page.getByText('new blog 3')
+        // const locator3LikeButton =  getByRole('button', { name: '👍' }).nth(2)
+        // clickAmmount(locator3LikeButton, 3)
+        // await locator3.getByRole('button', {name: 'Show'}).click()
+        // expect(locator3.getByText('Likes: 3'))
+      })
+    })
+    
+    
     describe('When user its not the creator', () => {
       beforeEach(async ({ request }) => {
         await request.post('/api/users', {
@@ -67,7 +94,7 @@ describe('Blog app', () => {
         })
       })
 
-      test.only('if user its not the creator, delete button its not visible', async ({ page, request }) => {
+      test('if user its not the creator, delete button its not visible', async ({ page, request }) => {
         await page.getByRole('button', {name: 'Logout'}).click()
         await loginWith(page, 'anotheruser', 'anotherpswd')
         const locator = page.getByRole('button', {name: 'Delete'})
