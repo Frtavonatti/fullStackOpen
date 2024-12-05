@@ -10,7 +10,7 @@ const createBlog = async (page, title, author) => {
   await page.getByRole('textbox', {name:'author'}).fill(author)
   await page.getByRole('button', {name: 'Create'}).click()
   
-  await page.getByText(title, author).waitFor() //validar si puede recibir 2 params
+  await page.getByText(title, author).waitFor()
 }
 
 export { loginWith, createBlog }
