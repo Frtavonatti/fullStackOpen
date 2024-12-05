@@ -1,5 +1,5 @@
 const { test, describe, beforeEach, expect } = require('@playwright/test');
-const { loginWith, createBlog, clickAmmount } = require('./helper');
+const { loginWith, createBlog, likeAndShowBlog } = require('./helper');
 
 describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
@@ -57,28 +57,31 @@ describe('Blog app', () => {
     })
 
     describe('When multiple blogs exists', () => {
-      beforeEach(async ({ page })=> {
-        await createBlog(page, 'new blog 2', 'testuser')
-        await createBlog(page, 'new blog 3', 'testuser')
-        await createBlog(page, 'new blog 4', 'testuser')
+      beforeEach(async ({ page }) => {
+      await createBlog(page, 'new blog 2', 'testuser')
+      await createBlog(page, 'new blog 3', 'testuser')
+      await createBlog(page, 'new blog 4', 'testuser')
       })
 
-      test.only('blogs are ordered according to the ammount of likes they had', async ({ page }) => {
-        await page.pause()
-        const locator2LikeButton =  getByRole('button', { name: '👍' }).nth(1)
-        clickAmmount(locator2LikeButton, 2)
-        
-        // await locator2.getByRole('button', {name: 'Show'}).click()
-        getByRole('button', { name: 'Show' }).nth(1).click()
+      // FIX: Works fine using npm test --debug, but not without debug
+      test.only('blogs are ordered according to the amount of likes they had', async ({ page }) => {
+      await likeAndShowBlog(page, 'new blog 2', 2)
+      const locator2 = page.getByText('new blog 2')
+      await page.waitForTimeout(100) 
+      expect(locator2.getByText('Likes: 2'))
+      
+      await likeAndShowBlog(page, 'new blog 3', 5)
+      const locator3 = page.getByText('new blog 3')
+      await page.waitForTimeout(100) 
+      expect(locator3.getByText('Likes: 5'))
 
-        const locator2 = page.getByText('new blog 2')
-        expect(locator2.getByText('Likes: 2'))
+      await page.pause()
 
-        // const locator3 = page.getByText('new blog 3')
-        // const locator3LikeButton =  getByRole('button', { name: '👍' }).nth(2)
-        // clickAmmount(locator3LikeButton, 3)
-        // await locator3.getByRole('button', {name: 'Show'}).click()
-        // expect(locator3.getByText('Likes: 3'))
+      const blogs = await page.$$('[data-testid="blog"]')
+      const firstBlog = await blogs[0].innerText()
+      const secondBlog = await blogs[1].innerText()
+      expect(firstBlog).toContain('new blog 3')
+      expect(secondBlog).toContain('new blog 2')
       })
     })
     

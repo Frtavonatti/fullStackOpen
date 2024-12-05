@@ -26,7 +26,7 @@ const Blog = ({ blog, user, deleteBlog, updateLikes }) => {
   const isCreatedByUser = blog.user.username === user.username
 
   return (
-    <div className="blog-container">
+    <div data-testid={'blog'} className="blog-container">
 
       <div className="blog-content">
         <strong>{blog.title}:</strong> <br/>

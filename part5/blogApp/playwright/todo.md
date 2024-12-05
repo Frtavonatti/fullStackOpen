@@ -23,4 +23,4 @@
 - [x] Realiza una prueba para asegurarte de que solo el creador puede ver el botón de eliminación de un blog, nadie más.
 
 ### 5.23: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 7
-- [ ] Realiza una prueba que verifique que los blogs estén ordenados de acuerdo con los "likes", con el blog con más "likes" en primer lugar.
+- [x] Realiza una prueba que verifique que los blogs estén ordenados de acuerdo con los "likes", con el blog con más "likes" en primer lugar.
