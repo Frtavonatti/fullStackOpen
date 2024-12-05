@@ -1,6 +1,5 @@
 const { test, describe, beforeEach, expect } = require('@playwright/test');
 const { loginWith, createBlog } = require('./helper');
-const exp = require('constants');
 
 describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
@@ -50,12 +49,30 @@ describe('Blog app', () => {
       await expect(page.getByText('Likes: 1')).toBeVisible()
     })
 
-    test.only('its possible to delete them', async ({ page }) => {
+    test('if user its the creator its possible to delete them', async ({ page }) => {
       page.on('dialog', dialog => dialog.accept()) // window.confirm handling
       await page.getByRole('button', {name: 'Delete'}).click()
       await expect(page.getByText('Blog deleted successfully')).toBeVisible() // its going to be visible only for 3 secs
       await expect(page.getByText('blog to be edited')).not.toBeVisible()
     })
-  })
 
+    describe('When user its not the creator', () => {
+      beforeEach(async ({ request }) => {
+        await request.post('/api/users', {
+          data: {
+            name: 'another',
+            username: 'anotheruser',
+            password: 'anotherpswd'
+          }
+        })
+      })
+
+      test.only('if user its not the creator, delete button its not visible', async ({ page, request }) => {
+        await page.getByRole('button', {name: 'Logout'}).click()
+        await loginWith(page, 'anotheruser', 'anotherpswd')
+        const locator = page.getByRole('button', {name: 'Delete'})
+        await expect(locator).not.toBeVisible()
+      })
+    })
+  })
 })
