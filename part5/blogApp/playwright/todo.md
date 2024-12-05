@@ -17,7 +17,7 @@
 - [x] Comprueba que el blog puede editarse.
 
 ### 5.21: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 5
-- [ ] Realiza una prueba para asegurarte de que el usuario que creó un blog pueda eliminarlo. Si utilizas el diálogo `window.confirm` en la operación de eliminación, quizás tengas que investigar cómo usar el diálogo en las pruebas de Playwright.
+- [x] Realiza una prueba para asegurarte de que el usuario que creó un blog pueda eliminarlo. Si utilizas el diálogo `window.confirm` en la operación de eliminación, quizás tengas que investigar cómo usar el diálogo en las pruebas de Playwright.
 
 ### 5.22: Pruebas de Extremo a Extremo de la Lista de Blogs, paso 6
 - [ ] Realiza una prueba para asegurarte de que solo el creador puede ver el botón de eliminación de un blog, nadie más.

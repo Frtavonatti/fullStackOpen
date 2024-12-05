@@ -1,5 +1,6 @@
 const { test, describe, beforeEach, expect } = require('@playwright/test');
-const { loginWith, createBlog } = require('./helper')
+const { loginWith, createBlog } = require('./helper');
+const exp = require('constants');
 
 describe('Blog app', () => {
   beforeEach(async ({ page, request }) => {
@@ -36,31 +37,24 @@ describe('Blog app', () => {
   describe('When logged in', () => {
     beforeEach(async ({ page }) => {
       await loginWith(page, 'testuser', 'testpswd')
+      await createBlog(page, 'new blog created from playwright', 'testuser')
     })
   
     test('a new blog can be created', async ({ page }) => {
-      await createBlog(page, 'new blog created from playwright', 'testuser')
       await expect(page.getByText('new blog created from playwright')).toBeVisible()
     })
 
-    describe('When Blogs exists', () => {
-      beforeEach(async ({ page }) => {
-        await createBlog(page, 'blog to be edited', 'testuser')
-      })
-  
-      test('its possible to give them a like', async ({ page }) => {
-        await page.getByText('👍').click()
-        await page.getByText('Show').click()
-        await expect(page.getByText('Likes: 1')).toBeVisible()
-      })
-  
-      test.only('its possible to delete them', async ({ page }) => {
-        await page.getByText('Delete').click()
-        page.on('dialog', dialog => dialog.accept('Are you sure you want to delete this blog?'))
-        await page.pause()
-        // await page.getByRole('button').click()
-        await expect(page.getByText('blog to be edited')).not.toBeVisible()
-      })
+    test('its possible to give blogs a like', async ({ page }) => {
+      await page.getByText('👍').click()
+      await page.getByText('Show').click()
+      await expect(page.getByText('Likes: 1')).toBeVisible()
+    })
+
+    test.only('its possible to delete them', async ({ page }) => {
+      page.on('dialog', dialog => dialog.accept()) // window.confirm handling
+      await page.getByRole('button', {name: 'Delete'}).click()
+      await expect(page.getByText('Blog deleted successfully')).toBeVisible() // its going to be visible only for 3 secs
+      await expect(page.getByText('blog to be edited')).not.toBeVisible()
     })
   })
 
