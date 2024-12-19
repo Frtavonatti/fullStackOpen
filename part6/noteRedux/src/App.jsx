@@ -1,35 +1,51 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
-// import viteLogo from '/vite.svg'
-// import './App.css'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import NewNote from './components/newNote'
+import Notes from './components/Notes'
+import reactLogo from './assets/react.svg'
+import './App.css'
 
-// function App() {
-//   const [count, setCount] = useState(0)
+const App = () => {
+  // useDispatch proporciona acceso a cualquier componente de React a la función dispatch de redux-store definida en main.jsx
+  const dispatch = useDispatch() //Antes usabamos dispatch de redux-store, ahora usamos el hook useDispatch de React
+  
+  // useSelector nos permite acceder a las notas almacenadas en el store
+  const notes = useSelector(state => state)
 
-//   return (
-//     <>
-      // <div>
-      //   <a href="https://vite.dev" target="_blank">
-      //     <img src={viteLogo} className="logo" alt="Vite logo" />
-      //   </a>
-      //   <a href="https://react.dev" target="_blank">
-      //     <img src={reactLogo} className="logo react" alt="React logo" />
-      //   </a>
-      // </div>
-      // <h1>Vite + React</h1>
-//       <div className="card">
-//         <button onClick={() => setCount((count) => count + 1)}>
-//           count is {count}
-//         </button>
-//         <p>
-//           Edit <code>src/App.jsx</code> and save to test HMR
-//         </p>
-//       </div>
-//       <p className="read-the-docs">
-//         Click on the Vite and React logos to learn more
-//       </p>
-//     </>
-//   )
-// }
+  useEffect(() => {
+    if (notes.length === 0) {
+      dispatch({
+        type: 'NEW_NOTE',
+        payload: {
+          content: 'the app state is in redux store',
+          important: true,
+          id: 1
+        }
+      })
+      
+      dispatch({
+        type: 'NEW_NOTE',
+        payload: {
+          content: 'state changes are made with actions',
+          important: false,
+          id: 2
+        }
+      })
+    }
+  }, [notes])
+  
+  return (
+    <>
+      <div>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Notes Redux</h1>
+      <Notes/>
+      <NewNote/>
+    </>
+  )
+}
 
-// export default App
+export default App
