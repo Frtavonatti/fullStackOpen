@@ -6,8 +6,8 @@ import { Provider } from 'react-redux'
 import App from './App'
 import noteReducer from './reducers/noteReducer'
 import filterReducer from './reducers/filterReducer'
-import { createNote } from './reducers/noteReducer'
-import { filterChange } from './reducers/filterReducer'
+// import { createNote } from './reducers/noteReducer'
+// import { filterChange } from './reducers/filterReducer'
 import './index.css'
 
 // El reducer combinado funciona de tal manera que cada acción es controlada en cada parte del reducer combinado, 
