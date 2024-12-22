@@ -20,7 +20,7 @@ const AnecdoteList = () => {
 
   return (
     <div>
-      {[...anecdotes]
+      {[...anecdotes] // cuando uses Redux Toolkit para devolver el estado inicial de las anécdotas, será inmutable, por lo que tendrás que copiarlo para ordenarlas
       .sort((a, b) => b.votes - a.votes)
       .map(anecdote =>
         <div key={anecdote.id}>
