@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit"
+
 const anecdotesAtStart = [
   'If it hurts, do it more often',
   'Adding manpower to a late software project makes it later!',
@@ -19,43 +21,63 @@ const asObject = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(asObject)
 
-const reducer = (state = initialState, action) => {
-  // console.log('state now: ', state)
-  // console.log('action', action)
-  switch (action.type) {
-    case 'CREATE':
-      return state.concat(action.payload)
+const anecdoteSlice = createSlice({
+  name: 'anecdote',
+  initialState,
+  reducers: {
+    addNoteAction (state, action) {
+      state.push({
+        content: action.payload,
+        id: getId(),
+        votes: 0
+      })
+    },
 
-    case 'VOTE':
-      const id = action.payload.id 
-      const updatedAnecdotes = state.map(anecdote => 
-        anecdote.id !== id 
-          ? anecdote 
-          : {...anecdote, votes: anecdote.votes + 1})
-      return updatedAnecdotes
-
-    default:
-      return state
-  }
-}
-
-// Actions
-export const voteAction = (id) => {
-  return {
-    type: 'VOTE',
-    payload: { id } 
-  }
-}
-
-export const addNoteAction = (content) => {
-  return {
-    type: 'CREATE',
-    payload: { 
-      content: content,
-      id: () => (100000 * Math.random()).toFixed(0),
-      votes: 0
+    voteAction (state, action) {
+      const id = action.payload
+      const anecdoteToChange = state.find(anecdote => anecdote.id === id)
+      if (anecdoteToChange) {
+        anecdoteToChange.votes += 1
+      }
     }
   }
-}
+})
 
-export default reducer
+export default anecdoteSlice.reducer
+export const { voteAction, addNoteAction } = anecdoteSlice.actions
+
+// const reducer = (state = initialState, action) => {
+//   switch (action.type) {
+//     case 'CREATE':
+//       return state.concat(action.payload)
+
+//     case 'VOTE':
+//       const id = action.payload.id 
+//       const updatedAnecdotes = state.map(anecdote => 
+//         anecdote.id !== id 
+//           ? anecdote 
+//           : {...anecdote, votes: anecdote.votes + 1})
+//       return updatedAnecdotes
+
+//     default:
+//       return state
+//   }
+// }
+
+// export const voteAction = (id) => {
+//   return {
+//     type: 'VOTE',
+//     payload: { id } 
+//   }
+// }
+
+// export const addNoteAction = (content) => {
+//   return {
+//     type: 'CREATE',
+//     payload: { 
+//       content: content,
+//       id: () => (100000 * Math.random()).toFixed(0),
+//       votes: 0
+//     }
+//   }
+// }

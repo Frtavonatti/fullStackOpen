@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client'
-import { createStore, combineReducers } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import anecdotesReducer from './reducers/anecdoteReducer'
 import filterReducer from './reducers/filterReducer'
@@ -7,12 +7,12 @@ import filterReducer from './reducers/filterReducer'
 import App from './App'
 import './index.css'
 
-const reducer = combineReducers({
-  anecdotes: anecdotesReducer,
-  filter: filterReducer
+const store = configureStore({
+  reducer: {
+    anecdotes: anecdotesReducer,
+    filter: filterReducer
+  }
 })
-
-const store = createStore(reducer)
 // console.log(store.getState())
 
 ReactDOM.createRoot(document.getElementById('root')).render(
