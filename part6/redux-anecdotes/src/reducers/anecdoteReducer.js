@@ -23,6 +23,9 @@ const reducer = (state = initialState, action) => {
   // console.log('state now: ', state)
   // console.log('action', action)
   switch (action.type) {
+    case 'CREATE':
+      return state.concat(action.payload)
+
     case 'VOTE':
       const id = action.payload.id 
       const updatedAnecdotes = state.map(anecdote => 
@@ -30,8 +33,28 @@ const reducer = (state = initialState, action) => {
           ? anecdote 
           : {...anecdote, votes: anecdote.votes + 1})
       return updatedAnecdotes
+
     default:
       return state
+  }
+}
+
+// Actions
+export const voteAction = (id) => {
+  return {
+    type: 'VOTE',
+    payload: { id } 
+  }
+}
+
+export const addNoteAction = (content) => {
+  return {
+    type: 'CREATE',
+    payload: { 
+      content: content,
+      id: () => (100000 * Math.random()).toFixed(0),
+      votes: 0
+    }
   }
 }
 
