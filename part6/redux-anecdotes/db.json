@@ -31,8 +31,8 @@
       "votes": 0
     },
     {
-      "id": "17da",
-      "content": "implemented backend for anecdotes creation",
+      "id": "7ae0",
+      "content": "implemented async action creator for anecdotes creation",
       "votes": 0
     }
   ]
