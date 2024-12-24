@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
+import noteService from '../services/notes'
 
 const noteSlice = createSlice({ 
   name: 'notes', 
   initialState: [],
   reducers: {
-    createNote(state, action) {
-      state.push(action.payload)
-    },
     toggleImportanceOf(state, action) {
       const id = action.payload
       const noteToChange = state.find(n => n.id === id)
@@ -27,5 +25,22 @@ const noteSlice = createSlice({
   }
 })
 
-export const { createNote, toggleImportanceOf, appendNotes, setNotes } = noteSlice.actions
+export const { toggleImportanceOf, appendNotes, setNotes } = noteSlice.actions
+
+// Redux thunk permite implementar action creators que devuelven una función en lugar de un objeto. 
+// esto permite implmentar action creators asíncronos, que esperan la finalización de una operación y luego despachan una acción.
+export const initializeNotes = () => {
+  return async dispatch => {
+    const notes = await noteService.getAll()
+    dispatch(setNotes(notes))
+  }
+}
+
+export const createNote = (content) => {
+  return async dispatch => {
+    const newNote = await noteService.createNew(content)
+    dispatch(appendNotes(newNote))
+  }
+}
+
 export default noteSlice.reducer

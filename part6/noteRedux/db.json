@@ -9,6 +9,21 @@
       "content": "state changes are made with actions",
       "important": false,
       "id": "2"
+    },
+    {
+      "id": "1993",
+      "content": "newNote",
+      "important": false
+    },
+    {
+      "id": "1344",
+      "content": "testing ",
+      "important": false
+    },
+    {
+      "id": "3d15",
+      "content": "now it should be working",
+      "important": false
     }
   ]
 }
