@@ -11,4 +11,9 @@ const createAnecdote = (content) => {
   .then(res => res.data)
 }
 
-export { getAll, createAnecdote }
+const updateVotes = (updatedAnecdote) => {
+  return axios.put(`${baseUrl}/${updatedAnecdote.id}`, updatedAnecdote)
+  .then(res => res.data)
+}
+
+export { getAll, createAnecdote, updateVotes }
