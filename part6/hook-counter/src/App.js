@@ -1,4 +1,20 @@
-import { useReducer } from 'react'
+import { useContext, useReducer } from 'react'
+import CounterContext from './CounterContext'
+import './App.css'
+
+const Display = () => {
+  const [counter] = useContext(CounterContext)
+  return <div>Count is: {counter}</div>
+}
+
+const Button = ({ type, label }) => {
+  const [counter, counterDispatch] = useContext(CounterContext)
+  return (
+    <button onClick={() => counterDispatch({ type })}>
+      {label}
+    </button>
+  )
+}
 
 const counterReducer = (state, action) => {
   switch (action.type) {
@@ -17,14 +33,16 @@ const App = () => {
   const [counter, counterDispatch] = useReducer(counterReducer, 0)
 
   return (
-    <div>
-      <div>{counter}</div>
+    <CounterContext.Provider value={[counter, counterDispatch]}> 
+      <h1>Hook Counter</h1>
+      <Display counter={counter}/>
       <div>
-        <button onClick={() => counterDispatch({ type: "INC"})}>+</button>
-        <button onClick={() => counterDispatch({ type: "DEC"})}>-</button>
-        <button onClick={() => counterDispatch({ type: "ZERO"})}>0</button>
+        <Button dispatch={counterDispatch} type='DEC' label='-' />
+        <Button dispatch={counterDispatch} type='INC' label='+' /><br/>
+        <Button dispatch={counterDispatch} type='ZERO' label='0' />
       </div>
-    </div>
+    </CounterContext.Provider> 
+
   )
 }
 
