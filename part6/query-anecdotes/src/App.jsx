@@ -2,10 +2,21 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { getAll, updateVotes } from './services/anecdotes'
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
+import { useReducer } from 'react'
 import './App.css'
+
+const notificationReducer = (state, action) => {
+  switch (action.type) {
+    case 'SHOW':
+      return action.payload
+    default:
+      return ''
+  }
+}
 
 const App = () => {
   const queryClient = useQueryClient()
+  const [notification, notificationDispatch] = useReducer(notificationReducer, '')
   
   // Mutation Handlers
   const newVotesMutation = useMutation({
