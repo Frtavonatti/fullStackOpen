@@ -13,8 +13,6 @@ const validator = (request, response, next) => {
     return response.status(400).json({
       error: 'too short anecdote, must have length 5 or more'
     })
-  // } else if (request.method==='GET' && ) {
-  //   return response.status(200).send(<h3> Anecdote service not available due to problems in server</h3>)
   } else {
     next()
   }

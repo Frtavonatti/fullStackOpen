@@ -1,14 +1,21 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { getAll } from './services/anecdotes'
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
-import axios from 'axios'
 import './App.css'
 
 const App = () => {
+  const queryClient = useQueryClient()
+  // Mutation Handlers
+
+  // Event Handlers
+  const handleVote = (anecdote) => {
+    console.log(`voted ${anecdote.content}`)
+  }
+
   const result = useQuery({    
     queryKey: ['anecdotes'], //queryKey sirve como referencia posterior (puedes nombrarla como quieras)
-    queryFn: () => axios.get('http://localhost:3001/anecdotes')
-      .then(res => res.data),
+    queryFn: getAll,
     retry: false  
   })
   
@@ -27,10 +34,6 @@ const App = () => {
   }
 
   const anecdotes = result.data
-
-  const handleVote = (anecdote) => {
-    console.log(`voted ${anecdote.content}`)
-  }
 
   return (
     <div>
