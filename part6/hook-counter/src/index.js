@@ -1,8 +1,11 @@
 import ReactDOM from 'react-dom/client'
+import { CounterContextProvider } from './CounterContext'
 import App from './App'
 import './index.css'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <App />
+  <CounterContextProvider>
+    <App />
+  </CounterContextProvider>
 )
