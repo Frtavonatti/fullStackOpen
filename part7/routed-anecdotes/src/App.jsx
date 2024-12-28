@@ -1,17 +1,7 @@
 import { useState } from 'react'
-
-const Menu = () => {
-  const padding = {
-    paddingRight: 5
-  }
-  return (
-    <div>
-      <a href='#' style={padding}>anecdotes</a>
-      <a href='#' style={padding}>create new</a>
-      <a href='#' style={padding}>about</a>
-    </div>
-  )
-}
+import { BrowserRouter as Router,
+   Routes, Route, Link 
+  } from 'react-router-dom'
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
@@ -58,6 +48,7 @@ const CreateNew = (props) => {
       info,
       votes: 0
     })
+    // To-do: implementar metodo para borrar los inputs una vez realizado el submit
   }
 
   return (
@@ -122,15 +113,30 @@ const App = () => {
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
 
+  // Styles
+  const padding = {
+    paddingRight: 5
+  }
+
   return (
-    <div>
+    <Router>
       <h1>Software anecdotes</h1>
-      <Menu />
-      <AnecdoteList anecdotes={anecdotes} />
-      <About />
-      <CreateNew addNew={addNew} />
+
+      <div>
+        <Link style={padding} to="/">Anecdotes</Link>
+        <Link style={padding} to="/create">Create</Link>
+        <Link style={padding} to="/about">About</Link>
+      </div>
+
+      <Routes>
+        <Route path='/' element={<AnecdoteList anecdotes={anecdotes}/>} />
+        <Route path='/create' element={<CreateNew addNew={addNew}/>} />
+        <Route path='/about' element={<About/>} />
+      </Routes>
+
       <Footer />
-    </div>
+    </Router>
+
   )
 }
 
