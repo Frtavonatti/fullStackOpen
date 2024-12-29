@@ -1,12 +1,20 @@
 import { useState } from 'react'
-import { BrowserRouter as Router,
-   Routes, Route, Link 
-  } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import AnecdoteList from './components/AnecdoteList'
 import Anecdote from './components/Anecdote'
 import CreateNew from './components/CreateNew'
 import About from './components/About'
 import Footer from './components/Footer'
+
+const Notification = ({ text }) => {
+  if (!text) { return null  }
+
+  return (
+    <div style={{ border: '2px solid white', borderRadius: '10px', padding: '10px' }}>
+      <p>{text}</p>
+    </div>
+  )
+}
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
@@ -31,6 +39,10 @@ const App = () => {
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
+    setNotification(`Added new anecdote: "${anecdote.content}"`)
+    setTimeout(() => {
+      setNotification(null)
+    }, 4000);
   }
 
   const anecdoteById = (id) =>
@@ -55,6 +67,7 @@ const App = () => {
   return (
     <Router>
       <h1>Software anecdotes</h1>
+      <Notification text={notification}/>
 
       <div>
         <Link style={padding} to="/">Anecdotes</Link>
