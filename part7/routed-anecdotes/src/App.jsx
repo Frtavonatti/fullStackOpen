@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { Routes, Route, Link, useMatch } from 'react-router-dom'
 import AnecdoteList from './components/AnecdoteList'
 import Anecdote from './components/Anecdote'
 import CreateNew from './components/CreateNew'
@@ -59,13 +59,18 @@ const App = () => {
     setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
   }
 
+  const match = useMatch('/anecdotes/:id')
+  const anecdote = match
+    ? anecdotes.find(a => a.id === Number(match.params.id)) 
+    : null
+
   // Styles
   const padding = {
     paddingRight: 5
   }
 
   return (
-    <Router>
+    <>
       <h1>Software anecdotes</h1>
       <Notification text={notification}/>
 
@@ -76,15 +81,14 @@ const App = () => {
       </div>
 
       <Routes>
-        <Route path='/anecdotes/:id' element={<Anecdote anecdotes={anecdotes}/>} />
+        <Route path='/anecdotes/:id' element={<Anecdote anecdote={anecdote}/>} />
         <Route path='/' element={<AnecdoteList anecdotes={anecdotes}/>} />
         <Route path='/create' element={<CreateNew addNew={addNew}/>} />
         <Route path='/about' element={<About/>} />
       </Routes>
 
       <Footer />
-    </Router>
-
+    </>
   )
 }
 
