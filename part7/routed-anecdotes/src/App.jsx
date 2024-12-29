@@ -3,6 +3,7 @@ import { BrowserRouter as Router,
    Routes, Route, Link 
   } from 'react-router-dom'
 import AnecdoteList from './components/AnecdoteList'
+import Anecdote from './components/Anecdote'
 import CreateNew from './components/CreateNew'
 import About from './components/About'
 import Footer from './components/Footer'
@@ -62,6 +63,7 @@ const App = () => {
       </div>
 
       <Routes>
+        <Route path='/anecdotes/:id' element={<Anecdote anecdotes={anecdotes}/>} />
         <Route path='/' element={<AnecdoteList anecdotes={anecdotes}/>} />
         <Route path='/create' element={<CreateNew addNew={addNew}/>} />
         <Route path='/about' element={<About/>} />
