@@ -16,7 +16,14 @@ const CreateNew = (props) => {
       info: info.value,
       votes: 0
     })
-    navigate('/')
+    // navigate('/')
+  }
+
+  const handleReset = (e) => {
+    e.preventDefault()
+    content.reset()
+    author.reset()
+    info.reset()
   }
 
   return (
@@ -25,7 +32,7 @@ const CreateNew = (props) => {
       <form onSubmit={handleSubmit}>
         <div>
           content
-          <input {...content} />
+          <input {...content } />
         </div>
         <div>
           author
@@ -37,6 +44,8 @@ const CreateNew = (props) => {
         </div>
         <button>create</button>
       </form>
+      
+      <button onClick={(e) => handleReset(e)}>reset</button>
     </div>
   )
 }
