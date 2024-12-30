@@ -4,17 +4,9 @@ import AnecdoteList from './components/AnecdoteList'
 import Anecdote from './components/Anecdote'
 import CreateNew from './components/CreateNew'
 import About from './components/About'
+import Notification from './components/Notification'
 import Footer from './components/Footer'
 
-const Notification = ({ text }) => {
-  if (!text) { return null  }
-
-  return (
-    <div style={{ border: '2px solid white', borderRadius: '10px', padding: '10px' }}>
-      <p>{text}</p>
-    </div>
-  )
-}
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([
