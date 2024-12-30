@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom"
 import { useField } from "../hooks"
 
 const CreateNew = (props) => {
-  const { reset: contentReset, ...content } = useField('content')
-  const { reset: authorReset, ...author } = useField('author')
-  const { reset: infoReset, ...info } = useField('info')
+  const [content, resetContent] = useField('content')
+  const [author, resetAuthor] = useField('author')
+  const [info, resetInfo] = useField('info')
   
   const navigate = useNavigate()
 
@@ -21,9 +21,9 @@ const CreateNew = (props) => {
 
   const handleReset = (e) => {
     e.preventDefault()
-    contentReset()
-    authorReset()
-    infoReset()
+    resetContent()
+    resetAuthor()
+    resetInfo()
   }
 
   return (
@@ -43,9 +43,8 @@ const CreateNew = (props) => {
           <input {...info} />
         </div>
         <button>create</button>
+        <button onClick={(e) => handleReset(e)}>reset</button>
       </form>
-      
-      <button onClick={(e) => handleReset(e)}>reset</button>
     </div>
   )
 }
