@@ -1,0 +1,27 @@
+.blog-container {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    background-color: #4a4848;
+    width: 250px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .blog-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .blog-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .delete-button {
+    background-color: #ff5555;
+  }
