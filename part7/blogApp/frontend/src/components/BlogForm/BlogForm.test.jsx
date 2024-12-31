@@ -47,7 +47,7 @@ describe('testing Blogform Component', () => {
 
     const button = screen.getByText('Create')
     await user.click(button)
-    
+
     expect(mockHandler.mock.calls).toHaveLength(1)
   })
 })

@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setNotification } from './reducers/notificationReducer'
 import Login from './components/Login'
 import Header from './components/Header'
 import BlogList from './components/BlogList'
@@ -14,7 +16,9 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [message, setMessage] = useState({ type: '', text: '' })
+
+  const dispatch = useDispatch()
+  const message = useSelector(state => state.notification)
 
   const blogFormRef = useRef()
 
@@ -33,29 +37,18 @@ const App = () => {
     }
   }, [])
 
-  useEffect(() => {
-    if (message.text) {
-      setTimeout(() => {
-        setMessage({ type: '', text: '' })
-      }, 5000)
-    }
-  }, [message])
-
   const handleLogin = async (event) => {
     event.preventDefault()
-
     try {
       const user = await loginService.login({ username, password })
-
       window.localStorage.setItem('loggedUser', JSON.stringify(user))
-
       blogService.setToken(user.token)
       setUser(user)
       setUsername('')
       setPassword('')
     } catch (error) {
       console.log(error)
-      setMessage(error)
+      dispatch(setNotification(error))
     }
   }
 
@@ -72,9 +65,9 @@ const App = () => {
       const createdBlog = await blogService.create(newBlog)
       createdBlog.user = user
       setBlogs(blogs.concat(createdBlog))
-      setMessage({ type: 'success', text: 'Blog created succesfully' })
+      dispatch(setNotification({ type: 'success', text: 'Blog created succesfully' }))
     } catch (error) {
-      setMessage({ type: 'error', text: 'Failed to create new blog' })
+      dispatch(setNotification({ type: 'error', text: 'Failed to create new blog' }))
     }
   }
 
@@ -83,9 +76,9 @@ const App = () => {
       try {
         await blogService.remove(id)
         setBlogs(blogs.filter(blog => blog.id !== id))
-        setMessage({ type: 'success', text: 'blog deleted successfully' })
+        dispatch(setNotification({ type: 'success', text: 'blog deleted successfully' }))
       } catch (error) {
-        setMessage({ type: 'error', text: 'Its not possible to delete this blog' })
+        dispatch(setNotification({ type: 'error', text: 'Its not possible to delete this blog' }))
       }
     }
   }
@@ -96,7 +89,7 @@ const App = () => {
       const updatedBlog = await blogService.update(id, likes)
       setBlogs(blogs.map(blog => blog.id === id ? { ...blog, likes: updatedBlog.likes } : blog))
     } catch (error) {
-      setMessage({ type: 'error', text: 'Its not possible to like this blog' })
+      dispatch(setNotification({ type: 'error', text: 'Its not possible to like this blog' }))
     }
   }
 
@@ -120,10 +113,7 @@ const App = () => {
               deleteBlog={deleteBlog}
             />
             <Togglable buttonLabel={'Create new Blog'} ref={blogFormRef}>
-              <BlogForm
-                createNewBlog={createNewBlog}
-                setMessage={setMessage}
-              />
+              <BlogForm createNewBlog={createNewBlog} />
             </Togglable>
           </div>
 

@@ -1,12 +1,14 @@
 # Part7e: Redux, React Router and Styles
 
-## Redux
 
 ### 7.9: Formateo Automático de Código
 - [ ] Integrar Prettier en la aplicación y configurarlo con el editor
 
+
+## Redux
+
 ### 7.10: Redux, Paso 1
-- [ ] Refactorizar la aplicación para usar Redux en la gestión de notificaciones
+- [x] Refactorizar la aplicación para usar Redux en la gestión de notificaciones
 
 ### 7.11: Redux, Paso 2
 - [ ] Almacenar datos de blogs en Redux store
@@ -19,6 +21,7 @@
 
 ### 7.13: Redux, Paso 4
 - [ ] Almacenar información del usuario logueado en Redux store
+
 
 ## Vistas
 

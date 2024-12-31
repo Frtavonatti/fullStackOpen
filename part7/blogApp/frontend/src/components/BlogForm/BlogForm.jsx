@@ -1,7 +1,11 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setNotification } from '../../reducers/notificationReducer'
 import PropTypes from 'prop-types'
 
-const BlogForm = ({ createNewBlog, setMessage }) => {
+const BlogForm = ({ createNewBlog }) => {
+  const dispatch = useDispatch()
+
   const [formData, setFormData] = useState({
     title: '',
     author: '',
@@ -19,7 +23,7 @@ const BlogForm = ({ createNewBlog, setMessage }) => {
   const addBlog = (event) => {
     event.preventDefault()
     if (!formData.author) {
-      setMessage({ type: 'error', text: 'You have to complete all fields' })
+      dispatch(setNotification({ type: 'error', text: 'You have to complete all fields' }))
     } else {
       createNewBlog(formData)
     }
@@ -77,7 +81,6 @@ const BlogForm = ({ createNewBlog, setMessage }) => {
 
 BlogForm.propTypes = {
   createNewBlog: PropTypes.func.isRequired,
-  setMessage: PropTypes.func.isRequired
 }
 
 export default BlogForm

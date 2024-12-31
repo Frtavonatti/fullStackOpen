@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Blog from "./Blog";
+import Blog from './Blog'
 
 // Test Helper
 const user = {
@@ -35,21 +35,21 @@ describe('blog component test', () => {
   })
 
   test('blog url and number of likes are shown when the button controlling the shown details has been clicked', async () => {
-    const UIuser = userEvent.setup() 
-    const button = screen.getByText('Show') 
-    
+    const UIuser = userEvent.setup()
+    const button = screen.getByText('Show')
+
     await UIuser.click(button)
     const toggleContent = container.querySelector('#toggleContent')
     expect(toggleContent).toBeVisible()
   })
 
   test('if the like button is clicked twice, the event handler is called twice', async () => {
-    const UIuser = userEvent.setup() 
-    const button = screen.getByText('👍') 
-    
+    const UIuser = userEvent.setup()
+    const button = screen.getByText('👍')
+
     await UIuser.click(button)
     await UIuser.click(button)
-    
+
     expect(mockHandler.mock.calls).toHaveLength(2)
   })
 })

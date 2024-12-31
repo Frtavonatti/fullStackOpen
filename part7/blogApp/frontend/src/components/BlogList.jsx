@@ -14,7 +14,7 @@ const BlogList = ({ blogs, user, deleteBlog, updateLikes }) => {
           return blogB.likes - blogA.likes
         })
         .map(blog =>
-          <Blog 
+          <Blog
             key={blog.id}
             blog={blog}
             user={user}
