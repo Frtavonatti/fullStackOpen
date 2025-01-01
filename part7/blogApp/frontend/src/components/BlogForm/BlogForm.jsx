@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { setNotification } from '../../reducers/notificationReducer'
-import PropTypes from 'prop-types'
+import { createBlog } from '../../reducers/blogsSlice'
 
-const BlogForm = ({ createNewBlog }) => {
+const BlogForm = () => {
   const dispatch = useDispatch()
 
+  // TO-DO: Implement a custom hook to handle form data
   const [formData, setFormData] = useState({
     title: '',
     author: '',
@@ -25,7 +26,7 @@ const BlogForm = ({ createNewBlog }) => {
     if (!formData.author) {
       dispatch(setNotification({ type: 'error', text: 'You have to complete all fields' }))
     } else {
-      createNewBlog(formData)
+      dispatch(createBlog(formData))
     }
     setFormData({ title: '', author: '', url: '' })
   }
@@ -66,21 +67,16 @@ const BlogForm = ({ createNewBlog }) => {
           <input
             type="text"
             placeholder='Link'
-            name='link'
+            name='url'
             onChange={handleChange}
-            value={formData.link}
+            value={formData.url}
           />
 
           <button type='submit'> Create </button>
         </form>
       </div>
-
     </>
   )
-}
-
-BlogForm.propTypes = {
-  createNewBlog: PropTypes.func.isRequired,
 }
 
 export default BlogForm

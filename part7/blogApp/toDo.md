@@ -11,9 +11,8 @@
 - [x] Refactorizar la aplicación para usar Redux en la gestión de notificaciones
 
 ### 7.11: Redux, Paso 2
-- [ ] Almacenar datos de blogs en Redux store
-- [ ] Implementar vista de blogs desde backend
-- [ ] Implementar creación de nuevos blogs
+- [x] Almacenar datos de blogs en Redux store
+- [x] Implementar creación de nuevos blogs
 
 ### 7.12: Redux, Paso 3
 - [ ] Implementar funcionalidad de likes con Redux

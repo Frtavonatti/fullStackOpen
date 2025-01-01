@@ -1,8 +1,11 @@
 import React from 'react'
+// import { useDispatch } from 'react-redux'
+import { deleteBlog, likeBlog } from '../../reducers/blogsSlice'
 import { useState } from 'react'
 import './Blog.css'
 
-const Blog = ({ blog, user, deleteBlog, updateLikes }) => {
+const Blog = ({ blog, user }) => {
+  // const dispatch = useDispatch()
   const [visible, setVisible] = useState(false)
   const [likes, setLikes] = useState(blog.likes)
 
@@ -13,6 +16,7 @@ const Blog = ({ blog, user, deleteBlog, updateLikes }) => {
     setVisible(!visible)
   }
 
+  // TO-DO: Implement redux actions to update likes and remove blogs (7.12)
   const handleLike = async () => {
     try {
       const updatedLikes = likes + 1

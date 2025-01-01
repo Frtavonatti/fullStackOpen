@@ -1,25 +1,26 @@
+import { useSelector } from 'react-redux'
 import Blog from './Blog/Blog'
 import PropTypes from 'prop-types'
 
-const BlogList = ({ blogs, user, deleteBlog, updateLikes }) => {
+const BlogList = ({ user }) => {
+  const blogs = useSelector(state => state.blogs)
+
+  const BlogListStyle = {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+    gap: '10px',
+    marginTop: '20px'
+  }
+
   return (
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-      gap: '10px',
-      marginTop: '20px'
-    }}>
-      {blogs
-        .sort((blogA, blogB) => {
-          return blogB.likes - blogA.likes
-        })
+    <div style={BlogListStyle}>
+      {[...blogs] // Copy the array to avoid mutating the original
+        .sort((a, b) => b.likes - a.likes)
         .map(blog =>
           <Blog
             key={blog.id}
             blog={blog}
             user={user}
-            deleteBlog={deleteBlog}
-            updateLikes={updateLikes}
           />
         )
       }
@@ -28,10 +29,7 @@ const BlogList = ({ blogs, user, deleteBlog, updateLikes }) => {
 }
 
 BlogList.propTypes = {
-  blogs: PropTypes.array.isRequired,
   user: PropTypes.object.isRequired,
-  deleteBlog: PropTypes.func.isRequired,
-  updateLikes: PropTypes.func.isRequired
 }
 
 export default BlogList

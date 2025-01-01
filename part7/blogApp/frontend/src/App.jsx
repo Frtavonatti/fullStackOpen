@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setNotification } from './reducers/notificationReducer'
+import { initializeBlogs } from './reducers/blogsSlice'
+
 import Login from './components/Login'
 import Header from './components/Header'
 import BlogList from './components/BlogList'
@@ -12,21 +14,18 @@ import loginService from './services/login'
 import './App.css'
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
+  const dispatch = useDispatch()
+  const message = useSelector(state => state.notification)
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
 
-  const dispatch = useDispatch()
-  const message = useSelector(state => state.notification)
-
   const blogFormRef = useRef()
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
-      setBlogs( blogs )
-    )
-  }, [])
+    dispatch(initializeBlogs())
+  }, [dispatch])
 
   useEffect(() => {
     const unformattedUser = window.localStorage.getItem('loggedUser')
@@ -58,40 +57,41 @@ const App = () => {
     setUser(null)
   }
 
-  // Is connected with addBlog in BlogForm to handle the local states of the form
-  const createNewBlog = async (newBlog) => {
-    try {
-      blogFormRef.current.toggleVisibility() // obtained through refs
-      const createdBlog = await blogService.create(newBlog)
-      createdBlog.user = user
-      setBlogs(blogs.concat(createdBlog))
-      dispatch(setNotification({ type: 'success', text: 'Blog created succesfully' }))
-    } catch (error) {
-      dispatch(setNotification({ type: 'error', text: 'Failed to create new blog' }))
-    }
-  }
+  // // Is connected with addBlog in BlogForm to handle the local states of the form
+  // const createNewBlog = async (newBlog) => {
+  //   try {
+  //     blogFormRef.current.toggleVisibility() // obtained through refs
+  //     const createdBlog = await blogService.create(newBlog)
+  //     createdBlog.user = user
+  //     dispatch(addBlog(createdBlog))
+  //     // dispatch(setBlogs(blogs.concat(createdBlog)))
+  //     dispatch(setNotification({ type: 'success', text: 'Blog created succesfully' }))
+  //   } catch (error) {
+  //     dispatch(setNotification({ type: 'error', text: 'Failed to create new blog' }))
+  //   }
+  // }
 
-  const deleteBlog = async (id) => {
-    if (window.confirm('Are you sure you want to delete this blog?')) {
-      try {
-        await blogService.remove(id)
-        setBlogs(blogs.filter(blog => blog.id !== id))
-        dispatch(setNotification({ type: 'success', text: 'blog deleted successfully' }))
-      } catch (error) {
-        dispatch(setNotification({ type: 'error', text: 'Its not possible to delete this blog' }))
-      }
-    }
-  }
+  // const deleteBlog = async (id) => {
+  //   if (window.confirm('Are you sure you want to delete this blog?')) {
+  //     try {
+  //       await blogService.remove(id)
+  //       dispatch(setBlogs(blogs.filter(blog => blog.id !== id)))
+  //       dispatch(setNotification({ type: 'success', text: 'blog deleted successfully' }))
+  //     } catch (error) {
+  //       dispatch(setNotification({ type: 'error', text: 'Its not possible to delete this blog' }))
+  //     }
+  //   }
+  // }
 
-  // Is connected with handleLikes in blogform to handle de likes state of the blog
-  const updateLikes = async (id, likes) => {
-    try {
-      const updatedBlog = await blogService.update(id, likes)
-      setBlogs(blogs.map(blog => blog.id === id ? { ...blog, likes: updatedBlog.likes } : blog))
-    } catch (error) {
-      dispatch(setNotification({ type: 'error', text: 'Its not possible to like this blog' }))
-    }
-  }
+  // // Is connected with handleLikes in blogform to handle de likes state of the blog
+  // const updateLikes = async (id, likes) => {
+  //   try {
+  //     const updatedBlog = await blogService.update(id, likes)
+  //     dispatch(setBlogs(blogs.map(blog => blog.id === id ? { ...blog, likes: updatedBlog.likes } : blog)))
+  //   } catch (error) {
+  //     dispatch(setNotification({ type: 'error', text: 'Its not possible to like this blog' }))
+  //   }
+  // }
 
   return (
     <>
@@ -106,14 +106,9 @@ const App = () => {
         user
           ?
           <div>
-            <BlogList
-              blogs={blogs}
-              user={user}
-              updateLikes={updateLikes}
-              deleteBlog={deleteBlog}
-            />
+            <BlogList user={user}/>
             <Togglable buttonLabel={'Create new Blog'} ref={blogFormRef}>
-              <BlogForm createNewBlog={createNewBlog} />
+              <BlogForm />
             </Togglable>
           </div>
 
