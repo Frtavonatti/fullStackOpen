@@ -15,8 +15,8 @@
 - [x] Implementar creación de nuevos blogs
 
 ### 7.12: Redux, Paso 3
-- [ ] Implementar funcionalidad de likes con Redux
-- [ ] Implementar eliminación de blogs con Redux
+- [x] Implementar funcionalidad de likes con Redux
+- [x] Implementar eliminación de blogs con Redux
 
 ### 7.13: Redux, Paso 4
 - [ ] Almacenar información del usuario logueado en Redux store

@@ -26,9 +26,14 @@ const BlogForm = () => {
     if (!formData.author) {
       dispatch(setNotification({ type: 'error', text: 'You have to complete all fields' }))
     } else {
-      dispatch(createBlog(formData))
-    }
+      try {
+        dispatch(createBlog(formData))
+        dispatch(setNotification({ type: 'success', text: 'Blog created succesfully' }))
+      } catch (error) {
+        dispatch(setNotification({ type: 'error', text: 'Failed to create new blog' }))
+      }
     setFormData({ title: '', author: '', url: '' })
+    }
   }
 
   return (
