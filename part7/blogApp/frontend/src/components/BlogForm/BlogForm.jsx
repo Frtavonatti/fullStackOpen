@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { setNotification } from '../../reducers/notificationReducer'
+import { setNotification } from '../../reducers/notificationSlice'
 import { createBlog } from '../../reducers/blogsSlice'
 
 const BlogForm = () => {

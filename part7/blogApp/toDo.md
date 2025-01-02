@@ -19,7 +19,7 @@
 - [x] Implementar eliminación de blogs con Redux
 
 ### 7.13: Redux, Paso 4
-- [ ] Almacenar información del usuario logueado en Redux store
+- [x] Almacenar información del usuario logueado en Redux store
 
 
 ## Vistas

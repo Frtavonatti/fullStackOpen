@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteBlog, likeBlog } from '../../reducers/blogsSlice'
-import { setNotification } from '../../reducers/notificationReducer'
+import { setNotification } from '../../reducers/notificationSlice'
 import { useState } from 'react'
 import './Blog.css'
 
