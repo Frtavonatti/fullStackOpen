@@ -1,38 +1,18 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import { useEffect, useRef } from 'react'
+import axios from "axios";
+import { Routes, Route, useMatch } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { initializeBlogs } from './reducers/blogsSlice'
 import { initializeUser } from './reducers/usersSlice'
-import Login from './components/Login'
+import BlogsPage from './components/BlogsPage'
 import Header from './components/Header'
-import BlogList from './components/BlogList'
-import BlogForm from './components/BlogForm/BlogForm'
-import Users from './components/Users'
+import UsersPage from './components/UsersPage'
+import UserCard from './components/UserCard'
 import Notification from './components/Notification'
-import Togglable from './components/Togglable'
 import './App.css'
 
-const BlogsPage = () => {
-  const blogFormRef = useRef()
-  const user = useSelector(state => state.user)
-
-  return (
-    <div>
-      {user ? (
-        <div>
-          <BlogList user={user} />
-          <Togglable buttonLabel={'Create new Blog'} ref={blogFormRef}>
-            <BlogForm />
-          </Togglable>
-        </div>
-      ) : (
-        <Login />
-      )}
-    </div>
-  )
-}
-
 const App = () => {
+  const [users, setUsers] = useState([]);
   const dispatch = useDispatch()
   const message = useSelector(state => state.notification)
   const user = useSelector(state => state.user)
@@ -42,22 +22,28 @@ const App = () => {
     dispatch(initializeUser())
   }, [dispatch])
 
-  return (
-    <Router>
-      <div>
-        <Link style={{'padding': '1rem'}} to="/">Blogs</Link>
-        <Link style={{'padding': '1rem'}} to="/users">Users</Link>
-      </div>
+  useEffect(() => {
+    axios.get('/api/users').then(response => {
+      setUsers(response.data)
+    })
+  }, [])
 
+  const match = useMatch('/users/:id')
+  const userMatched = match
+    ? users.find(user => user.id === match.params.id)
+    : null
+
+  return (
+    <>
       <Header user={user} />
       {message.text && <Notification message={message} />}
 
       <Routes>
         <Route path="/" element={<BlogsPage />} />
-        <Route path="/users" element={<Users />} />
+        <Route path="/users" element={<UsersPage users={users} />} />
+        <Route path="/users/:id" element={<UserCard user={userMatched} />} />
       </Routes>
-
-    </Router>
+    </>
   )
 }
 

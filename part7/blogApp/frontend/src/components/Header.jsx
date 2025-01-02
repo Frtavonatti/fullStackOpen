@@ -1,6 +1,7 @@
 import reactLogo from '../assets/react.svg'
 import { useDispatch } from 'react-redux'
 import { logoutUser } from '../reducers/usersSlice'
+import { Link } from 'react-router-dom'
 
 const Header = ({ user }) => {
   const dispatch = useDispatch()
@@ -13,7 +14,12 @@ const Header = ({ user }) => {
 
   return (
     <div>
-      {user && (
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+      <nav>
+        <Link style={{'padding': '1rem'}} to="/">Blogs</Link>
+        <Link style={{'padding': '1rem'}} to="/users">Users</Link>
+      </nav>
+        {user && (
         <div style={{ display: 'flex', justifyContent: 'right' }}>
           <h4>Logged in: {username}</h4>
           <button
@@ -24,11 +30,14 @@ const Header = ({ user }) => {
           </button>
         </div>
       )}
+      </div>
 
-      <h1>Blogs</h1>
-      <a href="https://react.dev" target="_blank" rel="noreferrer">
-        <img src={reactLogo} className="logo react" alt="React logo" />
-      </a>
+      <div display="flex" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <a target="_blank" rel="noreferrer">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+        <h1>BlogApp</h1>
+      </div>
     </div>
   )
 }
