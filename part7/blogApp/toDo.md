@@ -25,13 +25,13 @@
 ## Vistas
 
 ### 7.14: Vista de usuarios
-- [ ] Implementa una vista en la aplicación que muestre toda la información básica relacionada con los usuarios
+- [x] Implementa una vista en la aplicación que muestre toda la información básica relacionada con los usuarios
 
 ### 7.15: Vista de Usuario Individual
 - [ ] Implementa una vista para usuarios individuales, que muestre todas las publicaciones de blog agregadas por ese usuario
 
 ### 7.16: Vista de Blog
-- [ ] Implementa una vista separada para las publicaciones de blog
+- [ ] Implementa una vista separada para las publicaciones de blog (blogs/:id)
 
 ### 7.17: Navegación
 - [ ] Implementa un menú de navegación para la aplicación
