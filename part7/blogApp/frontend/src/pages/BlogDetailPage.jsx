@@ -47,18 +47,40 @@ const BlogDetailPage = () => {
     }
   }
 
+  const blogContainerStyle = {
+    border: '1px solid white',
+    borderRadius: '5px',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    padding: '1rem',
+    margin: '1rem'
+  }
+
+  const likesContainerStyle = {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '1rem'
+  }
+
+  const commentListStyle = {
+    border: '1px solid white',
+    margin: '1rem',
+    borderRadius: '5px',  
+  }
+
   return (
     <div>
-      <h2> {blog.title} </h2>
-      <a href={`http://${blog.url}`} target="blank" rel="noopener noreferrer"> {blog.url} </a>
-      <p> Created by: {blog.author }</p>
-      <div>
-        <p>Likes: {blog.likes}</p>
-        <button onClick={handleLike}>Like</button>
+      <div style={blogContainerStyle}>
+        <h2> {blog.title} </h2>
+        <a href={`http://${blog.url}`} target="blank" rel="noopener noreferrer"> {blog.url} </a>
+        <p> Created by: {blog.author }</p>
+        <div style={likesContainerStyle}>
+          <button onClick={handleLike}>👍</button>
+          <p>{blog.likes} likes</p>
+        </div>
       </div>
 
       {comments.length > 0 && (
-        <div>
+        <div style={commentListStyle}>
           <h3>Comments</h3>
           <ul>
             {comments.map((comment, index) => 
@@ -70,12 +92,13 @@ const BlogDetailPage = () => {
 
       <div>
         <h3>Add a comment</h3>
-        <form onSubmit={handleComment}>
+        <form onSubmit={handleComment} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <input 
             type="text" 
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
             placeholder="Add a new comment"
+            style={{marginBottom: '1rem', padding: '0.6rem', width: '50%'}}
           />
           <button type="submit">Submit</button>
         </form>

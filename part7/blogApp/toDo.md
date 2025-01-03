@@ -46,7 +46,7 @@
 ## Estilos 
 
 ### 7.20: Estilos, paso 1
-- [ ] Mejora la apariencia de tu aplicación aplicando uno de los métodos que se muestran en el material del curso
+- [x] Mejora la apariencia de tu aplicación aplicando uno de los métodos que se muestran en el material del curso
 
 ### 7.21: Estilos, paso 2
-- [ ] Puedes marcar este ejercicio como finalizado si utilizas una hora o más para darle estilos a tu aplicación
+- [x] Puedes marcar este ejercicio como finalizado si utilizas una hora o más para darle estilos a tu aplicación
