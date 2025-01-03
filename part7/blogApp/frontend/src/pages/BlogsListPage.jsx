@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
-import Login from './Login'
-import BlogList from './BlogList'
-import BlogForm from './BlogForm/BlogForm'
-import Togglable from './Togglable'
+import Login from '../components/Login'
+import BlogList from '../components/BlogList'
+import BlogForm from '../components/BlogForm/BlogForm'
+import Togglable from '../components/Togglable'
 
-const BlogsPage = () => {
+const BlogsListPage = () => {
   const blogFormRef = useRef()
   const user = useSelector(state => state.user)
 
@@ -25,4 +25,4 @@ const BlogsPage = () => {
   )
 }
 
-export default BlogsPage
+export default BlogsListPage

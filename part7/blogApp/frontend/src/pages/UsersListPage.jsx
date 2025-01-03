@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
-const UsersPage = ({ users }) => {
+const UsersListPage = ({ users }) => {
+
   const userListStyle = {
     display: 'flex',
     flexDirection: 'column',
@@ -33,4 +34,4 @@ const UsersPage = ({ users }) => {
   )
 }
 
-export default UsersPage;
+export default UsersListPage;

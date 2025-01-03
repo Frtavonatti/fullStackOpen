@@ -31,10 +31,10 @@
 - [x] Implementa una vista para usuarios individuales, que muestre todas las publicaciones de blog agregadas por ese usuario
 
 ### 7.16: Vista de Blog
-- [ ] Implementa una vista separada para las publicaciones de blog (blogs/:id)
+- [x] Implementa una vista separada para las publicaciones de blog (blogs/:id)
 
 ### 7.17: Navegación
-- [ ] Implementa un menú de navegación para la aplicación
+- [x] Implementa un menú de navegación para la aplicación
 
 ### 7.18: Comentarios, paso 1
 - [ ] Implementa la funcionalidad para comentar las publicaciones de blog

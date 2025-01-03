@@ -17,10 +17,16 @@ const Togglable = forwardRef((props, refs) => {
     toggleVisibility
   }))
 
+  const buttonStyle = {
+    marginTop: '2rem'
+  }
+
   return (
     <div>
       <div style={hideWhenVisible}>
-        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+        <button 
+          style={buttonStyle}
+          onClick={toggleVisibility}>{props.buttonLabel}</button>
       </div>
 
       <div style={showWhenVisible}>

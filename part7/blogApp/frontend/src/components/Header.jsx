@@ -1,10 +1,12 @@
 import reactLogo from '../assets/react.svg'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { logoutUser } from '../reducers/usersSlice'
 import { Link } from 'react-router-dom'
 
-const Header = ({ user }) => {
+const Header = () => {
   const dispatch = useDispatch()
+  const user = useSelector(state => state.user)
+  
   const username = user ? user.username : 'default' //revisar el comportamiento y entender porque no me permite trabajar directamente con user.username
 
   const handleLogout = (event) => {

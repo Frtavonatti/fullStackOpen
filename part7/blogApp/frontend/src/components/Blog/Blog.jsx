@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { deleteBlog, likeBlog } from '../../reducers/blogsSlice'
 import { setNotification } from '../../reducers/notificationSlice'
@@ -43,7 +44,9 @@ const Blog = ({ blog, user }) => {
     <div data-testid={'blog'} className="blog-container">
 
       <div className="blog-content">
-        <strong>{blog.title}:</strong> <br/>
+        <Link to={`/blogs/${blog.id}`}> 
+          <strong>{blog.title}:</strong> <br/>
+        </Link>
         {blog.author} <br/>
 
         <div id={'toggleContent'} style={showWhenVisible}>

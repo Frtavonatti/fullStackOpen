@@ -7,9 +7,10 @@ const BlogList = ({ user }) => {
 
   const BlogListStyle = {
     display: 'grid',
+    justifyItems: 'center',
     gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-    gap: '10px',
-    marginTop: '20px'
+    gap: '20px',
+    marginTop: '10px',
   }
 
   return (

@@ -1,6 +1,6 @@
-import Togglable from "./Togglable";
+import Togglable from "../components/Togglable";
 
-const UserCard = ({ user }) => {
+const UserDetailPage = ({ user }) => {
   const userCardStyle = {
     display: 'flex',
     justifyContent: 'space-between',
@@ -32,4 +32,4 @@ const UserCard = ({ user }) => {
   )
 }
 
-export default UserCard
+export default UserPage
