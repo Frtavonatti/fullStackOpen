@@ -60,7 +60,7 @@ blogsRouter.post('/:id/comments', async (request, response) => {
 
 // DELETE
 blogsRouter.delete('/:id', userExtractor, async (request, response) => {
-  const blogId = request.params.id
+  const blogId = request.params.id 
 
   const blogToBeDeleted = await Blog.findById(blogId)
   if (!blogToBeDeleted) {
