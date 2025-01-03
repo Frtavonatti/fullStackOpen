@@ -32,4 +32,4 @@ const UserDetailPage = ({ user }) => {
   )
 }
 
-export default UserPage
+export default UserDetailPage

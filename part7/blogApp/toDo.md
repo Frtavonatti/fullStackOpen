@@ -37,7 +37,7 @@
 - [x] Implementa un menú de navegación para la aplicación
 
 ### 7.18: Comentarios, paso 1
-- [ ] Implementa la funcionalidad para comentar las publicaciones de blog
+- [x] Implementa la funcionalidad para comentar las publicaciones de blog
 
 ### 7.19: Comentarios, paso 2
 - [ ] Amplía tu aplicación para que los usuarios puedan agregar comentarios a las publicaciones de blog desde el frontend
