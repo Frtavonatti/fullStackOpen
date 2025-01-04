@@ -1,3 +1,19 @@
+const parseExerciseArguments = () => {
+  if (process.argv.length < 4) throw new Error("Not enough arguments");
+
+  const array = process.argv.slice(2, process.argv.length - 1).map(day => Number(day));
+  const target = Number(process.argv[process.argv.length - 1]);
+
+  if (!isNaN(target) && !array.some(day => isNaN(day))) {
+    return {
+      array,
+      target,
+    }
+  } else {
+    throw new Error("All arguments must be numbers");
+  }
+}
+
 interface Result {
   periodLength: number;
   trainingDays: number;
@@ -37,4 +53,13 @@ const calculateExercises = (array: number[], target: number): Result => {
   return result;
 }
 
-calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2)
+try {
+  const { array, target } = parseExerciseArguments();
+  calculateExercises(array, target);
+} catch (e) {
+  let errorMessage = 'An error occurred: ';
+  if (e instanceof Error) {
+    errorMessage = errorMessage.concat(e.message);
+  }
+  console.log(errorMessage);
+}
