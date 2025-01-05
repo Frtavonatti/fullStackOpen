@@ -1,7 +1,9 @@
 const parseArguments = () => {
   if (process.argv.length < 4) throw new Error("Not enough arguments");
   if (process.argv.length > 4) throw new Error("Too many arguments");
+  console.log(process.argv);
   
+
   if (!isNaN(Number(process.argv[2])) && !isNaN(Number(process.argv[3]))) {
     return {
       height: Number(process.argv[2]),
@@ -12,7 +14,7 @@ const parseArguments = () => {
   }
 }
 
-const calculateBmi = (height: number, mass: number): string => { 
+export const calculateBmi = (height: number, mass: number): string => { 
   const bmi: number = mass / (height**2) * 10000; 
   let result: string;
   
