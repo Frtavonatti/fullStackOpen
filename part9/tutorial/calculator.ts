@@ -1,6 +1,19 @@
 type Operation = 'multiply' | 'add' | 'divide';
 
-const calculator = (a: number, b: number, operation: Operation): number => {
+const parseArguments = (args: Array<string>): { a: number, b: number, op: Operation } => {
+  if (args.length !== 5) throw new Error('Exactly two arguments required');
+  if (!isNaN(Number(args[2])) && !isNaN(Number(args[3])) && ['multiply', 'add', 'divide'].includes(args[4])) {
+    return {
+      a: Number(args[2]),
+      b: Number(args[3]),
+      op: args[4] as Operation
+    }
+  } else {
+    throw new Error('Provided values were not numbers or operation is not supported');
+  }
+}
+
+export const calculator = (a: number, b: number, operation: Operation): number => {
   switch (operation) {
     case 'add':
       return a + b;
@@ -15,18 +28,12 @@ const calculator = (a: number, b: number, operation: Operation): number => {
 }
 
 try {
-  console.log(calculator(1, 5, 'add'));
-  console.log(calculator(1, 5, 'multiply'));
-  console.log(calculator(1, 5, 'divide'));
-  console.log(calculator(1, 0, 'divide'));
-  // console.log(calculator(0, 0, 'dodo')); // throws an error
+  const { a, b, op } = parseArguments(process.argv);
+  calculator(a, b, op);
 } catch (error) {
-  let errorMessage = 'Something went wrong: '
-  // here we can not use error.message
-  if (error instanceof Error) {    // the type is narrowed and we can refer to error.message
+  let errorMessage: string = 'Something went wrong: '
+  if (error instanceof Error) {
     errorMessage += error.message;  
   }
-  // here we can not use error.message
-  
   console.log(errorMessage);
 }
