@@ -14,7 +14,11 @@ const compat = new FlatCompat({
     allConfig: js.configs.all
 });
 
-export default [...compat.extends(
+export default [
+    {
+        ignores: ["eslint.config.mjs", "dist/*", "node_modules/*"]
+    },
+    ...compat.extends(
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",

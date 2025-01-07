@@ -1,7 +1,7 @@
 import express from 'express';
 const app: express.Application = express();
 import { multiplicator } from './multiplier';
-import { calculator } from './calculator';
+import { calculator, Operation } from './calculator';
 
 // Middleware
 const logger = (_req: express.Request, _res: express.Response, next: express.NextFunction) => {
@@ -11,7 +11,7 @@ const logger = (_req: express.Request, _res: express.Response, next: express.Nex
   console.log('Query: ', _req.query);
   console.log('---');
   next();
-}
+};
 
 app.use(express.json());
 app.use(logger);
@@ -31,14 +31,19 @@ app.get('/calculate', (req, res) => {
   if (!value1 || !value2 || !op) {
     res.status(400).send('missing parameters');
   }
-  const result: number = calculator(Number(value1), Number(value2), op as 'multiply' | 'add' | 'divide');
+  const result: number = calculator(Number(value1), Number(value2), op as Operation);
   res.send(String(result));
 });
 
 app.post('/calculate', (req, res) => {
-  const { value1, value2, op } = req.body; // Acá debería quejarse por no recibir un explicit any
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
 
-  const result: number = calculator(value1, value2, op);
+  if (isNaN(Number(value1)) || isNaN(Number(value2))) {
+    res.status(400).send({ error: '...' });
+  }
+
+  const result: number = calculator(Number(value1), Number(value2), op as Operation);
   res.send({ result });
 });
 
