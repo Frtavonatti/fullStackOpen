@@ -8,11 +8,11 @@ const parseArguments = () => {
     return {
       height: Number(process.argv[2]),
       mass: Number(process.argv[3])
-    }
+    };
   } else {
     throw new Error("Height and mass must be numbers");
   }
-}
+};
 
 export const calculateBmi = (height: number, mass: number): string => { 
   const bmi: number = mass / (height**2) * 10000; 
@@ -32,7 +32,7 @@ export const calculateBmi = (height: number, mass: number): string => {
     result = 'Obese Class III (Very severe)';
   }
   return result;
-}
+};
 
 try {
   const { height, mass } = parseArguments();

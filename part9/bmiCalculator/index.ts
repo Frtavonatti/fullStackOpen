@@ -9,7 +9,7 @@ const logger: express.RequestHandler = (req: express.Request, _res: express.Resp
   console.log('Query:', req.query);
   console.log('---');
   next();
-}
+};
 
 app.use(logger);
 
@@ -26,7 +26,7 @@ app.get('/bmi', (req: express.Request, res: express.Response) => {
     res.status(400).json({ error: 'malformatted parameters' });
   }
 
-  const bmi = calculateBmi(height, weight)
+  const bmi = calculateBmi(height, weight);
 
   res.json({
     weight,

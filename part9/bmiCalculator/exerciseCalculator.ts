@@ -8,11 +8,11 @@ const parseExerciseArguments = () => {
     return {
       array,
       target,
-    }
+    };
   } else {
     throw new Error("All arguments must be numbers");
   }
-}
+};
 
 interface Result {
   periodLength: number;
@@ -48,10 +48,10 @@ const calculateExercises = (array: number[], target: number): Result => {
     ratingDescription: ratingDescription,
     target: target,
     average: average,
-  }
+  };
   console.log(result);
   return result;
-}
+};
 
 try {
   const { array, target } = parseExerciseArguments();
