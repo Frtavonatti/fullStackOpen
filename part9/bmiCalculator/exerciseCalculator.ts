@@ -24,7 +24,7 @@ interface Result {
   average: number;
 }
 
-const calculateExercises = (array: number[], target: number): Result => {
+export const calculateExercises = (array: number[], target: number): Result => {
   const average = array.reduce((a, b) => a + b, 0) / array.length;
   let rating: number;
   let ratingDescription: string;
