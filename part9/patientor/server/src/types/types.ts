@@ -11,6 +11,8 @@ export interface Patients {
   name: string,
   dateOfBirth: string,
   ssn: string,
-  gender: Gender,
+  gender: string, // Pending: Change gender for type Gender
   occupation: string,
 }
+
+export type NonSensitivePatiensData =  Omit<Patients, 'ssn'>
