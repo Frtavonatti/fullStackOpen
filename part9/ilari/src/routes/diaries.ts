@@ -1,6 +1,6 @@
 import express from "express";
 import diaryService from "../service/diaryService";
-import { NewDiaryEntry } from "../types";
+import toNewDiaryEntry from "../utils/utils";
 
 const router = express.Router();
 
@@ -20,15 +20,17 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { date, weather, visibility, comment } = req.body as NewDiaryEntry; // This was my solution instead of using disable-no-unsafe-vars
-
-  const newDiaryEntry = diaryService.addEntry({
-    date,
-    weather,
-    visibility,
-    comment
-  });
-  res.send(newDiaryEntry);
+  try {
+    const diaryEntry = toNewDiaryEntry(req.body);
+    const addedEntry = diaryService.addEntry(diaryEntry);
+    res.send(addedEntry);
+  } catch (error) {
+    let errorMessage = 'Something went wrong.';
+    if (error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    res.status(400).send(errorMessage);
+  }
 });
 
 export default router;
