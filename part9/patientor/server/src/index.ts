@@ -8,12 +8,12 @@ import diagnosesRouter from './routes/diagnoses';
 
 // Middleware
 app.use(cors());
+app.use(express.json());
 app.use(logger);
 
 // Routes
 app.use('/api/patients', patientsRouter);
 app.use('/api/diagnoses', diagnosesRouter);
-
 
 const PORT: number = 3001;
 app.listen(PORT, () => {
