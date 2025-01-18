@@ -1,9 +1,6 @@
-interface Course {
-  name: string,
-  exerciseCount: number
-}
+import { CoursePart } from "../types";
 
-const Content = ({ courseParts }: {courseParts: Course[]}): JSX.Element => {
+const Content = ({ courseParts }: {courseParts: CoursePart[]}): JSX.Element => {
 
   return (
     <div>
