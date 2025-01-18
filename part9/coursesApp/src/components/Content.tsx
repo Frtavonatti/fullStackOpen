@@ -2,6 +2,29 @@ import { CoursePart } from "../types";
 
 const Content = ({ courseParts }: {courseParts: CoursePart[]}): JSX.Element => {
 
+  // Move to utils
+  const assertNever = (value: never): never => {
+    throw new Error(
+      `Unhandled discriminated union member: ${JSON.stringify(value)}`
+    );
+  };
+
+  courseParts.forEach((part) => {
+    switch (part.kind) {
+      case 'basic':
+        console.log(part.name, part.description, part.exerciseCount);
+        break;
+      case 'group':
+        console.log(part.groupProjectCount);
+        break;
+      case 'background':
+        console.log(part.backgroundMaterial);
+        break;
+      default:
+        return assertNever(part)
+    }
+  })
+
   return (
     <div>
       <p>
