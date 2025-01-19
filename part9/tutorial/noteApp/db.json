@@ -1,0 +1,16 @@
+{
+  "notes": [
+    {
+      "id": 3,
+      "content": "Learning Typescript"
+    },
+    {
+      "id": 4,
+      "content": "Using pnpm as packagemanager"
+    },
+    {
+      "id": "953c",
+      "content": "New Note"
+    }
+  ]
+}

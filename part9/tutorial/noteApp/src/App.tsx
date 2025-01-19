@@ -1,28 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { getAllNotes, createNote } from './noteService';
+import { Note } from './types';
 import reactLogo from './assets/react.svg'
-
-interface Note {
-  id: number,
-  content: string
-}
 
 function App() {
   const [newNote, setNewNote] = useState('');
-  const [notes, setNotes] = useState<Note[]>([
-    { id: 1, content: 'Learning pnpm' }
-  ]);
+  const [notes, setNotes] = useState<Note[]>([]);
 
-  const generateId = () => Math.round(Math.random() * 100)
+  useEffect(() => {
+    getAllNotes().then(data => {
+      setNotes(data)
+    })
+  }, [])
 
-  const noteCreation = (event: { preventDefault: () => void; }) => {
-    event?.preventDefault()
-    setNotes([
-      { 
-        id: generateId(),
-        content: newNote
-      },
-      ...notes
-    ])
+  const noteCreation = (event: React.SyntheticEvent ) => {
+    event.preventDefault()
+    createNote({content: newNote}).then(data => {
+        setNotes(notes.concat(data))
+    })
+    setNewNote('')
   };
 
   return (
