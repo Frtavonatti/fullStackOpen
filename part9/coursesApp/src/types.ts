@@ -3,8 +3,11 @@ interface CoursePartBase {
   exerciseCount: number;
 }
 
-interface CoursePartBasic extends CoursePartBase {
-  description: string;
+interface CoursePartDescription extends CoursePartBase {
+  description: string
+}
+
+interface CoursePartBasic extends CoursePartDescription {
   kind: "basic"
 }
 
@@ -13,10 +16,22 @@ interface CoursePartGroup extends CoursePartBase {
   kind: "group"
 }
 
-interface CoursePartBackground extends CoursePartBase {
-  description: string;
+interface CoursePartBackground extends CoursePartDescription {
   backgroundMaterial: string;
   kind: "background"
 }
 
-export type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground;
+interface CoursePartSpecial extends CoursePartDescription {
+  requirements: string[];
+  kind: "special"
+}
+
+export type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground | CoursePartSpecial;
+
+
+// MOVE TO UTILS
+export const assertNever = (value: never): never => {
+  throw new Error(
+    `Unhandled discriminated union member: ${JSON.stringify(value)}`
+  );
+};
