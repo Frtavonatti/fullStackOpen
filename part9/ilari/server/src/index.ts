@@ -1,9 +1,11 @@
 import express from 'express';
+import cors from 'cors';
 import diaryRouter from './routes/diaries';
 import { logger } from './utils/middleware';
 const app = express();
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(logger);
 
