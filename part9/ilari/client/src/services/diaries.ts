@@ -3,13 +3,14 @@ import { NewDiaryEntry } from "../types";
 
 const baseUrl = "http://localhost:3000/api/diaries"
 
-const getAll = () => {
-  return axios.get(baseUrl).then(res => res.data)
+const getAll = async () => {
+  const res = await axios.get(baseUrl)
+  return res.data
 }
 
-const createNew = (newObject: NewDiaryEntry) => {
-  return axios.post(baseUrl, newObject)
-    .then(res => res.data)
+const createNew = async (newObject: NewDiaryEntry) => {
+  const res = await axios.post(baseUrl, newObject)
+  return res.data
 }
 
 export { getAll, createNew }

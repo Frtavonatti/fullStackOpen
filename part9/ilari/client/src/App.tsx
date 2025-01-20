@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { NonSensitiveDiaryEntry, NewDiaryEntry } from "./types";
 import { getAll, createNew } from './services/diaries'
+import Header from "./components/Header";
 import Input from "./components/ui/input";
-import reactLogo from "./assets/react.svg";
 
 function App() {
   const initialState: NewDiaryEntry = {
@@ -40,21 +40,24 @@ function App() {
 
   const handleSumit = async (event: React.SyntheticEvent) => {
     event.preventDefault();
-
-    const response = await createNew(newDiary);
-    setDiaries(diaries.concat(response));
+    try {
+      const response = await createNew(newDiary);
+      setDiaries(diaries.concat(response));
+    } catch (error: any) {
+      if (error.response && error.response.data && error.response.data.error) {
+        setError(error.response.data.error);
+      } else {
+        setError("Error posting diary: " + error.message);
+      }
+    }
     setNewDiary(initialState);
   }
 
   return (
     <div className="rounded-lg bg-zinc-800 px-12 py-6 shadow-lg">
-      <div className="mb-8 flex justify-center items-center">
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo h-20 w-20" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="mb-8">Ilari Flights</h1>
-      {error && <p>{error}</p>}
+      <Header/>
+      {error && <p className="text-red-700 text-lg font-bold mb-4">{error}</p>}
+
       <section>
         {diaries.map((diary) => (
           <div
