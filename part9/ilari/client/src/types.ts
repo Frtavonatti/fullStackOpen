@@ -1,4 +1,4 @@
-enum Weather {
+export enum Weather {
   Sunny = "sunny",
   Rainy = "rainy",
   Cloudy = "cloudy",
@@ -6,7 +6,7 @@ enum Weather {
   Windy = "windy",
 }
 
-enum Visibility {
+export enum Visibility {
   Great = "great",
   Good = "good",
   Ok = "ok",
@@ -24,3 +24,12 @@ export interface DiaryEntry {
 export type NonSensitiveDiaryEntry = Omit<DiaryEntry, "comment">;
 
 export type NewDiaryEntry = Omit<DiaryEntry, "id">;
+
+export interface ErrorResponse {
+  response?: {
+    data?: {
+      error?: string;
+    };
+  };
+  message: string;
+}

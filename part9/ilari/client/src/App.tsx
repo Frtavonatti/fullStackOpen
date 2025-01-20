@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { NonSensitiveDiaryEntry, NewDiaryEntry } from "./types";
+import { NonSensitiveDiaryEntry, NewDiaryEntry, Weather, Visibility, ErrorResponse } from "./types";
 import { getAll, createNew } from './services/diaries'
 import Header from "./components/Header";
-import Input from "./components/ui/input";
+import Radio from "./components/ui/Radio";
 
 function App() {
   const initialState: NewDiaryEntry = {
     date: "",
-    weather: "",
-    visibility: "",
+    weather: Weather.Sunny,
+    visibility: Visibility.Great,
     comment: ""
   }
 
@@ -43,14 +43,16 @@ function App() {
     try {
       const response = await createNew(newDiary);
       setDiaries(diaries.concat(response));
-    } catch (error: any) {
-      if (error.response && error.response.data && error.response.data.error) {
-        setError(error.response.data.error);
+    } catch (error) {
+      const err = error as ErrorResponse;
+      if (err.response?.data?.error) {
+        setError(err.response.data.error);
       } else {
-        setError("Error posting diary: " + error.message);
+        setError("Error posting diary: " + err.message);
       }
+    } finally {
+      setNewDiary(initialState);
     }
-    setNewDiary(initialState);
   }
 
   return (
@@ -73,12 +75,32 @@ function App() {
         ))}
       </section>
 
-      <form className="flex flex-col gap-2" onSubmit={handleSumit}>
-        <Input name={"date"} value={newDiary.date} onChange={handleChange} />
-        <Input name={"visibility"} value={newDiary.visibility} onChange={handleChange} />
-        <Input name={"weather"} value={newDiary.weather} onChange={handleChange} />
-        <Input name={"comment"} value={newDiary.comment} onChange={handleChange} />
-        <button type="submit">Add</button>
+      <form className="flex flex-col gap-2 bg bg-zinc-700 border border-solid border-white rounded-md p-4 my-2" onSubmit={handleSumit}>
+        <input type="date" name="date" value={newDiary.date} onChange={handleChange} />
+
+        <div className="border border-solid border-white rounded-md p-4 my-2">
+          <label className="font-bold">Visibility</label>
+            <div>
+            <Radio name="visibility" value="great" checked={newDiary.visibility === "great"} onChange={handleChange}/>
+            <Radio name="visibility" value="good" checked={newDiary.visibility === "good"} onChange={handleChange}/>
+            <Radio name="visibility" value="ok" checked={newDiary.visibility === "ok"} onChange={handleChange}/> 
+            <Radio name="visibility" value="poor" checked={newDiary.visibility === "poor"} onChange={handleChange}/> 
+            </div>
+        </div>
+
+        <div className="border border-solid border-white rounded-md p-4 my-2">
+          <label className="font-bold">Weather</label>
+            <div className="flex flex-row gap-2 justify-center">
+            <Radio name="weather" value="sunny" checked={newDiary.weather === "sunny"} onChange={handleChange} />
+            <Radio name="weather" value="rainy" checked={newDiary.weather === "rainy"} onChange={handleChange} />
+            <Radio name="weather" value="cloudy" checked={newDiary.weather === "cloudy"} onChange={handleChange} />
+            <Radio name="weather" value="stormy" checked={newDiary.weather === "stormy"} onChange={handleChange} />
+            <Radio name="weather" value="windy" checked={newDiary.weather === "windy"} onChange={handleChange} />
+            </div>
+        </div>
+
+        <textarea name={"comment"} value={newDiary.comment} onChange={handleChange} className="textarea textarea-bordered" placeholder="Bio"></textarea>
+        <button className="textarea mt-4" type="submit">Add</button>
       </form>
     </div>
   );
