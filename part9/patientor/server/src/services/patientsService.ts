@@ -17,7 +17,10 @@ const getNonSensitivePatiensData = (): NonSensitivePatiensData[] => {
 };
 
 const getIndividualPatient = (id: string): Patients | undefined => {
-  return patients.find((patient) => patient.id === id);
+  return patients.find((patient) => {
+    console.log(patient);
+    return patient.id === id;
+  });
 };
 
 const addPatient = (patientEntry: NewPatient) => {
