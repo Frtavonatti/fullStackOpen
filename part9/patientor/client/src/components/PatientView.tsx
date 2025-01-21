@@ -1,4 +1,3 @@
-
 import { Divider, Typography } from '@mui/material';
 import { Female, Male, Transgender } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
@@ -39,7 +38,7 @@ const PatientView = () => {
 
   return (
     <div style={{marginTop: '4rem'}}>
-        <Typography variant='h4'>
+        <Typography variant='h3'>
           {patient.name}
           {genderIcon(patient.gender)}
         </Typography>
@@ -53,6 +52,29 @@ const PatientView = () => {
         <Typography>
           Occupation: {patient.occupation}
         </Typography>
+
+        <div style={{marginTop: '4rem'}}>
+          <Typography variant='h4'>Entries</Typography>
+            <ul>
+            {patient.entries.map((entry) => (
+              <li key={entry.id}>
+                <Typography>
+                  {entry.date} - {entry.description}
+                </Typography>
+
+                <div>
+                  <Typography>Diagnoses Codes:</Typography>
+                    <ul>
+                      { entry.diagnosisCodes && 
+                      entry.diagnosisCodes.map((code, index) => <li key={index}>{code}</li> )
+                      }
+                    </ul>
+                </div>
+              </li>
+            ))}
+            </ul>
+        </div>
+
     </div>
   );
 };
