@@ -1,12 +1,15 @@
-
 import express from 'express';
 const router = express.Router();
-
 import services from '../services/patientsService';
 import toNewPatient from '../utils/utils';
 
 router.get('/', (_req, res) => {
   res.send(services.getNonSensitivePatiensData());
+});
+
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  res.send(services.getIndividualPatient(id));
 });
 
 router.post('/', (req, res) => {
