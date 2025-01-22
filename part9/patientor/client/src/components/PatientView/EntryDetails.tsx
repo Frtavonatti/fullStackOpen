@@ -17,7 +17,7 @@ const EntryDetails = ({ patient }: Props) => {
         { patient.entries.map((entry) => (
           <li key={entry.id}>
             <Typography> {entry.date} - {entry.description} </Typography>
-            { entry.diagnosisCodes && <DiagnosesCodes diagnoses={entry.diagnosisCodes} /> }
+            { entry.diagnosisCodes && <DiagnosesCodes codes={entry.diagnosisCodes} /> }
           </li>
           ))
         }
