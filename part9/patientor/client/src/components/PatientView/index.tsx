@@ -9,7 +9,7 @@ import { Patient, Diagnosis } from '../../types';
 const PatientView = () => {  
   const { id } = useParams<{ id: string }>();
   const [patient, setPatient] = useState<Patient | null>(null);
-    const [diagnosis, setDiagnosis] = useState<Diagnosis[] | null>(null);
+  const [diagnosis, setDiagnosis] = useState<Diagnosis[]>([]);
 
   useEffect(() => {
     const fetchPatient = async () => {
@@ -36,7 +36,7 @@ const PatientView = () => {
   return (
     <div style={{marginTop: '4rem'}}>
       <PatientInfo patient={patient}/>
-      {diagnosis && <EntryDetails patient={patient} diagnosis={diagnosis}/>}
+      <EntryDetails patient={patient} diagnosis={diagnosis}/>
     </div>
   );
 };
