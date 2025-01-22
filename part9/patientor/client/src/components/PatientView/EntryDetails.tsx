@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Typography, Button } from '@mui/material';
 import DiagnosesCodes from './DiagnosesCodes';
 import { Diagnosis, Patient } from '../../types';
 
@@ -7,6 +7,13 @@ interface Props {
   diagnosis: Diagnosis[]
 }
 
+const entryCardStyle = {
+  padding: '1rem',
+  margin: '5px 0',
+  border: '2px solid black',
+  borderRadius: '5px'
+};
+
 const EntryDetails = ({ patient, diagnosis }: Props) => {
   return (
     <div style={{marginTop: '4rem'}}>
@@ -14,15 +21,20 @@ const EntryDetails = ({ patient, diagnosis }: Props) => {
       ? <Typography variant='h4'>Entries</Typography> 
       : <Typography variant='h4'>No entries yet</Typography> 
     }
-      <ul>
+      <div>
         { patient.entries.map((entry) => (
-          <li key={entry.id}>
-            <Typography> {entry.date} - {entry.description} </Typography>
-            { entry.diagnosisCodes && <DiagnosesCodes diagnosis={diagnosis} codes={entry.diagnosisCodes} /> }
-          </li>
+          <div key={entry.id} style={entryCardStyle}>
+            <Typography> {entry.date} - {entry.type} </Typography>
+            { entry.type === 'OccupationalHealthcare' && <Typography> Employer: {entry.employerName} </Typography> }
+            <Typography> {entry.description} </Typography>
+            <Typography> Diagnosed by: {entry.specialist} </Typography>
+            { entry.diagnosisCodes && <DiagnosesCodes diagnosis={diagnosis} codes={entry.diagnosisCodes}/> }
+          </div>
           ))
         }
-      </ul>
+      </div>
+
+    <Button variant="contained" color="primary">Add new entry</Button>
   </div>
   );
 };

@@ -19,7 +19,9 @@ const DiagnosesCodes = ({ diagnosis, codes }: Props) => {
       <Typography>Diagnoses Codes:</Typography>
         <ul>
           {codes.map((code, index) => 
-            <li key={index}>{code}: {findDiagnosisName(code)}</li>)
+            <li key={index}> 
+              <Typography> {code}: {findDiagnosisName(code)} </Typography> 
+            </li>)
           }
         </ul>
     </div>
