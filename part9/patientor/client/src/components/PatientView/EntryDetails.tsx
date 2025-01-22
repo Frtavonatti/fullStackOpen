@@ -1,12 +1,13 @@
 import { Typography } from '@mui/material';
 import DiagnosesCodes from './DiagnosesCodes';
-import { Patient } from '../../types';
+import { Diagnosis, Patient } from '../../types';
 
 interface Props {
-  patient: Patient
+  patient: Patient,
+  diagnosis: Diagnosis[]
 }
 
-const EntryDetails = ({ patient }: Props) => {
+const EntryDetails = ({ patient, diagnosis }: Props) => {
   return (
     <div style={{marginTop: '4rem'}}>
     { patient.entries.length > 0 
@@ -17,7 +18,7 @@ const EntryDetails = ({ patient }: Props) => {
         { patient.entries.map((entry) => (
           <li key={entry.id}>
             <Typography> {entry.date} - {entry.description} </Typography>
-            { entry.diagnosisCodes && <DiagnosesCodes codes={entry.diagnosisCodes} /> }
+            { entry.diagnosisCodes && <DiagnosesCodes diagnosis={diagnosis} codes={entry.diagnosisCodes} /> }
           </li>
           ))
         }
