@@ -3,7 +3,8 @@ import { BaseEntry,
   HospitalEntry,
   OccupationalHealthCareEntry,
   EntryWithoutId, 
-  HealthCheckRating 
+  HealthCheckRating, 
+  Diagnosis,
 } from "../types";
 
 const isString = (text: unknown): text is string =>  {
@@ -15,6 +16,14 @@ const parseString = (value: unknown): string => {
     throw new Error(`Invalid or missing parameter: ${value}`);
   }
   return value;
+};
+
+const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
+  if (!object || typeof object !== 'object' || !('diagnosisCodes' in object)) {
+    // we will just trust the data to be in correct form
+    return [] as Array<Diagnosis['code']>;
+  }
+  return object.diagnosisCodes as Array<Diagnosis['code']>;
 };
 
 const isHealthCheckRating = (param: unknown): param is HealthCheckRating => {
@@ -54,6 +63,7 @@ const toNewBaseEntry = (object: any): Omit<BaseEntry, 'id'> => {
     date: parseString(object.date),
     specialist: parseString(object.specialist),
     description: parseString(object.description),
+    diagnosisCodes: object.diagnosisCodes ? parseDiagnosisCodes(object.diagnosisCodes) : undefined
   };
   return newEntry;
 };
