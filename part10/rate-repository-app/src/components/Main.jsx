@@ -14,9 +14,11 @@ const Main = () => {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#e1e4e8',
     flexGrow: 1,
     flexShrink: 1,
     flex: 1,
+    // display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
