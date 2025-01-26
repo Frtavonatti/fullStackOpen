@@ -1,13 +1,18 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import AppBar from './AppBar';
+import { Routes, Route } from 'react-router-native';
 import RepositoryList from './RepositoryList';
+import SignIn from './SignIn';
+import AppBar from './AppBar';
 
 const Main = () => {
   return (
     <View style={styles.container}>
       <AppBar/>
-      <RepositoryList/>
+      <Routes>
+        <Route path="/" element={<RepositoryList />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
     </View>
   );
 };
@@ -18,7 +23,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flex: 1,
-    // display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },

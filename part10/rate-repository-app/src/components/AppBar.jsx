@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import AppBarTab from './AppBarTab';
 import theme from '../theme'
@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      <AppBarTab text={"Repositories"}/>
-      <AppBarTab text={"Create a review"}/>
-      <AppBarTab text={"Sign out"}/>
+      <AppBarTab text="Repositories" to="/" />
+      <AppBarTab text="Create a review" to="/review" />
+      <AppBarTab text="Sign in" to="/signin" />
     </View>
   );
 };
