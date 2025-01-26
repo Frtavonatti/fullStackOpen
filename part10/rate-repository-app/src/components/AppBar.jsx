@@ -9,7 +9,7 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollview}>
         <AppBarTab text="Repositories" to="/" />
-        <AppBarTab text="Create a review" to="/review" />
+        <AppBarTab text="Create a review" to="/" />
         <AppBarTab text="Sign in" to="/signin" />
       </ScrollView>
     </View>
@@ -19,7 +19,8 @@ const AppBar = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.appBar,
-    width: 412,
+    width: '100%',
+    
   },
   scrollview: {
     paddingTop: Constants.statusBarHeight,

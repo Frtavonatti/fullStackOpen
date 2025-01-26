@@ -11,7 +11,6 @@ const RepositoryItem = ({ repo }) => {
 
   return (
     <View style={styles.container}>
-
       <View style={styles.header}>  
         <Image source={{ uri: repo.ownerAvatarUrl }} style={styles.headerImage}/>
         <View style={{ display: 'flex', gap: 8 }}>
