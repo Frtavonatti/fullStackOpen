@@ -125,7 +125,7 @@
     }
     ```
 
-- [ ] **8.5: Libros por género**
+- [x] **8.5: Libros por género**
   - Modificar la consulta `allBooks` para aceptar un parámetro opcional `genre` y devolver solo los libros de ese género.
   - La consulta:
     ```graphql
