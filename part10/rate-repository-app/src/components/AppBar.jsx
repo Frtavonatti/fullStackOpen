@@ -20,11 +20,11 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.appBar,
     width: '100%',
-    
   },
   scrollview: {
     paddingTop: Constants.statusBarHeight,
     paddingBottom: 30,
+    marginTop: 20,
     display: 'flex',
     flexDirection: 'row',
     flexGrow: 1,
