@@ -30,7 +30,11 @@ const typeDefs = gql`
     published: Int!,
     author: String!,
     genres: [String],
-    ): Books
+    ): Books,
+    editAuthor(
+      name: String!,
+      setBornTo: Int!
+    ): Authors
   }
 `
 
@@ -49,11 +53,13 @@ const resolvers = {
     },
     allAuthors: () => authors
   },
+
   Authors: {
     bookCount: (root) => {
       return books.filter(book => book.author === root.name).length
     }
   },
+
   Mutation: {
     addBook: (root, args) => {
       const newBook = {
@@ -62,7 +68,19 @@ const resolvers = {
       }
       books.concat(newBook)
       return newBook
-    } 
+    }, 
+    editAuthor: (root, args) => {
+      const author = authors.find((a) => a.name === args.name)
+      if (!author) {
+        return null
+      }
+      const editedAuthor = {
+        ...author,
+        born: args.setBornTo
+      }
+      authors.map((a) => a.name === args.name ? editedAuthor : a)
+      return editedAuthor
+    }
   } 
 }
 

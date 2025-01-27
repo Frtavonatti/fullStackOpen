@@ -171,7 +171,7 @@
     }
     ```
 
-- [ ] **8.6: Agregar un libro**
+- [x] **8.6: Agregar un libro**
   - Implementar la mutación `addBook`, que puede ser usada así:
     ```graphql
     mutation {
@@ -226,7 +226,7 @@
     }
     ```
 
-- [ ] **8.7: Actualización del año de nacimiento de un autor**
+- [x] **8.7: Actualización del año de nacimiento de un autor**
   - Implementar la mutación `editAuthor`, que se puede usar para establecer un año de nacimiento para un autor.
   - La mutación:
     ```graphql
