@@ -58,7 +58,7 @@
     }
     ```
 
-- [ ] **8.3: Todos los autores**
+- [x] **8.3: Todos los autores**
   - Implementar la consulta `allAuthors`, que devuelva los detalles de todos los autores, incluyendo un campo `bookCount` con el número de libros que ha escrito el autor.
   - La consulta:
     ```graphql
