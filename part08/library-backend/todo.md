@@ -17,7 +17,7 @@
     }
     ```
 
-- [ ] **8.2: Todos los libros**
+- [x] **8.2: Todos los libros**
   - Implementar la consulta `allBooks`, que devuelva los detalles de todos los libros.
   - La consulta:
     ```graphql
@@ -27,6 +27,33 @@
         author
         published 
         genres
+      }
+    }
+    ```
+  - Debe devolver:
+    ```json
+    {
+      "data": {
+        "allBooks": [
+          {
+            "title": "Clean Code",
+            "author": "Robert Martin",
+            "published": 2008,
+            "genres": ["programming"]
+          },
+          {
+            "title": "Agile software development",
+            "author": "Robert Martin",
+            "published": 2002,
+            "genres": ["programming", "agile"]
+          },
+          {
+            "title": "Refactoring, edition 2",
+            "author": "Martin Fowler",
+            "published": 2018,
+            "genres": ["programming", "refactoring"]
+          }
+        ]
       }
     }
     ```
