@@ -8,8 +8,11 @@
   "author": "frtavonatti",
   "license": "MIT",
   "description": "",
+  "type": "module",
   "dependencies": {
+    "@apollo/server": "^4.11.3",
     "apollo-server": "^3.13.0",
-    "graphql": "^16.10.0"
+    "graphql": "^16.10.0",
+    "uuid": "^11.0.5"
   }
 }

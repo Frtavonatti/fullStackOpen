@@ -1,5 +1,8 @@
-const { ApolloServer } = require('@apollo/server')
-const { startStandaloneServer } = require('@apollo/server/standalone')
+import { ApolloServer } from '@apollo/server'
+import { startStandaloneServer } from '@apollo/server/standalone'
+import { GraphQLError } from 'graphql'
+import { v1 as uuid } from 'uuid'
+import gql from 'graphql-tag'
 
 let persons = [
   {
@@ -25,27 +28,92 @@ let persons = [
 ]
 
 const typeDefs = gql`
+  enum YesNo {  
+    YES  
+    NO
+  }
+
+  type Address {  
+    street: String!
+    city: String! 
+  }
+
   type Person {
     name: String!
     phone: String
-    street: String!
-    city: String! 
+    address: Address!
     id: ID!
   }
 
   type Query {
     personCount: Int!
-    allPersons: [Person!]!
+    allPersons(phone: YesNo): [Person!]!
     findPerson(name: String!): Person
+  }
+
+  type Mutation {
+    addPerson(
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
+    editNumber(    
+      name: String!    
+      phone: String!  
+    ): Person
   }
 `
 
 const resolvers = {
   Query: {
     personCount: () => persons.length,
-    allPersons: () => persons,
+    allPersons: (root, args) => {
+      if (!args.phone) {
+        return persons
+      }
+      const byPhone = (person) => 
+        args.phone === 'YES' ? person.phone : !person.phone
+      return persons.filter(byPhone)
+    },
     findPerson: (root, args) =>
       persons.find(p => p.name === args.name)
+  },
+  Person: {
+    address: (root) =>  {
+      return {
+        city: root.city,
+        street: root.street,
+      }
+    }
+  },
+  Mutation: {
+    addPerson: (root, args) => {
+      if (persons.find(p => p.name === args.name)) {
+        throw new GraphQLError('Name must be unique', {
+          extensions: {
+        code: 'BAD_USER_INPUT',
+        invalidArgs: args.name
+          }
+        })
+      }
+      
+      const person = {...args, id: uuid() } 
+      persons.concat(person)
+      return person
+    },
+    editNumber: (root, args) => {
+      const findPerson = persons.find(p => p.name === args.name)
+      if (!findPerson) {
+        return null
+      }
+      const updatedPerson = {
+        ...findPerson,
+          phone: args.phone
+      }
+      persons.map(p => p.name === args.name ? updatedPerson : p)
+      return updatedPerson
+    }
   }
 }
 
