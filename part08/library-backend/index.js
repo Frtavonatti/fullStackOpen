@@ -1,6 +1,7 @@
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
 import { gql } from 'apollo-server'
+import { v1 as uuid } from 'uuid'
 import { books, authors } from './data.js'
 
 const typeDefs = gql`
@@ -23,6 +24,14 @@ const typeDefs = gql`
     allBooks(author: String, genre: String): [Books],
     allAuthors: [Authors]
   }
+  type Mutation {
+    addBook(
+    title: String!,
+    published: Int!,
+    author: String!,
+    genres: [String],
+    ): Books
+  }
 `
 
 const resolvers = {
@@ -44,6 +53,16 @@ const resolvers = {
     bookCount: (root) => {
       return books.filter(book => book.author === root.name).length
     }
+  },
+  Mutation: {
+    addBook: (root, args) => {
+      const newBook = {
+        ...args,
+        id: uuid()
+      }
+      books.concat(newBook)
+      return newBook
+    } 
   } 
 }
 
