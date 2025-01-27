@@ -99,7 +99,7 @@
     }
     ```
 
-- [ ] **8.4: Libros de un autor**
+- [x] **8.4: Libros de un autor**
   - Modificar la consulta `allBooks` para aceptar un parámetro opcional `author` y devolver solo los libros escritos por ese autor.
   - La consulta:
     ```graphql
