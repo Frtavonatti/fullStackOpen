@@ -42,7 +42,7 @@ const EntryDetails: React.FC<Props> = ({ patient, diagnosis }) => {
             { entry.type === 'OccupationalHealthcare' && <Typography> Employer: {entry.employerName} </Typography> }
             <Typography> {entry.description} </Typography>
             <Typography> Diagnosed by: {entry.specialist} </Typography>
-            { entry.diagnosisCodes && <DiagnosesCodes diagnosis={diagnosis} codes={entry.diagnosisCodes}/> }
+            { entry.diagnosisCodes && entry.diagnosisCodes.length > 0 && <DiagnosesCodes diagnosis={diagnosis} codes={entry.diagnosisCodes}/> }
           </div>
         ))}
       </div>

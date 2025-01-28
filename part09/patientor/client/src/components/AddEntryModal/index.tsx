@@ -26,12 +26,7 @@ const AddEntryForm = ({ patient, setPatient }: AddEntryFormProps) => {
     const { name, value } = event.target;
 
     if (typeof name === 'string') {
-      if (name === 'diagnosisCodes') {
-        setFormState({
-          ...formState,
-          [name]: (value as string).split(',').map(code => code.trim())
-        });
-      } else if (name === 'healthCheckRating') {
+      if (name === 'healthCheckRating') {
         setFormState({
           ...formState,
           [name]: Number(value)
@@ -44,23 +39,28 @@ const AddEntryForm = ({ patient, setPatient }: AddEntryFormProps) => {
       }
     }
   };
+
+  // Fix: Ensure diagnosisCodes are included in the formState
   const handleSelectChange = (event: SelectChangeEvent<string[]>) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setFormState({
       ...formState,
-      [name as string]: value as string[]
+      diagnosisCodes: typeof value === 'string' ? value.split(',') : value
     });
   };
 
   const handleSubmit = async (event: React.SyntheticEvent) =>  {
     event.preventDefault();
     setErrorMessage(null);
+    console.log('FRONTEND REQUEST', formState); // Delete log
     
     try {
       const newEntry = await patientsService.addEntry(formState, patient.id);
       if (newEntry.error) {
         setErrorMessage(newEntry.error);
       } else {
+        console.log('BACKEND RESPONSE', newEntry); // Delete log
+        
         setPatient({
           ...patient,
           entries: patient.entries.concat(newEntry)

@@ -18,12 +18,19 @@ const parseString = (value: unknown): string => {
   return value;
 };
 
-const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
-  if (!object || typeof object !== 'object' || !('diagnosisCodes' in object)) {
-    // we will just trust the data to be in correct form
-    return [] as Array<Diagnosis['code']>;
+const parseDiagnosisCodes = (object: unknown): Array<Diagnosis["code"]> => {
+  if (!object) {
+    return [];
   }
-  return object.diagnosisCodes as Array<Diagnosis['code']>;
+  if (!Array.isArray(object)) {
+    throw new Error('Diagnosis codes must be an array');
+  }
+  object.forEach(code => {
+    if (!isString(code)) {
+      throw new Error(`Invalid diagnosis code: ${code}`);
+    }
+  });
+  return object as Array<Diagnosis["code"]>;
 };
 
 const isHealthCheckRating = (param: unknown): param is HealthCheckRating => {
@@ -63,7 +70,7 @@ const toNewBaseEntry = (object: any): Omit<BaseEntry, 'id'> => {
     date: parseString(object.date),
     specialist: parseString(object.specialist),
     description: parseString(object.description),
-    diagnosisCodes: object.diagnosisCodes ? parseDiagnosisCodes(object.diagnosisCodes) : undefined
+    diagnosisCodes: object.diagnosisCodes ? parseDiagnosisCodes(object.diagnosisCodes) : []
   };
   return newEntry;
 };

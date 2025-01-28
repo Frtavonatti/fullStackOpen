@@ -32,6 +32,7 @@ const AddEntryModal = ({ formState, handleChange, handleSelectChange }: addEntry
         onChange={handleChange}
         label="Description"
         variant="outlined"
+        required
       />
       <TextField
         id="date"
@@ -40,6 +41,7 @@ const AddEntryModal = ({ formState, handleChange, handleSelectChange }: addEntry
         value={formState.date}
         onChange={handleChange}
         variant="outlined"
+        required
       />
       <TextField
         id="specialist"
@@ -48,6 +50,7 @@ const AddEntryModal = ({ formState, handleChange, handleSelectChange }: addEntry
         onChange={handleChange}
         label="Specialist"
         variant="outlined"
+        required
       />
 
       <FormControl>
