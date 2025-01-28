@@ -13,14 +13,13 @@ router.get('/:id', (req, res) => {
   res.send(services.getIndividualPatient(id));
 });
 
-// TO-DO: Structure error handling
 router.post('/', (req, res) => {
   try {
     const newPatient = toNewPatient(req.body);
     const addedPatient = services.addPatient(newPatient);
     res.json(addedPatient);
   } catch (error) {
-    console.log(error);
+    res.json({ error: error instanceof Error ? error.message : 'Unknown error' });
   }
 });
 
@@ -30,7 +29,6 @@ router.get('/:id/entries', (req, res) => {
   res.json(entries);
 });
 
-// TO-DO: Structure error handling
 router.post('/:id/entries', (req, res) => {
   const id = req.params.id;
   try {
@@ -38,7 +36,7 @@ router.post('/:id/entries', (req, res) => {
     const addedEntry = services.addEntry(newEntry, id);
     res.json(addedEntry);
   } catch (error) {
-    console.log(error);
+    res.json({ error: error instanceof Error ? error.message : 'Unknown error' });
   }
 });
 

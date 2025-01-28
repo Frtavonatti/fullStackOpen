@@ -6,6 +6,8 @@ import PatientInfo from './PatientInfo';
 import EntryDetails from './EntryDetails';
 import { Patient, Diagnosis } from '../../types';
 
+import AddEntryForm from '../AddEntryModal';
+
 const PatientView = () => {  
   const { id } = useParams<{ id: string }>();
   const [patient, setPatient] = useState<Patient | null>(null);
@@ -37,6 +39,7 @@ const PatientView = () => {
     <div style={{marginTop: '4rem'}}>
       <PatientInfo patient={patient}/>
       <EntryDetails patient={patient} diagnosis={diagnosis}/>
+      <AddEntryForm patient={patient} setPatient={setPatient}/>
     </div>
   );
 };
