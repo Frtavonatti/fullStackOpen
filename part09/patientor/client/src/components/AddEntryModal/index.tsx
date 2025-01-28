@@ -2,15 +2,40 @@ import { useState } from "react";
 import { SelectChangeEvent } from "@mui/material/Select";
 import patientsService from "../../services/patients";
 import AddEntryModal from "./AddEntryModal";
-import { HealthCheckEntry, Patient } from "../../types";
+import { EntryWithoutId, Patient } from "../../types";
 
-const initialState: Omit<HealthCheckEntry, 'id'> = {
+const initialHealthCheckState: EntryWithoutId = {
+  type: "HealthCheck",
   description: '',
   date: '',
   specialist: '',
-  type: "HealthCheck" as const,
-  healthCheckRating: 0,
-  diagnosisCodes: [] as string[]
+  diagnosisCodes: [],
+  healthCheckRating: 0
+};
+
+const initialHospitalState: EntryWithoutId = {
+  type: "Hospital",
+  description: '',
+  date: '',
+  specialist: '',
+  diagnosisCodes: [],
+  discharge: {
+    date: '',
+    criteria: ''
+  }
+};
+
+const initialOccupationalHealthcareState: EntryWithoutId = {
+  type: "OccupationalHealthcare",
+  description: '',
+  date: '',
+  specialist: '',
+  diagnosisCodes: [],
+  employerName: '',
+  sickLeave: {
+    startDate: '',
+    endDate: ''
+  }
 };
 
 interface AddEntryFormProps {
@@ -19,7 +44,8 @@ interface AddEntryFormProps {
 }
 
 const AddEntryForm = ({ patient, setPatient }: AddEntryFormProps) => {
-  const [formState, setFormState] = useState(initialState);
+  const [formState, setFormState] = useState(initialHealthCheckState);
+  const [entryType, setEntryType] = useState('HealthCheck');
   const [errorMessage, setErrorMessage] = useState(null);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | { name?: string; value: unknown }>) => {
@@ -40,7 +66,24 @@ const AddEntryForm = ({ patient, setPatient }: AddEntryFormProps) => {
     }
   };
 
-  // Fix: Ensure diagnosisCodes are included in the formState
+  const handleEntryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setEntryType(value);
+
+    switch(value) {
+      case 'Hospital':
+        setFormState(initialHospitalState);
+        break;
+      case 'OccupationalHealthcare':
+        setFormState(initialOccupationalHealthcareState);
+        break;
+        case 'HealthCheck':
+        default:
+          setFormState(initialHealthCheckState);
+          break;
+    }
+  };
+
   const handleSelectChange = (event: SelectChangeEvent<string[]>) => {
     const { value } = event.target;
     setFormState({
@@ -52,15 +95,12 @@ const AddEntryForm = ({ patient, setPatient }: AddEntryFormProps) => {
   const handleSubmit = async (event: React.SyntheticEvent) =>  {
     event.preventDefault();
     setErrorMessage(null);
-    console.log('FRONTEND REQUEST', formState); // Delete log
     
     try {
       const newEntry = await patientsService.addEntry(formState, patient.id);
       if (newEntry.error) {
         setErrorMessage(newEntry.error);
       } else {
-        console.log('BACKEND RESPONSE', newEntry); // Delete log
-        
         setPatient({
           ...patient,
           entries: patient.entries.concat(newEntry)
@@ -69,7 +109,7 @@ const AddEntryForm = ({ patient, setPatient }: AddEntryFormProps) => {
     } catch (error) {
       console.log(error);
     } finally {
-      setFormState(initialState);
+      setFormState(initialHealthCheckState);
     }
   };
 
@@ -84,7 +124,13 @@ const AddEntryForm = ({ patient, setPatient }: AddEntryFormProps) => {
   return (
     <form onSubmit={handleSubmit} style={formStyles}>
       {errorMessage && <h3 style={{color: 'red'}}>{errorMessage}</h3>}
-      <AddEntryModal formState={formState} handleChange={handleChange} handleSelectChange={handleSelectChange}/>
+      <AddEntryModal 
+        formState={formState} 
+        entryType={entryType}
+        handleChange={handleChange} 
+        handleSelectChange={handleSelectChange}
+        handleEntryChange= {handleEntryChange}
+      />
     </form>
   );
 };
