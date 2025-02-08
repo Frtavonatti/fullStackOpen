@@ -99,7 +99,7 @@ const resolvers = {
       }
       
       const person = {...args, id: uuid() } 
-      persons.concat(person)
+      persons.push(person)
       return person
     },
     editNumber: (root, args) => {
@@ -111,7 +111,8 @@ const resolvers = {
         ...findPerson,
           phone: args.phone
       }
-      persons.map(p => p.name === args.name ? updatedPerson : p)
+      // persons.map(p => p.name === args.name ? updatedPerson : p)
+      persons = persons.map(p => (p.name === args.name ? updatedPerson : p)); // Assign the result of map back to persons
       return updatedPerson
     }
   }
