@@ -1,0 +1,22 @@
+{
+  "name": "library-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "frtavonatti",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@apollo/server": "^4.11.3",
+    "apollo-server": "^3.13.0",
+    "graphql": "^16.10.0",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
