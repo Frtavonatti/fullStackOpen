@@ -66,7 +66,7 @@ const resolvers = {
         ...args,
         id: uuid()
       }
-      books.concat(newBook)
+      books.push(newBook)
       return newBook
     }, 
     editAuthor: (root, args) => {

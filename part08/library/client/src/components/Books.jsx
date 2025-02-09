@@ -3,7 +3,7 @@ import { GET_BOOKS } from "../querys"
 
 const Books = (props) => {
   const { loading, data } = useQuery(GET_BOOKS)
-  const books = data.allBooks
+  const books = data ? data.allBooks : []
 
   if (!props.show) {
     return null
