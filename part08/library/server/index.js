@@ -70,16 +70,16 @@ const resolvers = {
       return newBook
     }, 
     editAuthor: (root, args) => {
-      const author = authors.find((a) => a.name === args.name)
-      if (!author) {
-        return null
+      const authorIndex = authors.findIndex((a) => a.name === args.name);
+      if (authorIndex === -1) {
+        return null;
       }
-      const editedAuthor = {
-        ...author,
+      const updatedAuthor = {
+        ...authors[authorIndex],
         born: args.setBornTo
-      }
-      authors.map((a) => a.name === args.name ? editedAuthor : a)
-      return editedAuthor
+      };
+      authors[authorIndex] = updatedAuthor;
+      return updatedAuthor;
     }
   } 
 }
