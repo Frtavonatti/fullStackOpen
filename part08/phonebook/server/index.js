@@ -1,8 +1,26 @@
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
-import { GraphQLError } from 'graphql'
-import { v1 as uuid } from 'uuid'
+// import { GraphQLError } from 'graphql'
+// import { v1 as uuid } from 'uuid'
 import gql from 'graphql-tag'
+import mongoose from 'mongoose'
+import jwt from 'jsonwebtoken'
+import 'dotenv/config'
+import Person from './models/person.js'
+
+
+mongoose.set('strictQuery', false)
+
+const MONGODB_URI = process.env.MONGODB_URI
+
+console.log('connecting to', MONGODB_URI)
+mongoose.connect(MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
 
 let persons = [
   {
@@ -45,10 +63,21 @@ const typeDefs = gql`
     id: ID!
   }
 
+  type User {
+  username: String!
+  friends: [Person!]!
+  id: ID!
+  }
+
+  type Token {
+    value: String!
+  }
+
   type Query {
     personCount: Int!
     allPersons(phone: YesNo): [Person!]!
     findPerson(name: String!): Person
+    me: User
   }
 
   type Mutation {
@@ -58,63 +87,102 @@ const typeDefs = gql`
       street: String!
       city: String!
     ): Person
+
     editNumber(    
       name: String!    
       phone: String!  
     ): Person
+
+    createUser(
+      username: String!
+    ): User
+
+    login(
+      username: String!
+      password: String!
+    ): Token
   }
 `
 
 const resolvers = {
   Query: {
-    personCount: () => persons.length,
-    allPersons: (root, args) => {
+    personCount: async () => Person.collection.countDocuments(),
+    allPersons: async (root, args) => {
       if (!args.phone) {
-        return persons
+        return Person.find({})
       }
-      const byPhone = (person) => 
-        args.phone === 'YES' ? person.phone : !person.phone
-      return persons.filter(byPhone)
+      return Person.find({ phone: {$exists: args.phone === 'YES'}})
     },
-    findPerson: (root, args) =>
-      persons.find(p => p.name === args.name)
+    findPerson: async (root, args) => Person.findOne({ name: args.name }),
   },
   Person: {
-    address: (root) =>  {
+    address: (root) => {
       return {
-        city: root.city,
         street: root.street,
+        city: root.city,
       }
-    }
+    },
   },
+
   Mutation: {
-    addPerson: (root, args) => {
-      if (persons.find(p => p.name === args.name)) {
-        throw new GraphQLError('Name must be unique', {
-          extensions: {
-        code: 'BAD_USER_INPUT',
-        invalidArgs: args.name
-          }
+    addPerson: async (root, args) => {
+        const person = new Person({ ...args })
+  
+        try {
+          await person.save()
+        } catch (error) {
+          throw new UserInputError(error.message, {
+            invalidArgs: args,
+          })
+        }
+        return person
+    },
+
+    editNumber: async (root, args) => {
+      const person = await Person.findOne({ name: args.name })
+      person.phone = args.phone
+
+      try {
+        await person.save()
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
         })
       }
-      
-      const person = {...args, id: uuid() } 
-      persons.push(person)
       return person
     },
-    editNumber: (root, args) => {
-      const findPerson = persons.find(p => p.name === args.name)
-      if (!findPerson) {
-        return null
+
+    createUser: async (root, args) => {
+      const user = new User({ username: args.username })
+  
+      return user.save()
+        .catch(error => {
+          throw new GraphQLError('Creating the user failed', {
+            extensions: {
+              code: 'BAD_USER_INPUT',
+              invalidArgs: args.name,
+              error
+            }
+          })
+        })
+    },
+
+    login: async (root, args) => {
+      const user = await User.findOne({ username: args.username })
+  
+      if ( !user || args.password !== 'secret' ) {
+        throw new GraphQLError('wrong credentials', {
+          extensions: {
+            code: 'BAD_USER_INPUT'
+          }
+        })        
       }
-      const updatedPerson = {
-        ...findPerson,
-          phone: args.phone
+      const userForToken = {
+        username: user.username,
+        id: user._id,
       }
-      // persons.map(p => p.name === args.name ? updatedPerson : p)
-      persons = persons.map(p => (p.name === args.name ? updatedPerson : p)); // Assign the result of map back to persons
-      return updatedPerson
-    }
+      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
+    },
   }
 }
 
@@ -125,6 +193,16 @@ const server = new ApolloServer({
 
 startStandaloneServer(server, {
   listen: { port: 4000 },
+  // The object returned by the context is given to all resolvers as their third parameter.
+  context: async ({ req, res }) => {
+    const auth = req ? req.headers.authorization : null
+    if (auth && auth.startsWith('Bearer ')) {
+      const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)   
+      const currentUser = await User
+        .findById(decodedToken.id).populate('friends')
+      return { currentUser }    
+    }  
+  },
 }).then(({ url }) => {
   console.log(`Server ready at ${url}`)
 })
