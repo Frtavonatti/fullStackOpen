@@ -4,7 +4,7 @@ import { books } from '../data.js'
 
 const resolvers = {
   Query: query,
-  Authors: {
+  Author: {
     bookCount: (root) => {
       return books.filter(book => book.author === root.name).length
     }
