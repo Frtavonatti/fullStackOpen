@@ -1,12 +1,14 @@
 import query from './resolvers/query.js'
 import mutation from './resolvers/mutation.js'
-import { books } from '../data.js'
+import Book from '../models/book.js'
 
 const resolvers = {
   Query: query,
   Author: {
-    bookCount: (root) => {
-      return books.filter(book => book.author === root.name).length
+    // Pending to fix
+    bookCount: async (root) => {
+      const result = await Book.countDocuments({ author: root._id })
+      return result
     }
   },
   Mutation: mutation

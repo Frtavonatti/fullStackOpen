@@ -1,18 +1,21 @@
-import { books, authors } from "../../data.js"
+import Book from '../../models/book.js'
+import Author from '../../models/author.js'
 
 const query = {
-  bookCount: () => books.length,
-  authorCount: () => authors.length,
-  allBooks: (root, args) => {
+  bookCount: () => Book.collection.countDocuments(),
+  authorCount: () => Author.collection.countDocuments(),
+  allBooks: async (root, args) => {
     if (!args.author && !args.genre) {
-      return books
-    } else if (args.author) {
-      return books.filter((book) => book.author === args.author)
+      return await Book.find({})
     } else if (args.genre) {
-      return books.filter((book) => book.genres.includes(args.genre))
+      return await Book.find({ genres: { $in: [args.genre] } })
+    
+    // Pending to fix
+    } else if (args.author) {
+      return await Book.find({ author: args.author })
     }
   },
-  allAuthors: () => authors
+  allAuthors: async () => await Author.find({})
 }
 
 export default query

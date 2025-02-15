@@ -1,26 +1,41 @@
-import { v1 as uuid } from 'uuid'
-import { books, authors } from "../../data.js"
+import Book from '../../models/book.js'
+import Author from '../../models/author.js'
 
 const mutation = {
-  addBook: (root, args) => {
-    const newBook = {
-      ...args,
-      id: uuid()
+  addBook: async (root, args) => {
+    try {
+      let author = await Author.findOne({ name: args.author })
+      if (!author) {
+        author = new Author({ name: args.author })
+        await author.save()
+      }
+      
+      const book = new Book({ 
+        ...args, 
+        author: author._id 
+      })
+
+      // Populate allows a return query of name
+      await book.populate('author', 'name')
+  
+      return await book.save()
+    } catch (error) {
+      throw new Error(error.message)
     }
-    books.push(newBook)
-    return newBook
-  }, 
-  editAuthor: (root, args) => {
-    const authorIndex = authors.findIndex((a) => a.name === args.name);
-    if (authorIndex === -1) {
-      return null;
+  },
+
+  addAuthor: async (root, args) => {
+    const author = new Author({ ...args })
+    return await author.save()
+  },
+
+  editAuthor: async (root, args) => {
+    const author = await Author.findOne({ name: args.name })
+    if (!author) {
+      return null
     }
-    const updatedAuthor = {
-      ...authors[authorIndex],
-      born: args.setBornTo
-    };
-    authors[authorIndex] = updatedAuthor;
-    return updatedAuthor;
+    author.born = args.setBornTo
+    return await author.save()
   }
 } 
 
