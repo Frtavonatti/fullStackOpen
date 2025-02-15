@@ -1,6 +1,7 @@
 import { test, before, beforeEach, after } from 'node:test'
 import assert from 'assert'
 import mongoose from 'mongoose'
+import User from '../../models/user.js'
 import Book from '../../models/book.js'
 import Author from '../../models/author.js'
 import mutation from './mutation.js'
@@ -19,6 +20,7 @@ after(async () => {
 beforeEach(async () => {
   await Book.deleteMany({})
   await Author.deleteMany({})
+  await User.deleteMany({})
 })
 
 test('addBook creates a new book and author if author does not exist', async () => {
@@ -78,4 +80,29 @@ test('editAuthor updates an existing author', async () => {
 
   const updatedAuthor = await mutation.editAuthor(null, args)
   assert.strictEqual(updatedAuthor.born, args.setBornTo)
+})
+
+test('createUser creates a new user', async () => {
+  const args = {
+    username: 'testuser',
+    password: 'testpassword',
+    favoriteGenre: 'programming'
+  }
+
+  const user = await mutation.createUser(null, args)
+  assert.strictEqual(user.username, args.username)
+  assert.strictEqual(user.favoriteGenre, args.favoriteGenre)
+})
+
+test.only('login returns a token', async () => {
+  const args = { 
+    username: 'testuser', 
+    password: 'testpassword',
+    favoriteGenre: 'programming'
+  }
+
+  await mutation.createUser(null, args)
+
+  const token = await mutation.login(null, args)
+  assert(token.value)
 })

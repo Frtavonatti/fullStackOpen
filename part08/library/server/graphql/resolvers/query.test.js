@@ -8,7 +8,7 @@ import 'dotenv/config.js'
 
 before(async () => {
   const url = process.env.MONGODB_TEST_URI
-  await mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+  await mongoose.connect(url)
 })
 
 after(async () => {
@@ -51,4 +51,10 @@ test('allBooks returns books filtered by author', async () => {
 test('allAuthors returns all authors', async () => {
   const authors = await query.allAuthors()
   assert.strictEqual(authors.length, await Author.collection.countDocuments())
+})
+
+test('me returns the current user', async () => {
+  const user = { username: 'test', favoriteGenre: 'test' }
+  const currentUser = query.me(null, null, { currentUser: user })
+  assert.deepStrictEqual(currentUser, user)
 })

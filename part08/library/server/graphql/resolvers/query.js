@@ -15,7 +15,8 @@ const query = {
       return await Book.find({ author: args.author })
     }
   },
-  allAuthors: async () => await Author.find({})
+  allAuthors: async () => await Author.find({}),
+  me: (root, args, context) => context.currentUser
 }
 
 export default query
