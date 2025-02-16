@@ -16,14 +16,21 @@ const PersonForm = ({ setError }) => {
   }
 
   const [createPerson] = useMutation(CREATE_PERSON, {
-    refetchQueries: [{ query: ALL_PERSONS }],
     onCompleted: () => {
       resetForm()
       setTimeout(() => setError(null), 5000)
     },
     onError: (error) => {
       setError(error.graphQLErrors[0]?.message || 'Error creating person')
-    }
+    },
+    // refetchQueries: [{ query: ALL_PERSONS }],
+    update: (cache, response) => {
+      cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
+        return {
+          allPersons: allPersons.concat(response.data.addPerson),
+        }
+      })
+    },
   })
 
   const submit = async (event) => {
