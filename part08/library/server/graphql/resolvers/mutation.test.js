@@ -1,4 +1,4 @@
-import { test, before, beforeEach, after } from 'node:test'
+import { test, before, beforeEach, after, only } from 'node:test'
 import assert from 'assert'
 import mongoose from 'mongoose'
 import User from '../../models/user.js'
@@ -24,6 +24,19 @@ beforeEach(async () => {
 })
 
 test('addBook creates a new book and author if author does not exist', async () => {
+  const userArgs = { 
+    username: 'testuser', 
+    password: 'testpassword',
+    favoriteGenre: 'programming'
+  }
+
+  await mutation.createUser(null, userArgs)
+  await mutation.login(null, userArgs)
+
+  const context = {
+    currentUser: await User.findOne({ username: userArgs.username })
+  }
+
   const args = {
     title: 'Clean Code',
     published: 2008,
@@ -31,7 +44,7 @@ test('addBook creates a new book and author if author does not exist', async () 
     genres: ['programming']
   }
 
-  const book = await mutation.addBook(null, args)
+  const book = await mutation.addBook(null, args, context)
   assert.strictEqual(book.title, args.title)
   assert.strictEqual(book.published, args.published)
   assert.strictEqual(book.genres[0], args.genres[0])
@@ -41,6 +54,19 @@ test('addBook creates a new book and author if author does not exist', async () 
 })
 
 test('addBook creates a new book with existing author', async () => {
+  const userArgs = { 
+    username: 'testuser', 
+    password: 'testpassword',
+    favoriteGenre: 'programming'
+  }
+
+  await mutation.createUser(null, userArgs)
+  await mutation.login(null, userArgs)
+
+  const context = {
+    currentUser: await User.findOne({ username: userArgs.username })
+  }
+
   const author = new Author({ name: 'Robert Martin' })
   await author.save()
 
@@ -51,7 +77,7 @@ test('addBook creates a new book with existing author', async () => {
     genres: ['programming']
   }
 
-  const book = await mutation.addBook(null, args)
+  const book = await mutation.addBook(null, args, context)
   assert.strictEqual(book.title, args.title)
   assert.strictEqual(book.published, args.published)
   assert.strictEqual(book.genres[0], args.genres[0])
@@ -70,6 +96,19 @@ test('addAuthor creates a new author', async () => {
 })
 
 test('editAuthor updates an existing author', async () => {
+  const userArgs = { 
+    username: 'testuser', 
+    password: 'testpassword',
+    favoriteGenre: 'programming'
+  }
+
+  await mutation.createUser(null, userArgs)
+  await mutation.login(null, userArgs)
+
+  const context = {
+    currentUser: await User.findOne({ username: userArgs.username })
+  }
+
   const author = new Author({ name: 'Martin Fowler', born: 1963 })
   await author.save()
 
@@ -78,23 +117,24 @@ test('editAuthor updates an existing author', async () => {
     setBornTo: 1964
   }
 
-  const updatedAuthor = await mutation.editAuthor(null, args)
+  const updatedAuthor = await mutation.editAuthor(null, args, context)
   assert.strictEqual(updatedAuthor.born, args.setBornTo)
 })
 
 test('createUser creates a new user', async () => {
-  const args = {
-    username: 'testuser',
+  const args = { 
+    username: 'testuser', 
     password: 'testpassword',
     favoriteGenre: 'programming'
   }
 
   const user = await mutation.createUser(null, args)
+
   assert.strictEqual(user.username, args.username)
   assert.strictEqual(user.favoriteGenre, args.favoriteGenre)
 })
 
-test.only('login returns a token', async () => {
+test('login returns a token', async () => {
   const args = { 
     username: 'testuser', 
     password: 'testpassword',

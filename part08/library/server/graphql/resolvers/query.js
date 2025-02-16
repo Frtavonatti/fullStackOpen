@@ -16,6 +16,8 @@ const query = {
     }
   },
   allAuthors: async () => await Author.find({}),
+
+  // Fix
   me: (root, args, context) => context.currentUser
 }
 

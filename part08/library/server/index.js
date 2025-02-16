@@ -5,12 +5,15 @@ import jwt from 'jsonwebtoken'
 import 'dotenv/config'
 import resolvers from './graphql/index.js'
 import typeDefs from './graphql/typeDefs.js'
+import User from './models/user.js'
 
-console.log('Connecting to', process.env.MONGODB_URI)
-mongoose.connect(process.env.MONGODB_URI).then(() => {
-  console.log('Connected to MongoDB')
+const url = process.env.MONGODB_URI
+console.log('Connecting to', url)
+mongoose.connect(url)
+  .then(() => {
+    console.log('Connected to MongoDB')
 }).catch((error) => {
-  console.error('Error connecting to MongoDB:', error.message)
+    console.error('Error connecting to MongoDB:', error.message)
 })
 
 const server = new ApolloServer({
@@ -23,13 +26,17 @@ startStandaloneServer(server, {
   context: async ({ req, res }) => {
     const auth = req ? req.headers.authorization : null
     if (auth && auth.startsWith('Bearer ')) {
-      const decodedToken = jwt.verify(
-        auth.substring(7), process.env.JWT_SECRET
-      )
-      const currentUser = await User
-        .findById(decodedToken.id).populate('friends')
-      return { currentUser }
+      try {
+        const decodedToken = jwt.verify(
+          auth.substring(7), process.env.JWT_SECRET
+        )
+        const currentUser = await User.findById(decodedToken.id)
+        return { currentUser }
+      } catch (error) {
+        console.error('Error verifying token:', error)
+      }
     }
+    return {}
   },
 }).then(({ url }) => {
   console.log(`Server ready at ${url}`)

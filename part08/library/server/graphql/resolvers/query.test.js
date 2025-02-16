@@ -3,6 +3,7 @@ import assert from 'assert'
 import mongoose from 'mongoose'
 import Book from '../../models/book.js'
 import Author from '../../models/author.js'
+import mutation from './mutation.js'
 import query from './query.js'
 import 'dotenv/config.js'
 
@@ -38,7 +39,7 @@ test('allBooks returns books filtered by genre', async () => {
   })
 })
 
-// TEST FAILS
+// THIS TEST FAILS: PENDING TO FIX
 test('allBooks returns books filtered by author', async () => {
   const authorName = 'Robert Martin'
   const author = await Author.findOne({ name: authorName })
@@ -54,7 +55,22 @@ test('allAuthors returns all authors', async () => {
 })
 
 test('me returns the current user', async () => {
-  const user = { username: 'test', favoriteGenre: 'test' }
-  const currentUser = query.me(null, null, { currentUser: user })
-  assert.deepStrictEqual(currentUser, user)
+  const user = { 
+    username: 'test',
+    password: 'password',  
+    favoriteGenre: 'test' 
+  }
+  
+  await mutation.createUser(null, user)
+  const { value: token } = await mutation.login(null, user)
+
+  const context = {
+    headers: {
+      authorization: `Bearer ${token}`
+    }
+  }
+
+  const currentUser = await query.me(null, null, context)
+  assert.deepStrictEqual(currentUser.username, user.username)
+  assert.deepStrictEqual(currentUser.favoriteGenre, user.favoriteGenre)
 })

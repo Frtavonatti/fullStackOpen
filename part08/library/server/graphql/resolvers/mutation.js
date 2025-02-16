@@ -6,8 +6,18 @@ import errorHandler from '../../middleware/errorHandler.js'
 import { GraphQLError } from 'graphql'
 
 const mutation = {
-  addBook: async (root, args) => errorHandler(async () => {
+  addBook: async (root, args, context) => errorHandler(async () => {
     let author = await Author.findOne({ name: args.author })
+    const currentUser = context.currentUser
+
+    if (!currentUser) {
+      throw new GraphQLError('Not authenticated', {
+        extensions: {
+          code: 'UNAUTHENTICATED'
+        }
+      })
+    }
+    
     if (!author) {
       author = new Author({ name: args.author })
       await author.save()
@@ -18,8 +28,7 @@ const mutation = {
       author: author._id 
     })
 
-    // Populate allows a return query of name
-    await book.populate('author', 'name')
+    await book.populate('author', 'name') // Populate allows a return query of name
 
     return await book.save()
   }, root, args),
@@ -29,8 +38,18 @@ const mutation = {
     return await author.save()
   }, root, args),
 
-  editAuthor: async (root, args) => errorHandler(async () => {
+  editAuthor: async (root, args, context) => errorHandler(async () => {
     const author = await Author.findOne({ name: args.name })
+    const currentUser = context.currentUser
+
+    if (!currentUser) {
+      throw new GraphQLError('Not authenticated', {
+        extensions: {
+          code: 'UNAUTHENTICATED'
+        }
+      })
+    }
+    
     if (!author) {
       throw new GraphQLError('Author not found', {
         extensions: {
