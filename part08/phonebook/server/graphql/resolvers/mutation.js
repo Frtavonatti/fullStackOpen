@@ -6,7 +6,7 @@ import User from '../../models/user.js'
 const mutation = {
   addPerson: async (root, args, context) => {
     const person = new Person({ ...args })
-    const currentUser = context.currentUser
+    const currentUser = context.currentUser    
 
     if (!currentUser) {
       throw new GraphQLError('not authenticated', {

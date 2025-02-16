@@ -38,7 +38,7 @@ beforeEach(async () => {
   await mutation.login(null, userArgs)
 })
 
-test.only('addBook creates a new book and author if author does not exist', async () => {
+test('addBook creates a new book and author if author does not exist', async () => {
   const context = await getContext();
 
   const args = {

@@ -19,7 +19,6 @@ const PersonForm = ({ setError }) => {
     refetchQueries: [{ query: ALL_PERSONS }],
     onCompleted: () => {
       resetForm()
-      // setError('Person created successfully!')
       setTimeout(() => setError(null), 5000)
     },
     onError: (error) => {
@@ -39,10 +38,10 @@ const PersonForm = ({ setError }) => {
       await createPerson({
         variables: {
           name: name.trim(),
-          phone: phone.trim(),
+          phone: phone.length > 0 ? phone.trim() : undefined,
           street: street.trim(),
           city: city.trim()
-        }
+        },
       })
     } catch (error) {
       console.error(error);
@@ -58,6 +57,7 @@ const PersonForm = ({ setError }) => {
           name * <input 
             value={name}
             onChange={({ target }) => setName(target.value)}
+            placeholder="name"
             required
           />
         </div>
@@ -65,12 +65,14 @@ const PersonForm = ({ setError }) => {
           phone <input 
             value={phone}
             onChange={({ target }) => setPhone(target.value)}
+            placeholder="phone"
           />
         </div>
         <div>
           street * <input 
             value={street}
             onChange={({ target }) => setStreet(target.value)}
+            placeholder="street"
             required
           />
         </div>
@@ -78,6 +80,7 @@ const PersonForm = ({ setError }) => {
           city * <input 
             value={city}
             onChange={({ target }) => setCity(target.value)}
+            placeholder="city"
             required
           />
         </div>
