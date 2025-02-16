@@ -7,10 +7,23 @@ import Author from '../../models/author.js'
 import mutation from './mutation.js'
 import 'dotenv/config'
 
+// Utils
+const userArgs = { 
+  username: 'testuser', 
+  password: 'testpassword',
+  favoriteGenre: 'programming'
+}
+
+const getContext = async () => {
+  return {
+    currentUser: await User.findOne({ username: 'testuser' })
+  }
+}
+
+// Setup
 before(async () => {
   const url = process.env.MONGODB_TEST_URI
   await mongoose.connect(url)
-  console.log(`Connected to MongoDB on: ${url}`)
 })
 
 after(async () => {
@@ -21,21 +34,12 @@ beforeEach(async () => {
   await Book.deleteMany({})
   await Author.deleteMany({})
   await User.deleteMany({})
-})
-
-test('addBook creates a new book and author if author does not exist', async () => {
-  const userArgs = { 
-    username: 'testuser', 
-    password: 'testpassword',
-    favoriteGenre: 'programming'
-  }
-
   await mutation.createUser(null, userArgs)
   await mutation.login(null, userArgs)
+})
 
-  const context = {
-    currentUser: await User.findOne({ username: userArgs.username })
-  }
+test.only('addBook creates a new book and author if author does not exist', async () => {
+  const context = await getContext();
 
   const args = {
     title: 'Clean Code',
@@ -54,18 +58,7 @@ test('addBook creates a new book and author if author does not exist', async () 
 })
 
 test('addBook creates a new book with existing author', async () => {
-  const userArgs = { 
-    username: 'testuser', 
-    password: 'testpassword',
-    favoriteGenre: 'programming'
-  }
-
-  await mutation.createUser(null, userArgs)
-  await mutation.login(null, userArgs)
-
-  const context = {
-    currentUser: await User.findOne({ username: userArgs.username })
-  }
+  const context = await getContext();
 
   const author = new Author({ name: 'Robert Martin' })
   await author.save()
@@ -96,18 +89,7 @@ test('addAuthor creates a new author', async () => {
 })
 
 test('editAuthor updates an existing author', async () => {
-  const userArgs = { 
-    username: 'testuser', 
-    password: 'testpassword',
-    favoriteGenre: 'programming'
-  }
-
-  await mutation.createUser(null, userArgs)
-  await mutation.login(null, userArgs)
-
-  const context = {
-    currentUser: await User.findOne({ username: userArgs.username })
-  }
+  const context = await getContext();
 
   const author = new Author({ name: 'Martin Fowler', born: 1963 })
   await author.save()
@@ -123,9 +105,9 @@ test('editAuthor updates an existing author', async () => {
 
 test('createUser creates a new user', async () => {
   const args = { 
-    username: 'testuser', 
+    username: 'anotheruser', 
     password: 'testpassword',
-    favoriteGenre: 'programming'
+    favoriteGenre: 'fiction'
   }
 
   const user = await mutation.createUser(null, args)
@@ -135,14 +117,6 @@ test('createUser creates a new user', async () => {
 })
 
 test('login returns a token', async () => {
-  const args = { 
-    username: 'testuser', 
-    password: 'testpassword',
-    favoriteGenre: 'programming'
-  }
-
-  await mutation.createUser(null, args)
-
-  const token = await mutation.login(null, args)
+  const token = await mutation.login(null, userArgs)
   assert(token.value)
 })
