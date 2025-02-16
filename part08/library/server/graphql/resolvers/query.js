@@ -5,19 +5,21 @@ const query = {
   bookCount: () => Book.collection.countDocuments(),
   authorCount: () => Author.collection.countDocuments(),
   allBooks: async (root, args) => {
-    if (!args.author && !args.genre) {
-      return await Book.find({})
-    } else if (args.genre) {
-      return await Book.find({ genres: { $in: [args.genre] } })
+    let query = {}
     
-    // Pending to fix
-    } else if (args.author) {
-      return await Book.find({ author: args.author })
+    if (args?.genre) {
+      query.genres = { $in: [args.genre] }
     }
+    
+    if (args?.author) {
+      const author = await Author.findOne({ name: args.author })
+      if (author) {
+        query.author = author._id
+      }
+    }
+    return await Book.find(query).populate('author')
   },
   allAuthors: async () => await Author.find({}),
-
-  // Fix
   me: (root, args, context) => context.currentUser
 }
 

@@ -3,6 +3,7 @@ const typeDefs = `#graphql
     name: String!,
     born: Int,
     bookCount: Int
+    id: ID
   },
 
   type Book {
@@ -10,12 +11,13 @@ const typeDefs = `#graphql
     published: Int!,
     author: Author!,
     genres: [String],
+    id: ID
   },
 
   type User {
     username: String!
     favoriteGenre: String!
-    # id: ID!
+    id: ID
   }
 
   type Token {
