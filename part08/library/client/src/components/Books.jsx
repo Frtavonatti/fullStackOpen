@@ -3,17 +3,15 @@ import { useState } from "react"
 import { GET_BOOKS } from "../querys"
 
 const Books = (props) => {
-  const { loading, data } = useQuery(GET_BOOKS)
-  const books = data ? data.allBooks : []
   const [ genre, setGenre ] = useState(null)
+  
+  const { loading, data } = useQuery(GET_BOOKS, {
+    variables: { genre: genre || "" }
+  })
 
   const handleClick = (event) => {
     setGenre(event.target.value.toLowerCase())
   }
-
-  const booksToShow = genre === null 
-    ? books 
-    : books.filter((book) => book.genres.includes(genre))
   
   if (!props.show) {
     return null
@@ -22,6 +20,8 @@ const Books = (props) => {
   if (loading) {
     return 'Loading...'
   }
+
+  const books = data?.allBooks
 
   return (
     <div>
@@ -34,7 +34,7 @@ const Books = (props) => {
             <th>author</th>
             <th>published</th>
           </tr>
-          {booksToShow.map((a) => (
+          {books.map((a) => (
             <tr key={a.title}>
               <td>{a.title}</td>
               <td>{a.author.name}</td>

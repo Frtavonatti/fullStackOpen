@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/client"
-import { GET_BOOKS_BY_GENRE, GET_USER } from "../querys"
+import { GET_BOOKS, GET_USER } from "../querys"
 
 const Recommend = (props) => {
   const { loading: loadingUser, data: userData } = useQuery(GET_USER)
 
   const favouriteGenre = userData?.me?.favoriteGenre
-  const { loading: loadingBooks, data: booksData } = useQuery(GET_BOOKS_BY_GENRE, { 
+  const { loading: loadingBooks, data: booksData } = useQuery(GET_BOOKS, { 
     variables: { genre: favouriteGenre} 
   })
 
