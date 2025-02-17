@@ -5,8 +5,6 @@ const Books = (props) => {
   const { loading, data } = useQuery(GET_BOOKS)
   const books = data ? data.allBooks : []
 
-  console.log(books);
-
   if (!props.show) {
     return null
   }
