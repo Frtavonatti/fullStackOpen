@@ -2,26 +2,24 @@ import { useQuery } from "@apollo/client"
 import { useState } from "react"
 import { GET_BOOKS } from "../querys"
 
+
 const Books = (props) => {
   const [ genre, setGenre ] = useState(null)
   
-  const { loading, data } = useQuery(GET_BOOKS, {
-    variables: { genre: genre || "" }
+  const { loading, data, error } = useQuery(GET_BOOKS, {
+    variables: { genre }
   })
 
   const handleClick = (event) => {
     setGenre(event.target.value.toLowerCase())
   }
   
-  if (!props.show) {
-    return null
-  }
-
-  if (loading) {
-    return 'Loading...'
-  }
-
-  const books = data?.allBooks
+  if (!props.show) return null
+  if (loading) return 'Loading...'
+  if (error) return `Error: ${error.message}`
+  if (!data) return 'No data available'
+  
+  const books = data ? data.allBooks : []
 
   return (
     <div>

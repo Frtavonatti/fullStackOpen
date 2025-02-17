@@ -4,7 +4,28 @@ import { CREATE_BOOK, GET_BOOKS } from '../querys'
 
 const NewBook = (props) => {
   const [ createBook ] = useMutation(CREATE_BOOK, {
-    refetchQueries: [{ query: GET_BOOKS }]
+    update: (store, response) => {
+      try {
+        // Read query with null genre to get all books
+        const dataInStore = store.readQuery({ 
+          query: GET_BOOKS,
+          variables: { genre: null }
+        })
+        
+        if (dataInStore) {
+          store.writeQuery({
+            query: GET_BOOKS,
+            variables: { genre: null },
+            data: {
+              ...dataInStore,
+              allBooks: [ ...dataInStore.allBooks, response.data.addBook ]
+            }
+          })
+        }
+      } catch (error) {
+        console.log('Error updating cache:', error)
+      }
+    }
   })
 
   const [title, setTitle] = useState('')
