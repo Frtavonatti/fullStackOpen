@@ -3,6 +3,7 @@ import LoginForm from "./components/LoginForm";
 import Authors from "./components/Authors";
 import Books from "./components/Books";
 import NewBook from "./components/NewBook";
+import Recommend from "./components/Recommend";
 import Notification from "./components/Notification";
 
 const App = () => {
@@ -52,6 +53,7 @@ const App = () => {
         <button onClick={() => setPage("authors")}>authors</button>
         <button onClick={() => setPage("books")}>books</button>
         <button onClick={() => setPage("add")}>add book</button>
+        <button onClick={() => setPage("recommend")}>recommend</button>
         <button onClick={handleLogout}>logout</button>
       </div>
 
@@ -59,6 +61,7 @@ const App = () => {
       <Authors show={page === "authors"} />
       <Books show={page === "books"} />
       <NewBook show={page === "add"} />
+      <Recommend show={page === "recommend"} />
     </div>
   );
 };
