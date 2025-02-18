@@ -61,6 +61,10 @@ const typeDefs = gql`
       password: String!
     ): Token
   }
+
+  type Subscription {
+    personAdded: Person!
+  }
 `
 
 export default typeDefs

@@ -1,7 +1,10 @@
 import { GraphQLError } from 'graphql'
+import { PubSub } from 'graphql-subscriptions'
 import jwt from 'jsonwebtoken'
 import Person from '../../models/person.js'
 import User from '../../models/user.js'
+
+const pubsub = new PubSub()
 
 const mutation = {
   addPerson: async (root, args, context) => {
@@ -29,6 +32,9 @@ const mutation = {
         }
       })
     }
+
+    pubsub.publish('PERSON_ADDED', { personAdded: person })
+
     return person
   },
 

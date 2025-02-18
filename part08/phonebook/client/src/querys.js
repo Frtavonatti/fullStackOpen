@@ -7,60 +7,55 @@ export const LOGIN = gql`
     }
   }
 `
+const PERSON_DETAILS = gql`
+  fragment PersonDetails on Person {
+    id
+    name
+    phone 
+    address {
+      street 
+      city
+    }
+  }
+`
 
 export const ALL_PERSONS = gql`
+  ${PERSON_DETAILS}
   query {
     allPersons  {
-      name
-      phone
-      id
+      ...PersonDetails
     }
   }
 `
 
 export const FIND_PERSON = gql`
+  ${PERSON_DETAILS}
   query FindPerson($nameToSearch: String!) {
     findPerson(name: $nameToSearch) {
-      id
-      name
-      phone
-      address {
-        city
-        street
-      }
+      ...PersonDetails
     }
   }
 `
 
 export const CREATE_PERSON = gql`
-mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) {
-  addPerson(
-    name: $name,
-    street: $street,
-    city: $city,
-    phone: $phone
-  ) {
-    name
-    phone
-    id
-    address {
-      street
-      city
+  ${PERSON_DETAILS}
+  mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) {
+    addPerson(
+      name: $name,
+      street: $street,
+      city: $city,
+      phone: $phone
+    ) {
+      ...PersonDetails
     }
   }
-}
 `
 
 export const EDIT_NUMBER = gql`
+  ${PERSON_DETAILS}
   mutation editNumber($name: String!, $phone: String!) {
     editNumber(name: $name, phone: $phone)  {
-      name
-      phone
-      address {
-        street
-        city
-      }
-      id
+      ...PersonDetails
     }
   }
 `

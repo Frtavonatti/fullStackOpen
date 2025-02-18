@@ -1,5 +1,6 @@
 import query from './resolvers/query.js'
 import mutation from './resolvers/mutation.js'
+import subscription from './resolvers/subscription.js'
 
 const resolvers = {
   Query: query,
@@ -11,7 +12,8 @@ const resolvers = {
       }
     },
   },
-  Mutation: mutation
+  Mutation: mutation,
+  Subscription: subscription,
 }
 
 export default resolvers
