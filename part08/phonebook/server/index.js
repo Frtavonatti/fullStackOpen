@@ -60,8 +60,8 @@ const start = async () => {
 
   await server.start()
 
-  app.use(
-    '/',
+  // Express Middleware Mount Point
+  app.use('/',
     cors(),
     express.json(),
     expressMiddleware(server, {
