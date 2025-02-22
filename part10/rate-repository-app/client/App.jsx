@@ -1,11 +1,12 @@
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
 import { ApolloProvider } from '@apollo/client';
+// import Constants from 'expo-constants'
 
 import Main from './src/components/Main';
 import client from './src/utils/apolloClient';
 
-const App = () => {
+const App = () => {  
   return (
     <ApolloProvider client={client}>
       <NativeRouter>

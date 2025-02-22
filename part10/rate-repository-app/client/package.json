@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.13.1",
     "@expo/metro-runtime": "~4.0.1",
+    "dotenv": "^16.4.7",
     "expo": "~52.0.27",
     "expo-status-bar": "~2.0.1",
     "formik": "^2.4.6",
@@ -21,7 +22,8 @@
     "react-native": "0.76.6",
     "react-native-web": "~0.19.13",
     "react-router-native": "^6.28.2",
-    "yup": "^1.6.1"
+    "yup": "^1.6.1",
+    "@react-native-async-storage/async-storage": "1.23.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
