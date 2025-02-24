@@ -1,14 +1,36 @@
-import { Link } from 'react-router-native'
+import { Pressable, StyleSheet } from 'react-native';
+import { Link } from 'react-router-native';
 import Text from './Text';
 
-const AppBarTab = ({ text, to }) => {
+const AppBarTab = ({ text, to, onPress }) => {
+  const content = 
+  <Text 
+    fontSize="subheading" 
+    fontWeight="bold"
+    style={styles.text}> 
+    {text}
+  </Text>;
+
+  if (onPress) {
+    return (
+      <Pressable onPress={onPress}>
+        {content}
+      </Pressable>
+    );
+  }
+
   return (
-      <Link to={to}>
-        <Text fontSize="subheading" fontWeight="bold" style={{color: '#fff', paddingLeft: 14}}>
-          {text}
-        </Text>
-      </Link>
-  )
-}
+    <Link to={to}>
+      {content}
+    </Link>
+  );
+};
+
+const styles = StyleSheet.create({
+  text: {
+    color: 'white',
+    paddingHorizontal: 15,
+  }
+});
 
 export default AppBarTab

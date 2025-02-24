@@ -16,7 +16,7 @@ const useSignIn = () => {
         password 
       } 
     });
-    const accessToken = mutation.data?.authorize?.accessToken;
+    const accessToken = mutation.data?.authenticate?.accessToken;
     await authStorage.setAccessToken(accessToken);
     apolloClient.resetStore();
     return mutation;

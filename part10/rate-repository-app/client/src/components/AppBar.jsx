@@ -1,16 +1,43 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
+import { useQuery, useApolloClient } from '@apollo/client';
+import { GET_USER } from '../graphql/queries';
+import AuthStorageContext from '../context/authStorageContext';
 import AppBarTab from './AppBarTab';
 import theme from '../theme'
 
 const AppBar = () => {
+  const { data: userData, refetch } = useQuery(GET_USER, {
+    fetchPolicy: 'cache-and-network',
+    notifyOnNetworkStatusChange: true
+  });
+  const authStorage = useContext(AuthStorageContext);
+  const apolloClient = useApolloClient();
+
+  const signout = async () => {
+    try {
+      await authStorage.removeAccessToken();
+      await apolloClient.resetStore();
+      await refetch();
+    } catch (error) {
+      console.error('Error during signout:', error);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView horizontal contentContainerStyle={styles.scrollview}>
         <AppBarTab text="Repositories" to="/" />
-        <AppBarTab text="Create a review" to="/" />
-        <AppBarTab text="Sign in" to="/signin" />
+        {userData?.me === null ? (
+          <AppBarTab text="Sign in" to="/signin" /> 
+        ) : (
+          <>
+            <AppBarTab text="Create a review" to="/create-review" />
+            <AppBarTab text="My reviews" to="/my-reviews" />
+            <AppBarTab text="Sign out" onPress={signout} />
+          </>
+        )}
       </ScrollView>
     </View>
   );

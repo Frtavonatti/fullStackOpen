@@ -3,7 +3,6 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-native';
 import useSignIn from '../hooks/useSignIn';
-import AuthStorage from '../utils/authStorage';
 import FormikTextInput from './FormikTextInput';
 import Text from './Text';
 
@@ -22,7 +21,6 @@ const validationSchema = yup.object().shape({
 
 const SignIn = () => {
   const [signIn] = useSignIn();
-  // const authStorage = new AuthStorage();
   const navigate = useNavigate();
 
   const onSubmit = async (values) => {
