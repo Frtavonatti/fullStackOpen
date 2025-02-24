@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-native';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import { useQuery, useApolloClient } from '@apollo/client';
@@ -14,12 +15,14 @@ const AppBar = () => {
   });
   const authStorage = useContext(AuthStorageContext);
   const apolloClient = useApolloClient();
+  const navigate = useNavigate();
 
   const signout = async () => {
     try {
       await authStorage.removeAccessToken();
       await apolloClient.resetStore();
       await refetch();
+      navigate('/signin');
     } catch (error) {
       console.error('Error during signout:', error);
     }
