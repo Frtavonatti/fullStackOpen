@@ -10,31 +10,31 @@ const RepositoryItem = ({ repo }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="repositoryItem">
       <View style={styles.header}>  
-        <Image source={{ uri: repo.ownerAvatarUrl }} style={styles.headerImage}/>
+        <Image source={{ uri: repo.ownerAvatarUrl }} style={styles.headerImage} testID="avatar"/>
         <View style={{ display: 'flex', gap: 8 }}>
-          <Text fontWeight={"bold"}>{repo.fullName}</Text>
-          <Text>{repo.description}</Text>
-          <Text style={styles.tag}>{repo.language}</Text>
+          <Text fontWeight={"bold"} testID="fullName">{repo.fullName}</Text>
+          <Text testID="description">{repo.description}</Text>
+          <Text style={styles.tag} testID="language">{repo.language}</Text>
         </View>
       </View>
 
       <View style={styles.statsContainer}>
         <View style={styles.stats}>
-          <Text fontWeight={"bold"}>{round(repo.stargazersCount)}</Text>
+          <Text fontWeight={"bold"} testID="stars">{round(repo.stargazersCount)}</Text>
           <Text>Stars</Text>
         </View>
         <View style={styles.stats}>
-          <Text fontWeight={"bold"}>{round(repo.forksCount)}</Text>
+          <Text fontWeight={"bold"} testID="forks">{round(repo.forksCount)}</Text>
           <Text>Forks</Text>
         </View>
         <View style={styles.stats}>
-          <Text fontWeight={"bold"}>{round(repo.reviewCount)}</Text>
+          <Text fontWeight={"bold"} testID="reviews">{round(repo.reviewCount)}</Text>
           <Text>Reviews</Text>
         </View>
         <View style={styles.stats}>
-          <Text fontWeight={"bold"}>{round(repo.ratingAverage)}</Text>
+          <Text fontWeight={"bold"} testID="rating">{round(repo.ratingAverage)}</Text>
           <Text>Rating</Text>
         </View>
       </View>
