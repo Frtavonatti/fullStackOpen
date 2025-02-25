@@ -50,6 +50,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.appBar,
     width: '100%',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1000,
   },
   scrollview: {
     paddingTop: Constants.statusBarHeight,
