@@ -53,13 +53,11 @@ const SignIn = () => {
             <FormikTextInput
               name="username"
               placeholder="Username"
-              style={styles.input}
             />
             <FormikTextInput
               name="password"
               placeholder="Password"
               secureTextEntry
-              style={styles.input}
             />
             <Pressable onPress={handleSubmit} style={styles.button}>
               <Text style={styles.buttonText}>Sign in</Text>

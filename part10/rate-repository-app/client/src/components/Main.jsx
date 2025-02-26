@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import AuthStorageContext from '../context/authStorageContext';
 import RepositoryList from './RepositoryList';
 import SingleRepositoryView from './SingleRepositoryView';
+import CreateReview from './CreateReview';
 import SignIn from './SignIn';
 import AppBar from './AppBar';
 
@@ -29,6 +30,7 @@ const Main = () => {
         <Route path="/" element={<RepositoryList />} />
         <Route path="/repository/:id" element={<SingleRepositoryView />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/create-review" element={<CreateReview />} />
       </Routes>
     </View>
   );

@@ -1,6 +1,14 @@
 import { useQuery } from "@apollo/client"; 
 import { useParams } from "react-router-native";
-import { StyleSheet, View, Text, Pressable, Linking, FlatList } from "react-native";
+import { 
+  StyleSheet, 
+  View, 
+  Text, 
+  Pressable, 
+  Linking, 
+  FlatList, 
+  SafeAreaView 
+} from "react-native";
 import { GET_REPOSITORY_DETAILS, GET_REPOSITORY_REVIEWS } from "../graphql/queries";
 import RepositoryItem from "./RepositoryItem";
 import ReviewItem from "./ReviewItem";
@@ -23,8 +31,6 @@ const SingleRepositoryView = () => {
   const reviewNodes = reviewsData
     ? reviewsData.repository.reviews.edges
     : [];
-
-  console.log(reviewNodes);
   
   const handlePress = () => {
     const url = data?.repository.url;
@@ -36,7 +42,7 @@ const SingleRepositoryView = () => {
   const ItemSeparator = () => <View style={{ height: 10 }} />;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.repository}>
         <RepositoryItem repo={data?.repository} />
         <Pressable>
@@ -55,15 +61,14 @@ const SingleRepositoryView = () => {
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => <ReviewItem review={item} />}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    paddingTop: 80, //StatusBar.height constant,
+    flex: 1,
+    marginTop: 80,
   },
   repository: {
     backgroundColor: 'white',

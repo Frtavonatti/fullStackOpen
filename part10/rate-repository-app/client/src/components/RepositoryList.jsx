@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View, StyleSheet, SafeAreaView } from 'react-native';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
 
@@ -9,11 +9,13 @@ export const RepositoryListContainer = ({ repositories }) => {
     : []
 
   return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={<View style={styles.separator} />}
-      renderItem={({ item }) => <RepositoryItem repo={item}/>}
-    />
+    <SafeAreaView style={styles.container}>
+      <FlatList
+        data={repositoryNodes}
+        ItemSeparatorComponent={<View style={styles.separator} />}
+        renderItem={({ item }) => <RepositoryItem repo={item}/>}
+      />
+    </SafeAreaView>
   );
 }
 
@@ -23,17 +25,14 @@ const RepositoryList = () => {
   if (loading) return 'Loading...'
   
   return (
-    <View style={styles.container}>
-      <RepositoryListContainer repositories={repositories} />
-    </View>
+    <RepositoryListContainer repositories={repositories} />
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    paddingTop: 80, //StatusBar.height constant,
+    flex: 1,
+    marginTop: 80,
   },
   separator: {
     height: 10,
