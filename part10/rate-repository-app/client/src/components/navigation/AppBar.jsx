@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-native';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import { useQuery, useApolloClient } from '@apollo/client';
-import { GET_USER } from '../graphql/queries';
-import AuthStorageContext from '../context/authStorageContext';
+import { GET_USER } from '../../graphql/queries';
+import AuthStorageContext from '../../context/authStorageContext';
 import AppBarTab from './AppBarTab';
-import theme from '../theme'
+import theme from '../../theme'
 
 const AppBar = () => {
   const { data: userData, refetch } = useQuery(GET_USER, {

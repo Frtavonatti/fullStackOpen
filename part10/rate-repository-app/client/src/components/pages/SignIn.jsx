@@ -2,9 +2,9 @@ import { View, Pressable, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-native';
-import useSignIn from '../hooks/useSignIn';
-import FormikTextInput from './FormikTextInput';
-import Text from './Text';
+import useSignIn from '../../hooks/useSignIn';
+import FormikTextInput from '../ui/FormikTextInput';
+import Text from '../ui/Text';
 
 const initialValues = {
   username: '',

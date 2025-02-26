@@ -1,6 +1,6 @@
 import {Image, View, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigate } from "react-router-native";
-import Text from "./Text";
+import Text from "../ui/Text";
 
 const RepositoryItem = ({ repo }) => {
   const navigate = useNavigate();

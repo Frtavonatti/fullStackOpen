@@ -9,9 +9,9 @@ import {
   FlatList, 
   SafeAreaView 
 } from "react-native";
-import { GET_REPOSITORY_DETAILS, GET_REPOSITORY_REVIEWS } from "../graphql/queries";
-import RepositoryItem from "./RepositoryItem";
-import ReviewItem from "./ReviewItem";
+import { GET_REPOSITORY_DETAILS, GET_REPOSITORY_REVIEWS } from "../../graphql/queries";
+import RepositoryItem from "../repositories/RepositoryItem";
+import ReviewItem from "../repositories/ReviewItem";
 
 const SingleRepositoryView = () => {
   const { id } = useParams();
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 80,
+    width: '100%',
   },
   repository: {
     backgroundColor: 'white',

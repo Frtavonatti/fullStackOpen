@@ -2,11 +2,11 @@ import React, { useContext, useEffect } from 'react';
 import { useNavigate, Routes, Route } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
 import AuthStorageContext from '../context/authStorageContext';
-import RepositoryList from './RepositoryList';
-import SingleRepositoryView from './SingleRepositoryView';
-import CreateReview from './CreateReview';
-import SignIn from './SignIn';
-import AppBar from './AppBar';
+import RepositoryList from './pages/RepositoryList';
+import SingleRepositoryView from './pages/SingleRepositoryView';
+import CreateReview from './pages/CreateReview';
+import SignIn from './pages/SignIn';
+import AppBar from './navigation/AppBar';
 
 
 const Main = () => {

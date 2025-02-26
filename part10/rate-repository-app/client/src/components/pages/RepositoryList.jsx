@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList, View, StyleSheet, SafeAreaView } from 'react-native';
-import useRepositories from '../hooks/useRepositories';
-import RepositoryItem from './RepositoryItem';
+import useRepositories from '../../hooks/useRepositories';
+import RepositoryItem from '../repositories/RepositoryItem';
 
 export const RepositoryListContainer = ({ repositories }) => {
   const repositoryNodes = repositories 

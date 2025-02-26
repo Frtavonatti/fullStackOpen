@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import Text from "./Text";
+import Text from "../ui/Text";
 
 const ReviewItem = ({ review }) => {
   const formattedDate = (date) => date.split('T')[0];

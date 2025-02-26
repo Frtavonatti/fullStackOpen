@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet } from 'react-native';
 import { Link } from 'react-router-native';
-import Text from './Text';
+import Text from '../ui/Text';
 
 const AppBarTab = ({ text, to, onPress }) => {
   const content = 

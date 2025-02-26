@@ -3,9 +3,9 @@ import { Formik } from "formik"
 import * as yup from "yup"
 import { useNavigate } from "react-router-native"
 import { useMutation } from "@apollo/client"
-import { CREATE_REVIEW } from "../graphql/mutations"
-import FormikTextInput from "./FormikTextInput"
-import Text from "./Text"
+import { CREATE_REVIEW } from "../../graphql/mutations"
+import FormikTextInput from "../ui/FormikTextInput"
+import Text from "../ui/Text"
 
 const initialValues = {
   ownerName: "",
