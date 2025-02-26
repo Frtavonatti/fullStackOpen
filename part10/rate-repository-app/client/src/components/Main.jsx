@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-native';
+import { useNavigate, Routes, Route } from 'react-router-native';
 import { StyleSheet, View } from 'react-native';
-import { Routes, Route } from 'react-router-native';
 import AuthStorageContext from '../context/authStorageContext';
 import RepositoryList from './RepositoryList';
 import SingleRepositoryView from './SingleRepositoryView';

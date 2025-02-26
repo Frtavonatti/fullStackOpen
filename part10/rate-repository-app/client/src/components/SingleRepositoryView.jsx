@@ -1,12 +1,13 @@
 import { useQuery } from "@apollo/client"; 
 import { useParams } from "react-router-native";
-import { View, Text, Pressable, Linking } from "react-native";
-import { GET_REPOSITORY_DETAILS } from "../graphql/queries";
+import { StyleSheet, View, Text, Pressable, Linking, FlatList } from "react-native";
+import { GET_REPOSITORY_DETAILS, GET_REPOSITORY_REVIEWS } from "../graphql/queries";
 import RepositoryItem from "./RepositoryItem";
+import ReviewItem from "./ReviewItem";
 
 const SingleRepositoryView = () => {
   const { id } = useParams();
-  
+
   const { data, loading, error } = useQuery(GET_REPOSITORY_DETAILS, {
     variables: { id },
     fetchPolicy: 'cache-and-network',
@@ -15,26 +16,68 @@ const SingleRepositoryView = () => {
     }
   });
 
+  const { data: reviewsData, loading: reviewsLoading } = useQuery(GET_REPOSITORY_REVIEWS, {
+    variables: { id },
+  });
+
+  const reviewNodes = reviewsData
+    ? reviewsData.repository.reviews.edges
+    : [];
+
+  console.log(reviewNodes);
+  
   const handlePress = () => {
     const url = data?.repository.url;
     Linking.openURL(url);
   }
 
-  if (loading) return <Text>Loading...</Text>;
+  if (loading || reviewsLoading) return <Text>Loading...</Text>;
+
+  const ItemSeparator = () => <View style={{ height: 10 }} />;
 
   return (
-    <View>
-      <RepositoryItem repo={data?.repository} />
-      <Pressable>
-        <Text fontWeight={"bold"} 
-          style={{ backgroundColor: '#0366d6', color: 'white', padding: 10, textAlign: 'center' }} 
-          onPress={handlePress}
-          testID="button">
-            Open in GitHub
-        </Text>
-      </Pressable>
+    <View style={styles.container}>
+      <View style={styles.repository}>
+        <RepositoryItem repo={data?.repository} />
+        <Pressable>
+          <Text fontWeight={"bold"} 
+            style={styles.button} 
+            onPress={handlePress}
+            testID="button">
+              Open in GitHub
+          </Text>
+        </Pressable>
+      </View>
+
+      <ItemSeparator />
+      <FlatList
+        data={reviewNodes}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={({ item }) => <ReviewItem review={item} />}
+      />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    top: 0,
+    paddingTop: 80, //StatusBar.height constant,
+  },
+  repository: {
+    backgroundColor: 'white',
+    paddingBottom: 10,
+  },
+  button: {
+    backgroundColor: '#0366d6',
+    color: 'white',
+    fontWeight: 'bold',
+    padding: 10,
+    marginHorizontal: 20,
+    textAlign: 'center',
+    borderRadius: 5,
+  }
+});
 
 export default SingleRepositoryView;
