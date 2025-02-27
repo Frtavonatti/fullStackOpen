@@ -3,11 +3,15 @@ import { RepositoryDetails } from "./fragments";
 
 export const GET_REPOSITORIES = gql`
   query Repositories(
+    $first: Int,
+    $after: String,
     $orderBy: AllRepositoriesOrderBy, 
     $orderDirection: OrderDirection, 
     $searchKeyword: String
   ) {
     repositories(
+      first: $first,
+      after: $after,
       orderBy: $orderBy, 
       orderDirection: $orderDirection, 
       searchKeyword: $searchKeyword
@@ -17,6 +21,12 @@ export const GET_REPOSITORIES = gql`
           id
           ...RepositoryDetails
         }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
       }
     }
   }

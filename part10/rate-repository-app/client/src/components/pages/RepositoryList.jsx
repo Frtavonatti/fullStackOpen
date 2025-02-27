@@ -10,6 +10,7 @@ import layout from '../../layout';
 //TODO: Fix issue where SearchBar loses focus after query execution (10.24)
 export const RepositoryListContainer = ({ 
   repositories,
+  onEndReach,
   searchKeyword,
   setSearchKeyword,
   setOrderBy, 
@@ -30,6 +31,8 @@ export const RepositoryListContainer = ({
       />
       <FlatList
         data={repositoryNodes}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
         ItemSeparatorComponent={<View style={styles.separator} />}
         renderItem={({ item }) => <RepositoryItem repo={item}/>}
       />
@@ -42,13 +45,23 @@ const RepositoryList = () => {
   const [ debouncedSearchKeyword ] = useDebounce(searchKeyword, 500);
   const [ orderBy, setOrderBy ] = useState('CREATED_AT');
   const [ orderDirection, setOrderDirection ] = useState('DESC'); 
-  const { repositories, loading, refetch } = useRepositories(debouncedSearchKeyword, orderBy, orderDirection);
+  const { repositories, fetchMore } = useRepositories(
+    { first: 6 }, 
+    debouncedSearchKeyword, 
+    orderBy, 
+    orderDirection);
 
-  if (loading) return <Text>'Loading...'</Text>
+  // if (loading) return <Text>'Loading...'</Text>
+
+  const onEndReach = () => {
+    console.log('You have reached the end of the list');
+    fetchMore();
+  }
   
   return (
     <RepositoryListContainer 
       repositories={repositories} 
+      onEndReach={onEndReach}
       searchKeyword={searchKeyword}
       setSearchKeyword={setSearchKeyword}
       setOrderBy={setOrderBy}
