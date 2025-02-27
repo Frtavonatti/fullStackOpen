@@ -12,6 +12,7 @@ import {
 import { GET_REPOSITORY_DETAILS, GET_REPOSITORY_REVIEWS } from "../../graphql/queries";
 import RepositoryItem from "../repositories/RepositoryItem";
 import ReviewItem from "../repositories/ReviewItem";
+import layout from "../../layout";
 
 const SingleRepositoryView = () => {
   const { id } = useParams();
@@ -68,7 +69,7 @@ const SingleRepositoryView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 80,
+    marginTop: layout.containerSpacing.top,
     width: '100%',
   },
   repository: {

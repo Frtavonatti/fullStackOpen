@@ -3,6 +3,7 @@ import { FlatList, Text, View, StyleSheet, SafeAreaView } from 'react-native';
 import useRepositories from '../../hooks/useRepositories';
 import RepositoryItem from '../repositories/RepositoryItem';
 import Dropdown from '../ui/DropDown';
+import layout from '../../layout';
 
 export const RepositoryListContainer = ({ 
   repositories, 
@@ -43,7 +44,7 @@ const RepositoryList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 80,
+    marginTop: layout.containerSpacing.top,
   },
   separator: {
     height: 10,
