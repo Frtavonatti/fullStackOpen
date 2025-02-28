@@ -3,7 +3,7 @@ import Text from "../ui/Text";
 
 const ReviewItem = ({ review }) => {
   const formattedDate = (date) => date.split('T')[0];
-
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -11,7 +11,10 @@ const ReviewItem = ({ review }) => {
           <Text style={styles.rating}>{review.node.rating}</Text>
         </View>
         <View style={styles.headerContent}>
-          <Text fontWeight="bold">{review.node.user.username}</Text>
+          { review.node.user 
+          ? <Text fontWeight="bold">{review.node.user.username}</Text>
+          : <Text fontWeight="bold">{review.node.repository.fullName}</Text>
+        }
           <Text style={styles.date}>{ formattedDate(review.node.createdAt) }</Text>
           <Text style={styles.text}>{review.node.text}</Text>
         </View>

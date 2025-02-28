@@ -5,6 +5,7 @@ import useRepositories from '../../hooks/useRepositories';
 import RepositoryItem from '../repositories/RepositoryItem';
 import Dropdown from '../ui/DropDown';
 import Search from '../ui/SearchBar';
+import ItemSeparator from '../ui/ItemSeparator';
 import layout from '../../layout';
 
 //TODO: Fix issue where SearchBar loses focus after query execution (10.24)
@@ -33,7 +34,7 @@ export const RepositoryListContainer = ({
         data={repositoryNodes}
         onEndReached={onEndReach}
         onEndReachedThreshold={0.5}
-        ItemSeparatorComponent={<View style={styles.separator} />}
+        ItemSeparatorComponent={<ItemSeparator/>}
         renderItem={({ item }) => <RepositoryItem repo={item}/>}
       />
     </SafeAreaView>
@@ -70,12 +71,10 @@ const RepositoryList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     marginTop: layout.containerSpacing.top,
     width: '100%'
-  },
-  separator: {
-    height: 10,
-  },
+  }
 });
 
 export default RepositoryList;

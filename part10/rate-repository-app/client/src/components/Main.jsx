@@ -4,6 +4,7 @@ import { StyleSheet, View } from 'react-native';
 import RepositoryList from './pages/RepositoryList';
 import SingleRepositoryView from './pages/SingleRepositoryView';
 import CreateReview from './pages/CreateReview';
+import MyReviews from './pages/MyReviews';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import AppBar from './navigation/AppBar';
@@ -18,6 +19,7 @@ const Main = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/create-review" element={<CreateReview />} />
+        <Route path="/my-reviews" element={<MyReviews />} />
       </Routes>
     </View>
   );
