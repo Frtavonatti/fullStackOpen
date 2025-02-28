@@ -51,10 +51,7 @@ const RepositoryList = () => {
     orderBy, 
     orderDirection);
 
-  // if (loading) return <Text>'Loading...'</Text>
-
   const onEndReach = () => {
-    console.log('You have reached the end of the list');
     fetchMore();
   }
   

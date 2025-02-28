@@ -28,6 +28,7 @@ const useRepositories = ({ first }, searchKeyword, orderBy, orderDirection) => {
 				after: data.repositories.pageInfo.endCursor,
 				...variables,
 			},
+			// TODO: Study updateQuery
 			updateQuery: (previousResult, { fetchMoreResult }) => {
 				const nextResult = {
 					repositories: {

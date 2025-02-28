@@ -9,38 +9,41 @@ import {
   FlatList, 
   SafeAreaView 
 } from "react-native";
-import { GET_REPOSITORY_DETAILS, GET_REPOSITORY_REVIEWS } from "../../graphql/queries";
+import { GET_REPOSITORY_DETAILS } from "../../graphql/queries";
+import useReviews from "../../hooks/useReviews";
 import RepositoryItem from "../repositories/RepositoryItem";
 import ReviewItem from "../repositories/ReviewItem";
+import ItemSeparator from "../ui/ItemSeparator";
 import layout from "../../layout";
 
 const SingleRepositoryView = () => {
   const { id } = useParams();
 
-  const { data, loading, error } = useQuery(GET_REPOSITORY_DETAILS, {
+  const { data, error, loading: repoLoading } = useQuery(GET_REPOSITORY_DETAILS, {
     variables: { id },
     fetchPolicy: 'cache-and-network',
-    onError: (error) => {
-      console.error('GraphQL error:', error);
-    }
   });
 
-  const { data: reviewsData, loading: reviewsLoading } = useQuery(GET_REPOSITORY_REVIEWS, {
-    variables: { id },
+  const { reviews, fetchMore, loading: reviewsLoading } = useReviews({ 
+    first: 5, 
+    id
   });
 
-  const reviewNodes = reviewsData
-    ? reviewsData.repository.reviews.edges
-    : [];
+  if (repoLoading) return <Text>Loading repository...</Text>;
+  if (error) return <Text>Error: {error.message}</Text>;
+  if (!data?.repository) return <Text>Repository not found</Text>;
+
+  const reviewNodes = reviews ? reviews.edges : [];
   
   const handlePress = () => {
-    const url = data?.repository.url;
-    Linking.openURL(url);
+    Linking.openURL(data?.repository.url);
   }
 
-  if (loading || reviewsLoading) return <Text>Loading...</Text>;
-
-  const ItemSeparator = () => <View style={{ height: 10 }} />;
+  const onEndReach = () => {
+    if (!reviewsLoading) {
+      fetchMore();
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -60,6 +63,8 @@ const SingleRepositoryView = () => {
       <FlatList
         data={reviewNodes}
         ItemSeparatorComponent={ItemSeparator}
+        onEndReached={onEndReach}
+        // onEndReachedThreshold={0.5}
         renderItem={({ item }) => <ReviewItem review={item} />}
       />
     </SafeAreaView>
