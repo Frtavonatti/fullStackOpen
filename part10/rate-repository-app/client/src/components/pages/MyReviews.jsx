@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { GET_USER } from '../../graphql/queries';
-import { FlatList, SafeAreaView, StyleSheet } from 'react-native';
-import ReviewItem from '../repositories/ReviewItem';
+import { FlatList, Pressable, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import EditableReview from '../repositories/EditableReview';
 import ItemSeparator from '../ui/ItemSeparator';
 import layout from '../../layout';
 
@@ -19,7 +19,7 @@ const MyReviews = () => {
         data={reviewNodes}
         ItemSeparatorComponent={ItemSeparator}
         keyExtractor={({ node }) => node.id}
-        renderItem={({ item }) => <ReviewItem review={item} />}
+        renderItem={({ item }) => <EditableReview review={item} />}
       />
     </SafeAreaView>
   )

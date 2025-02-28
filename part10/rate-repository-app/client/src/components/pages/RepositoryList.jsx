@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, Text, View, StyleSheet, SafeAreaView } from 'react-native';
+import { FlatList, StyleSheet, SafeAreaView } from 'react-native';
 import { useDebounce } from 'use-debounce';
 import useRepositories from '../../hooks/useRepositories';
 import RepositoryItem from '../repositories/RepositoryItem';
