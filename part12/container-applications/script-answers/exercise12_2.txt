@@ -1,0 +1,64 @@
+[?2004h]0;frtav@Matebook: ~/code/full-stack-app/part12/container-applications/script-answers[01;32mfrtav@Matebook[00m:[01;34m~/code/full-stack-app/part12/container-applications/script-answers[00m$ docker -v[A
+]0;frtav@Matebook: ~/code/full-stack-app/part12/container-applications/script-answers[01;32mfrtav@Matebook[00m:[01;34m~/code/full-stack-app/part12/container-applications/script-answers[00m$ [C[Ckcer[C[C[C[A
+]0;frtav@Matebook: ~/code/full-stack-app/part12/container-applications/script-answers[01;32mfrtav@Matebook[00m:[01;34m~/code/full-stack-app/part12/container-applications/script-answers[00m$ [C[Ccker[Ccontainer run hello-world
+[?2004l
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+[?2004h]0;frtav@Matebook: ~/code/full-stack-app/part12/container-applications/script-answers[01;32mfrtav@Matebook[00m:[01;34m~/code/full-stack-app/part12/container-applications/script-answers[00m$ docker container run hello-world
+[C[C-v[K[A
+]0;frtav@Matebook: ~/code/full-stack-app/part12/container-applications/script-answers[01;32mfrtav@Matebook[00m:[01;34m~/code/full-stack-app/part12/container-applications/script-answers[00m$ [C[Ckcer[C[C[C[A
+]0;frtav@Matebook: ~/code/full-stack-app/part12/container-applications/script-answers[01;32mfrtav@Matebook[00m:[01;34m~/code/full-stack-app/part12/container-applications/script-answers[00m$ [C[Ccker[Ccontainer run hello-world
+[C[C[15Prun --help
+[C[Ccontainer run -it ubuntu bash
+[?2004l
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+
+[1A[2K
+5a7813e071bf: Pulling fs layer 
+[1B[1A[2K
+5a7813e071bf: Downloading  3.146MB/29.75MB
+[1B[1A[2K
+5a7813e071bf: Downloading  9.437MB/29.75MB
+[1B[1A[2K
+5a7813e071bf: Downloading  13.63MB/29.75MB
+[1B[1A[2K
+5a7813e071bf: Downloading  18.87MB/29.75MB
+[1B[1A[2K
+5a7813e071bf: Downloading  20.97MB/29.75MB
+[1B[1A[2K
+5a7813e071bf: Downloading  25.17MB/29.75MB
+[1B[1A[2K
+5a7813e071bf: Downloading  29.75MB/29.75MB
+[1B[1A[2K
+5a7813e071bf: Download complete 
+[1BDigest: sha256:72297848456d5d37d1262630108ab308d3e9ec7ed1c3286a32fe09856619a782
+Status: Downloaded newer image for ubuntu:latest
+[?2004h]0;root@b9ba01a75dbc: /root@b9ba01a75dbc:/# mkdir usr/src/app
+[?2004h]0;root@b9ba01a75dbc: /root@b9ba01a75dbc:/# ls
+[?2004l
+[0m[01;36mbin[0m   [01;34mdev[0m  [01;34mhome[0m  [01;36mlib64[0m  [01;34mmnt[0m  [01;34mproc[0m  [01;34mrun[0m   [01;34msrv[0m  [30;42mtmp[0m  [01;34mvar[0m
+[01;34mboot[0m  [01;34metc[0m  [01;36mlib[0m   [01;34mmedia[0m  [01;34mopt[0m  [01;34mroot[0m  [01;36msbin[0m  [01;34msys[0m  [01;34musr[0m
+[?2004h]0;root@b9ba01a75dbc: /root@b9ba01a75dbc:/# cd user  r/src/app/
+[?2004l
+[?2004h]0;root@
