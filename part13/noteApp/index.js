@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { Sequelize, Model, DataTypes, QueryTypes} from 'sequelize' // Delete querytypes
+import { Sequelize, Model, DataTypes} from 'sequelize'
 import express from 'express'
 const app = express()
 
