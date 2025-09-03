@@ -1,0 +1,35 @@
+### Fetches all blog entries from the API
+GET http://localhost:3001/api/blogs
+
+### Fetches a single blog entry by its ID
+GET http://localhost:3001/api/blogs/1
+
+### Create a new blog post
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Test Blog Post",
+  "author": "Test Author",
+  "url": "http://example.com/test-blog-post",
+  "likes": 0
+}
+
+### Create a blog post with missing fields (should fail)
+POST http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "author": "Test Author"
+}
+
+### Delete a blog post by its ID
+DELETE http://localhost:3001/api/blogs/4
+
+### Update the number of likes for a blog post
+PUT http://localhost:3001/api/blogs/1
+Content-Type: application/json
+
+{
+  "likes": 8
+}
