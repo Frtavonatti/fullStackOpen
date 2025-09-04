@@ -1,7 +1,9 @@
 import 'dotenv/config'
 import { Sequelize, Model, DataTypes} from 'sequelize'
 import express from 'express'
+
 const app = express()
+app.use(express.json())
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialectOptions: {
@@ -39,20 +41,46 @@ Note.init(
   }
 )
 
+Note.sync()
+
 // Routes
 app.get('/api/notes', async (req, res) => {
-  // const notes = await sequelize.query("SELECT * FROM notes", { type: QueryTypes.SELECT })
-  const notes = await Note.findAll()
-  res.json(notes)
+  try {
+    // const notes = await sequelize.query("SELECT * FROM notes", { type: QueryTypes.SELECT })
+    const notes = await Note.findAll()
+    return res.json(notes)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
 })
 
-app.post('api/notes', async (req, res) => {
-  // console.log(req.body)
+app.get('/api/notes/:id', async (req, res) => {
+  try {
+    const note = await Note.findByPk(req.params.id)
+    return res.json(note)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+})
+
+app.post('/api/notes', async (req, res) => {
   try {
     const newNote = await Note.create(req.body)
-    res.json(newNote)
+    return res.json(newNote)
   } catch (error) {
     return res.status(400).json({error})
+  }
+})
+
+app.delete('/api/notes/:id', async (req, res) => {
+  try {
+    const note = await Note.findByPk(req.params.id)
+    if (!note)
+      return res.status(404).json({ error: 'Note not found' })
+    note.destroy()
+    return res.json({ message: 'Note deleted successfully' })
+  } catch (error) {
+    return res.status(400).json({ error })
   }
 })
 

@@ -1,0 +1,33 @@
+### Test: Get all notes
+GET http://localhost:3001/api/notes
+
+
+### Test: Get one note
+GET http://localhost:3001/api/notes/1
+
+
+### Test: Create a new note
+POST http://localhost:3001/api/notes
+Content-Type: application/json
+
+{
+  "title": "Test Note",
+  "content": "This is a test note."
+}
+
+### Test: Get a note by ID (replace :id with a real note ID)
+GET http://localhost:3001/api/notes/:id
+Accept: application/json
+
+### Test: Update a note by ID (replace :id with a real note ID)
+PUT http://localhost:3001/api/notes/:id
+Content-Type: application/json
+
+{
+  "title": "Updated Test Note",
+  "content": "This note has been updated."
+}
+
+### Test: Delete a note by ID (replace :id with a real note ID)
+DELETE http://localhost:3001/api/notes/2
+Accept: application/json
