@@ -29,5 +29,5 @@ Content-Type: application/json
 }
 
 ### Test: Delete a note by ID (replace :id with a real note ID)
-DELETE http://localhost:3001/api/notes/2
+DELETE http://localhost:3001/api/notes/3
 Accept: application/json
