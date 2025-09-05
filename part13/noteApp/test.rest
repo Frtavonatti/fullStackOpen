@@ -12,7 +12,8 @@ Content-Type: application/json
 
 {
   "title": "Test Note",
-  "content": "This is a test note."
+  "content": "This is a test note.",
+  "important": false
 }
 
 ### Test: Get a note by ID (replace :id with a real note ID)
@@ -20,12 +21,11 @@ GET http://localhost:3001/api/notes/:id
 Accept: application/json
 
 ### Test: Update a note by ID (replace :id with a real note ID)
-PUT http://localhost:3001/api/notes/:id
+PUT http://localhost:3001/api/notes/4
 Content-Type: application/json
 
 {
-  "title": "Updated Test Note",
-  "content": "This note has been updated."
+  "important": true
 }
 
 ### Test: Delete a note by ID (replace :id with a real note ID)

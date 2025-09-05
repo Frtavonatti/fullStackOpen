@@ -20,8 +20,3 @@ const start = async () => {
 }
 
 start()
-
-// Config
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
-})

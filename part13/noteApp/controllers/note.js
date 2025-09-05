@@ -7,6 +7,8 @@ const router = Router()
 // Middleware
 const noteFinder = async (req, res, next) => {
   req.note = await Note.findByPk(req.params.id)
+  if (!req.note) 
+    return res.status(404).json({ error: 'Note not found' })
   next()
 }
 
@@ -25,6 +27,15 @@ router.get('/:id', noteFinder, async (req, res) => {
     return res.json(req.note)
   } catch (error) {
     res.status(500).json({ error: error.message })
+  }
+})
+
+router.put('/:id', noteFinder, async (req, res) => {
+  try {
+    const updatedNote = await req.note.update({ important: !req.note.important })
+    return res.status(200).json(updatedNote)
+  } catch (error) {
+    return res.status(400).json({ error: error.message })
   }
 })
 
