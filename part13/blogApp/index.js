@@ -6,10 +6,12 @@ import { PORT } from './utils/config.js'
 
 app.use(express.json())
 
-import blogsRouter from './controllers/blog.js' 
+import blogsRouter from './controllers/blog.js'
+import { errorHandler } from './utils/middleware.js' 
 
 // Controllers
 app.use('/api/blogs', blogsRouter)
+app.use(errorHandler)
 
 // Config
 const start = async () => {
