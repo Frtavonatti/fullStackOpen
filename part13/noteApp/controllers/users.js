@@ -5,20 +5,21 @@ import { User, Note } from '../models/index.js';
 const router = Router();
 
 // Options to include associated notes when fetching users
-const options = {
+const config = {
   include: {
-    model: Note
+    model: Note,
+    attributes: { exclude: ['userId'] }
   }
 }
 
 // Routes
 router.get('/', async (req, res) => {
-  const users = await User.findAll(options);
+  const users = await User.findAll(config);
   res.json(users);
 })
 
 router.get('/:id', async (req, res, next) => {
-  const user = await User.findByPk(req.params.id, options);
+  const user = await User.findByPk(req.params.id, config);
   if (user) {
     res.json(user);
   } else {

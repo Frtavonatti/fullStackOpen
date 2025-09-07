@@ -6,9 +6,18 @@ import { SECRET } from '../utils/config.js'
 
 const router = Router()
 
+// Options
+const config = {
+  attributes: { exclude: ['userId'] },
+  include: {
+    model: User,
+    attributes: ['username']
+  }
+}
+
 // Middleware
 const noteFinder = async (req, res, next) => {
-  req.note = await Note.findByPk(req.params.id)
+  req.note = await Note.findByPk(req.params.id, config) // Added config 
   if (!req.note) 
     return res.status(404).json({ error: 'Note not found' })
   next()
@@ -31,7 +40,7 @@ const tokenExtractor = (req, res, next) => {
 // Routes
 router.get('/', async (req, res) => {
   try {
-    const notes = await Note.findAll()
+    const notes = await Note.findAll(config)
     return res.json(notes)
   } catch (error) {
     res.status(500).json({ error: error.message })
