@@ -1,7 +1,15 @@
 import Blog from "./blog.js"
+import User from "./user.js"
 
-Blog.sync()
+// Define associations between models
+Blog.belongsTo(User)
+User.hasMany(Blog)
 
-export default {
-  Blog
+// Synchronize models with the database
+Blog.sync({ alter: true })
+User.sync({ alter: true })
+
+export {
+  Blog,
+  User
 }

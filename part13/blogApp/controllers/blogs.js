@@ -1,6 +1,6 @@
 import { Router } from "express"
 
-import Blog from "../models/blog.js"
+import { Blog } from "../models/index.js"
 import { blogFinder } from "../utils/middleware.js"
 
 const router = Router()
