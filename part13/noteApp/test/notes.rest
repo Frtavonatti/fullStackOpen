@@ -9,6 +9,7 @@ GET http://localhost:3001/api/notes/1
 ### Test: Create a new note
 POST http://localhost:3001/api/notes
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOjEsImlhdCI6MTc1NzI3MDM3Mn0.SAI8YMHMo4esHwsChAYRGmfB6L798fd-6EG4nfZIYjA
 
 {
   "title": "Test Note",

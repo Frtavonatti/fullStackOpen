@@ -1,7 +1,14 @@
 import Note from "./note.js";
+import User from "./user.js";
 
-Note.sync()
+// Define associations
+User.hasMany(Note)
+Note.belongsTo(User)
 
-export default {
-  Note
+// Sync models with the database
+Note.sync({ alter: true }) // Use { alter: true } to update the table to match the model
+User.sync({ alter: true })
+
+export {
+  Note, User
 }
