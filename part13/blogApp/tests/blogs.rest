@@ -25,7 +25,8 @@ Content-Type: application/json
 }
 
 ### Delete a blog post by its ID
-DELETE http://localhost:3001/api/blogs/4
+DELETE http://localhost:3001/api/blogs/8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJAbWFpbC5jb20iLCJpZCI6NSwiaWF0IjoxNzU3MzY4OTc1fQ.UH_pU_j165jWu19gd-4bdMsPUpnPCDa5Yvqs0RkjeUI
 
 ### Update the number of likes for a blog post
 PUT http://localhost:3001/api/blogs/1

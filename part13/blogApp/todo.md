@@ -29,7 +29,7 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
 
 
 # Exercise 13.11: Delete Blogs
-- [ ] Allow only the user who added a blog to delete it.
+- [x] Allow only the user who added a blog to delete it.
 
 # Exercise 13.12: Show Relationships in Endpoints
 - [ ] Update `GET /api/blogs` to show the user who added each blog.
