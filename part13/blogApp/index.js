@@ -8,19 +8,29 @@ app.use(express.json())
 
 import blogsRouter from './controllers/blogs.js'
 import usersRouter from './controllers/users.js'
+import loginRouter from './controllers/login.js'
 import { errorHandler } from './utils/middleware.js' 
 
 // Controllers
 app.use('/api/blogs', blogsRouter)
 app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
 app.use(errorHandler)
 
 // Config
 const start = async () => {
-  await connectToDatabase()
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-  })
-} 
+  try {
+    console.log('Connecting to database...')
+    await connectToDatabase()
+    console.log('Database connected!')
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`)
+    })
+  } catch (error) {
+    console.error('Failed to start server:', error)
+    process.exit(1)
+  }
+}
 
 start()

@@ -1,4 +1,6 @@
-import Blog from "../models/blog.js"
+import jwt from "jsonwebtoken"
+import { Blog } from "../models/index.js"
+import { SECRET } from "./config.js"
 
 export const errorHandler = (error, req, res, next) => {
   console.error(error.message)
@@ -12,6 +14,20 @@ export const errorHandler = (error, req, res, next) => {
   }
 
   return res.status(500).json({ error: 'Internal server error' })
+}
+
+export const tokenExtractor = (req, res, next) => {
+  const authorization = req.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    try {
+      req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
+      next()
+    } catch (error) {
+      return res.status(401).json({ error: 'token invalid' })
+    }
+  } else {
+    return res.status(401).json({ error: 'token missing or invalid' })
+  }
 }
 
 export const blogFinder = async (req, res, next) => {

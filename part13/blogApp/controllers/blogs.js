@@ -1,7 +1,7 @@
 import { Router } from "express"
 
-import { Blog } from "../models/index.js"
-import { blogFinder } from "../utils/middleware.js"
+import { Blog, User } from "../models/index.js"
+import { tokenExtractor, blogFinder } from "../utils/middleware.js"
 
 const router = Router()
 
@@ -14,7 +14,13 @@ router.get('/:id', blogFinder, async (req, res, next) => {
   return res.json(req.blog)
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', tokenExtractor, async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id)
+  if (!user) {
+    return res.status(401).json({ error: 'User not found' })
+  }
+
+  req.body.userId = user.id
   const newBlog = await Blog.create(req.body)
   return res.json(newBlog)
 })

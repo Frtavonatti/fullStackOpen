@@ -7,12 +7,13 @@ GET http://localhost:3001/api/blogs/1
 ### Create a new blog post
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJAbWFpbC5jb20iLCJpZCI6NSwiaWF0IjoxNzU3MzY4OTc1fQ.UH_pU_j165jWu19gd-4bdMsPUpnPCDa5Yvqs0RkjeUI
 
 {
-  "title": "Test Blog Post",
-  "author": "Test Author",
-  "url": "http://example.com/test-blog-post",
-  "likes": 0
+  "title": "Exploring Quantum Computing",
+  "author": "Ada Lovelace",
+  "url": "https://techinsights.com/quantum-computing-intro",
+  "likes": 42
 }
 
 ### Create a blog post with missing fields (should fail)
