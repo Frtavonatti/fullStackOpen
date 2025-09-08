@@ -9,8 +9,8 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "name": "Nuevo Usuario 3",
-  "username": "nuevo_usuario 3"
+  "name": "Nuevo Usuario 4",
+  "username": "nuevo_usuario 4"
 }
 
 ### Actualizar el nombre de un usuario por username
