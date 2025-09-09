@@ -11,11 +11,6 @@ export const sequelize = new Sequelize(DATABASE_URL, {
 })
 
 export const connectToDatabase = async () => {
-  try {
-    await sequelize.authenticate()
-    console.log('Connected to the database');
-  } catch (error) {
-    console.log('Failed to connect to the database');
-    return process.exit()
-  }
+  await sequelize.authenticate()
+  console.log('Connected to the database')
 }

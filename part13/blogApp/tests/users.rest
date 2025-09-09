@@ -2,15 +2,15 @@
 GET http://localhost:3001/api/users
 
 ### Obtener un usuario por ID
-GET http://localhost:3001/api/users/1
+GET http://localhost:3001/api/users/2
 
 ### Crear un nuevo usuario
 POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "name": "New User",
-  "username": "user@mail.com"
+  "name": "New User2",
+  "username": "user2@mail.com"
 }
 
 ### Actualizar el nombre de un usuario por username

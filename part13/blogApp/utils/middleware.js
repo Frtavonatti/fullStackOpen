@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
-import { Blog } from "../models/index.js"
+import { Blog, User } from "../models/index.js"
+import { includeUser, includeBlogs } from "./queries.js"
 import { SECRET } from "./config.js"
 
 export const errorHandler = (error, req, res, next) => {
@@ -9,8 +10,8 @@ export const errorHandler = (error, req, res, next) => {
     return res.status(400).json({ name: error.name, message: error.message })
   } else if (error.name === 'NotFoundError') {
     return res.status(404).json({ name: error.name, message: error.message })
-  }if (error.name === 'NotFoundError') {
-    return res.status(404).json({ error: error.message })
+  } else if (error.name === 'ForbiddenError') {
+    return res.status(403).json({ name: error.name, message: error.message })
   }
 
   return res.status(500).json({ error: 'Internal server error' })
@@ -31,10 +32,19 @@ export const tokenExtractor = (req, res, next) => {
 }
 
 export const blogFinder = async (req, res, next) => {
-  req.blog = await Blog.findByPk(req.params.id)
-  if (!req.blog) 
+  req.blog = await Blog.findByPk(req.params.id, includeUser)
   if (!req.blog) {
     const error = new Error('Blog not found')
+    error.name = 'NotFoundError'
+    return next(error)
+  }
+  next()
+}
+
+export const userFinder = async (req, res, next) => {
+  req.user = await User.findByPk(req.decodedToken.id, includeBlogs)
+  if (!req.user) {
+    const error = new Error('User not found')
     error.name = 'NotFoundError'
     return next(error)
   }

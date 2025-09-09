@@ -2,18 +2,18 @@
 GET http://localhost:3001/api/blogs
 
 ### Fetches a single blog entry by its ID
-GET http://localhost:3001/api/blogs/1
+GET http://localhost:3001/api/blogs/10
 
 ### Create a new blog post
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJAbWFpbC5jb20iLCJpZCI6NSwiaWF0IjoxNzU3MzY4OTc1fQ.UH_pU_j165jWu19gd-4bdMsPUpnPCDa5Yvqs0RkjeUI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJAbWFpbC5jb20iLCJpZCI6NSwiaWF0IjoxNzU3NDUyMDU0fQ.2MB8awXlEOUo65wUfE04d4_szNxa5W_JyJsJ0RX3RJ4
 
 {
-  "title": "Exploring Quantum Computing",
-  "author": "Ada Lovelace",
-  "url": "https://techinsights.com/quantum-computing-intro",
-  "likes": 42
+  "title": "A Deep Dive into WebAssembly",
+  "author": "Grace Hopper",
+  "url": "https://techinsights.com/webassembly-deep-dive",
+  "likes": 27
 }
 
 ### Create a blog post with missing fields (should fail)
@@ -25,11 +25,11 @@ Content-Type: application/json
 }
 
 ### Delete a blog post by its ID
-DELETE http://localhost:3001/api/blogs/8
+DELETE http://localhost:3001/api/blogs/9
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJAbWFpbC5jb20iLCJpZCI6NSwiaWF0IjoxNzU3MzY4OTc1fQ.UH_pU_j165jWu19gd-4bdMsPUpnPCDa5Yvqs0RkjeUI
 
 ### Update the number of likes for a blog post
-PUT http://localhost:3001/api/blogs/1
+PUT http://localhost:3001/api/blogs/9
 Content-Type: application/json
 
 {

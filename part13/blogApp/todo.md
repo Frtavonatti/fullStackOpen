@@ -32,5 +32,5 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
 - [x] Allow only the user who added a blog to delete it.
 
 # Exercise 13.12: Show Relationships in Endpoints
-- [ ] Update `GET /api/blogs` to show the user who added each blog.
-- [ ] Update `GET /api/users` to show the blogs each user has added.
+- [x] Update `GET /api/blogs` to show the user who added each blog.
+- [x] Update `GET /api/users` to show the blogs each user has added.

@@ -20,10 +20,7 @@ app.use(errorHandler)
 // Config
 const start = async () => {
   try {
-    console.log('Connecting to database...')
     await connectToDatabase()
-    console.log('Database connected!')
-
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`)
     })
