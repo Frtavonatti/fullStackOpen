@@ -3,7 +3,7 @@ GET http://localhost:3001/api/notes
 
 
 ### Test: Get one note
-GET http://localhost:3001/api/notes/1
+GET http://localhost:3001/api/notes/5
 
 
 ### Test: Create a new note

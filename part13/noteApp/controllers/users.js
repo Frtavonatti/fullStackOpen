@@ -1,25 +1,17 @@
 import { Router } from "express";
 
-import { User, Note } from '../models/index.js';
+import { User } from '../models/index.js';
+import { includeNotes } from "../utils/queries.js";
 
 const router = Router();
 
-// Options to include associated notes when fetching users
-const config = {
-  include: {
-    model: Note,
-    attributes: { exclude: ['userId'] }
-  }
-}
-
-// Routes
 router.get('/', async (req, res) => {
-  const users = await User.findAll(config);
+  const users = await User.findAll(includeNotes);
   res.json(users);
 })
 
 router.get('/:id', async (req, res, next) => {
-  const user = await User.findByPk(req.params.id, config);
+  const user = await User.findByPk(req.params.id, includeNotes);
   if (user) {
     res.json(user);
   } else {

@@ -1,46 +1,15 @@
-import jwt from 'jsonwebtoken'
 import { Router } from "express"
 
 import { Note, User } from '../models/index.js'
-import { SECRET } from '../utils/config.js'
+import { tokenExtractor, noteFinder } from '../utils/middleware.js'
+import { includeUser } from "../utils/queries.js"
 
 const router = Router()
-
-// Options
-const config = {
-  attributes: { exclude: ['userId'] },
-  include: {
-    model: User,
-    attributes: ['username']
-  }
-}
-
-// Middleware
-const noteFinder = async (req, res, next) => {
-  req.note = await Note.findByPk(req.params.id, config) // Added config 
-  if (!req.note) 
-    return res.status(404).json({ error: 'Note not found' })
-  next()
-}
-
-const tokenExtractor = (req, res, next) => {
-  const authorization = req.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    try {
-      req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
-      next()
-    } catch (error) {
-      return res.status(401).json({ error: 'token invalid' })   
-    }
-  } else {
-    return res.status(401).json({ error: 'token missing or invalid' })
-  }
-}
 
 // Routes
 router.get('/', async (req, res) => {
   try {
-    const notes = await Note.findAll(config)
+    const notes = await Note.findAll(includeUser)
     return res.json(notes)
   } catch (error) {
     res.status(500).json({ error: error.message })

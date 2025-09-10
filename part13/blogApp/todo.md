@@ -34,3 +34,33 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
 # Exercise 13.12: Show Relationships in Endpoints
 - [x] Update `GET /api/blogs` to show the user who added each blog.
 - [x] Update `GET /api/users` to show the blogs each user has added.
+
+
+# Exercise 13.13: Filter Blogs by Keyword
+
+- [ ] Implement keyword filtering for the `GET /api/blogs` route.
+  - `GET /api/blogs?search=react` returns all blogs with the keyword "react" in the `title` field (case-insensitive).
+  - `GET /api/blogs` returns all blogs.
+
+# Exercise 13.14: Expand Filter to Author
+
+- [ ] Expand the filter to search for the keyword in both `title` and `author` fields.
+  - `GET /api/blogs?search=jami` returns blogs with the keyword "jami" in either the `title` or `author` fields.
+
+# Exercise 13.15: Order Blogs by Likes
+
+- [ ] Modify the blogs route to return blogs ordered by the number of likes in descending order.
+
+# Exercise 13.16: Authors Route with Blog and Like Counts
+
+- [ ] Create a route `/api/authors` that returns the number of blogs and total likes for each author.
+  - Implement the operation directly at the database level using `group by` and aggregation functions.
+  - The returned JSON should look like:
+    ```json
+    [
+      { "author": "Jami Kousa", "articles": "3", "likes": "10" },
+      { "author": "Kalle Ilves", "articles": "1", "likes": "2" },
+      { "author": "Dan Abramov", "articles": "1", "likes": "4" }
+    ]
+    ```
+  - **Bonus:** Order the returned data by the number of likes in the database query.
