@@ -20,8 +20,11 @@ export const includeUser = {
 export const blogQueryOptions = (req) => {
   const where = {}
 
-  if (req.query.search != undefined) {
-    where.title = { [Op.iLike]: `%${req.query.search}%` } // iLike es case-insensitive en PostgreSQL
+  if (req.query.search !== undefined) {
+    where[Op.or] = [
+      { title: { [Op.iLike]: `%${req.query.search}%` } }, // iLike es case-insensitive en PostgreSQL
+      { author: { [Op.iLike]: `%${req.query.search}%` } }
+    ]
   }
 
   return {
