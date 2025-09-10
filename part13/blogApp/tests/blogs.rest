@@ -1,6 +1,9 @@
 ### Fetches all blog entries from the API
 GET http://localhost:3001/api/blogs
 
+### Filters blog by title content
+GET http://localhost:3001/api/blogs?search=quantum
+
 ### Fetches a single blog entry by its ID
 GET http://localhost:3001/api/blogs/10
 

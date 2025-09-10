@@ -2,12 +2,12 @@ import { Router } from "express"
 
 import { Blog } from "../models/index.js"
 import { tokenExtractor, blogFinder, userFinder } from "../utils/middleware.js"
-import { includeUser } from "../utils/queries.js"
+import { blogQueryOptions } from "../utils/queries.js"
 
 const router = Router()
 
 router.get('/', async (req, res, next) => {
-  const blogs = await Blog.findAll(includeUser)
+  const blogs = await Blog.findAll(blogQueryOptions(req))
   return res.json(blogs)
 })
 
