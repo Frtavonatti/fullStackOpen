@@ -2,26 +2,18 @@ import { Router } from "express"
 
 import { Note, User } from '../models/index.js'
 import { tokenExtractor, noteFinder } from '../utils/middleware.js'
-import { includeUser } from "../utils/queries.js"
+import { notesQueryOptions } from "../utils/queries.js"
 
 const router = Router()
 
 // Routes
 router.get('/', async (req, res) => {
-  try {
-    const notes = await Note.findAll(includeUser)
-    return res.json(notes)
-  } catch (error) {
-    res.status(500).json({ error: error.message })
-  }
+  const notes = await Note.findAll(notesQueryOptions(req))
+  return res.json(notes)
 })
 
 router.get('/:id', noteFinder, async (req, res) => {
-  try {
-    return res.json(req.note)
-  } catch (error) {
-    res.status(500).json({ error: error.message })
-  }
+  return res.json(req.note)
 })
 
 router.put('/:id', noteFinder, async (req, res) => {
@@ -41,7 +33,7 @@ router.post('/', tokenExtractor, async (req, res) => {
       userId: user.id,
       date: new Date(),
     })
-    return res.json(newNote)
+    return res.status(201).json(newNote)
   } catch (error) {
     return res.status(400).json({ error: error.message })
   }

@@ -1,6 +1,11 @@
 ### Test: Get all notes
 GET http://localhost:3001/api/notes
 
+### Test: Get only important notes
+GET http://localhost:3001/api/notes?important=true
+
+### Test: Filter notes by content
+GET http://localhost:3001/api/notes?search=psql
 
 ### Test: Get one note
 GET http://localhost:3001/api/notes/5
@@ -12,8 +17,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOjEsImlhdCI6MTc1NzI3MDM3Mn0.SAI8YMHMo4esHwsChAYRGmfB6L798fd-6EG4nfZIYjA
 
 {
-  "title": "Test Note",
-  "content": "This is a test note.",
+  "content": "Learn advanced psql commands for better productivity.",
   "important": false
 }
 
