@@ -16,10 +16,10 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJAbWFpbC5jb20iLCJpZCI6NSwiaWF0IjoxNzU3NDUyMDU0fQ.2MB8awXlEOUo65wUfE04d4_szNxa5W_JyJsJ0RX3RJ4
 
 {
-  "title": "A Deep Dive into WebAssembly",
-  "author": "Grace Hopper",
-  "url": "https://techinsights.com/webassembly-deep-dive",
-  "likes": 27
+  "title": "Getting Started with Express.js",
+  "author": "Express Team",
+  "url": "https://techinsights.com/express-getting-started",
+  "likes": 1
 }
 
 ### Create a blog post with missing fields (should fail)

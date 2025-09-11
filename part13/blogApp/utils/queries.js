@@ -21,12 +21,13 @@ export const blogQueryOptions = (req) => {
   const where = {}
 
   if (req.query.search !== undefined) {
+    // [Op.or] creates a property with a symbol key to combine multiple conditions in an array
     where[Op.or] = [
       { title: { [Op.iLike]: `%${req.query.search}%` } }, // iLike es case-insensitive en PostgreSQL
       { author: { [Op.iLike]: `%${req.query.search}%` } }
     ]
   }
-
+  
   return {
     include: {
       model: User,
@@ -34,6 +35,9 @@ export const blogQueryOptions = (req) => {
         exclude: ['id', 'createdAt', 'updatedAt']
       }
     },
-    where
+    where,
+    order: [
+      ['likes', 'DESC']
+    ]
   }
 }
