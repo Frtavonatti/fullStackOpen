@@ -48,7 +48,7 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
 - [x] Modify the blogs route to return blogs ordered by the number of likes in descending order.
 
 # Exercise 13.16: Authors Route with Blog and Like Counts
-- [ ] Create a route `/api/authors` that returns the number of blogs and total likes for each author.
+- [x] Create a route `/api/authors` that returns the number of blogs and total likes for each author.
   - Implement the operation directly at the database level using `group by` and aggregation functions.
   - The returned JSON should look like:
     ```json

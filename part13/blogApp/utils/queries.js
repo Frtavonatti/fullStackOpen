@@ -1,4 +1,4 @@
-import { Op } from "sequelize"
+import { Op, fn, col } from "sequelize"
 import { User, Blog } from "../models/index.js"
 
 export const includeBlogs = {
@@ -40,4 +40,32 @@ export const blogQueryOptions = (req) => {
       ['likes', 'DESC']
     ]
   }
+}
+
+/**
+ * Query options for retrieving aggregated author statistics.
+ * @type {Object}
+ * @property {Array} attributes - The fields to select:
+ *   - 'author': The author's name or identifier.
+ *   - [fn('COUNT', col('id')), 'articles']: Uses the Sequelize `fn` function to count the number of articles per author. The second parameter, 'articles', is the alias for the resulting column.
+ *   - [fn('SUM', col('likes')), 'likes']: Uses the Sequelize `fn` function to sum the total likes per author. The second parameter, 'likes', is the alias for the resulting column.
+ * @property {string|string[]} group - Groups the results by the 'author' field.
+ *
+ * ---
+ * About the `fn` parameters:
+ * @param {string} functionName - The name of the SQL function to execute (e.g., 'COUNT', 'SUM').
+ * @param {...any} args - The arguments passed to the SQL function, such as specific columns (e.g., col('id'), col('likes')).
+ * The second parameter in the array (e.g., 'articles', 'likes') is the alias for the computed column in the result set.
+ */
+
+export const authorsQueryOptions = {
+  attributes: [ // 
+    'author',
+    [fn('COUNT', col('id')), 'articles'], // 
+    [fn('SUM', col('likes')), 'likes']
+  ],
+  group: 'author',
+  order: [
+    ['likes', 'DESC']
+  ]
 }
