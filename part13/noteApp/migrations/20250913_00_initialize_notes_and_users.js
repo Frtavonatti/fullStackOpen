@@ -38,12 +38,6 @@ export async function up({ context: queryInterface }) {
 
   await queryInterface.addColumn('notes', 'user_id', {
     type: DataTypes.INTEGER,
-    allowNull: true, // temporarily allowed
-    references: { model: 'users', key: 'id' },
-  })
-
-  await queryInterface.changeColumn('notes', 'user_id', {
-    type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'users', key: 'id' },
   })

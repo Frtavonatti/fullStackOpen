@@ -5,9 +5,9 @@ import User from "./user.js";
 User.hasMany(Note)
 Note.belongsTo(User)
 
-// Sync models with the database
-Note.sync({ alter: true }) // Use { alter: true } to update the table to match the model
-User.sync({ alter: true })
+// No sync needed - migrations handle database schema
+// Note.sync({ alter: true }) // this updates the table to match the model
+// User.sync({ alter: true })
 
 export {
   Note, User
