@@ -21,6 +21,10 @@ Note.init(
     date: {
       type: DataTypes.DATE,
     },
+    user_id: { // This was not included on the original project
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     sequelize,
