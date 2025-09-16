@@ -1,3 +1,3 @@
-import { rollBackMigration } from "./db";
+import { rollBackMigration } from "./db.js";
 
 rollBackMigration()

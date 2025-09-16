@@ -24,11 +24,19 @@ Blog.init(
     likes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
-    }
+    },
+    year: {
+      type: DataTypes.INTEGER, // Sync with migration
+      defaultValue: new Date().getFullYear()
+    },
+    user_id: { 
+      type: DataTypes.INTEGER, // Sync with migration
+      allowNull: false,
+    },
   }, {
     sequelize,
     underscored: true,
-    timestamps: false,
+    // timestamps: false,
     modelName: 'blog',
   }
 )

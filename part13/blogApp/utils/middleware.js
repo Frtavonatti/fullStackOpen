@@ -8,6 +8,8 @@ export const errorHandler = (error, req, res, next) => {
 
   if (error.name === 'SequelizeValidationError') {
     return res.status(400).json({ name: error.name, message: error.message })
+  } else if (error.name = 'YearValidationError') {
+    return res.status(400).json({ name: error.name, message: error.message })
   } else if (error.name === 'NotFoundError') {
     return res.status(404).json({ name: error.name, message: error.message })
   } else if (error.name === 'ForbiddenError') {

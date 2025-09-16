@@ -16,7 +16,14 @@ router.get('/:id', blogFinder, async (req, res, next) => {
 })
 
 router.post('/', [tokenExtractor, userFinder], async (req, res, next) => {
-  req.body.userId = req.user.id // Find out where is req.body.userId used after blog creation
+  req.body.user_id = req.user.id 
+  // req.body.userId = req.user.id // Should revert to this format
+  
+  if (req.body.year > new Date().getFullYear() || req.body.year < 1991) {
+    const error = new Error('The year must be between 1991 and the current year');
+    error.name = 'YearValidationError';
+    throw error;
+  }
   const newBlog = await Blog.create(req.body)
   return res.status(201).json(newBlog)
 })

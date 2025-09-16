@@ -38,5 +38,4 @@ export const connectToDatabase = async () => {
   await sequelize.authenticate()
   console.log('Connected to the database')
   await runMigrations()
-  // await rollBackMigrations()
 }
