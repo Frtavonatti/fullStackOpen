@@ -15,7 +15,16 @@ POST http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "username": "testuser",
-  "name": "Test User",
+  "username": "testuser2",
+  "name": "Test User2",
   "password": "testpassword"
+}
+
+### Disable a user
+PUT http://localhost:3001/api/users/testuser2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaWQiOjEsImlhdCI6MTc1Nzk3NjY4NH0.Saisw006S5fB9kn3qM35aXdO98j3vo7ol7aJ7_y8Dng
+
+{
+  "disabled": true
 }

@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import { Note } from '../models/index.js'
+import { Note, User} from '../models/index.js'
 import { includeUser } from './queries.js'
 import { SECRET } from "./config.js"
 
@@ -23,4 +23,12 @@ export const tokenExtractor = (req, res, next) => {
   } else {
     return res.status(401).json({ error: 'token missing or invalid' })
   }
+}
+
+export const isAdmin = async (req, res, next) => {
+  const user = await User.findByPk(req.decodedToken.id)
+  if (!user.admin) {
+    res.status(401).json({ error: 'operation not allowed' })
+  }
+  next()
 }
