@@ -18,7 +18,7 @@ const seed = async () => {
     title: 'First Blog Post',
     likes: 10,
     year: 2000,
-    user_id: user.dataValues.id,
+    userId: user.dataValues.id,  // Cambiado de user_id a userId
     created_at: now,
     updated_at: now
   })
@@ -29,7 +29,7 @@ const seed = async () => {
     title: 'Second Blog Post',
     likes: 5,
     year: 1991,
-    user_id: user.dataValues.id,
+    userId: user.dataValues.id,  // Cambiado de user_id a userId
     created_at: now,
     updated_at: now
   })

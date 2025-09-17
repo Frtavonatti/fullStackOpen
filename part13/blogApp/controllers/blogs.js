@@ -6,6 +6,7 @@ import { blogQueryOptions } from "../utils/queries.js"
 
 const router = Router()
 
+
 router.get('/', async (req, res, next) => {
   const blogs = await Blog.findAll(blogQueryOptions(req))
   return res.json(blogs)
@@ -16,14 +17,14 @@ router.get('/:id', blogFinder, async (req, res, next) => {
 })
 
 router.post('/', [tokenExtractor, userFinder], async (req, res, next) => {
-  req.body.user_id = req.user.id 
-  // req.body.userId = req.user.id // Should revert to this format
-  
+  req.body.userId = req.user.id
+
   if (req.body.year > new Date().getFullYear() || req.body.year < 1991) {
     const error = new Error('The year must be between 1991 and the current year');
     error.name = 'YearValidationError';
     throw error;
   }
+
   const newBlog = await Blog.create(req.body)
   return res.status(201).json(newBlog)
 })

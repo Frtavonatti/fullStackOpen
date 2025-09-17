@@ -4,19 +4,22 @@ import { includeUser, includeBlogs } from "./queries.js"
 import { SECRET } from "./config.js"
 
 export const errorHandler = (error, req, res, next) => {
-  console.error(error.message)
+  console.error(error)
 
-  if (error.name === 'SequelizeValidationError') {
-    return res.status(400).json({ name: error.name, message: error.message })
-  } else if (error.name = 'YearValidationError') {
-    return res.status(400).json({ name: error.name, message: error.message })
-  } else if (error.name === 'NotFoundError') {
-    return res.status(404).json({ name: error.name, message: error.message })
-  } else if (error.name === 'ForbiddenError') {
-    return res.status(403).json({ name: error.name, message: error.message })
+  const errorMap = {
+    SequelizeValidationError: 400,
+    YearValidationError: 400,
+    NotFoundError: 404,
+    ForbiddenError: 403,
   }
 
-  return res.status(500).json({ error: 'Internal server error' })
+  const status = errorMap[error.name] || 500
+  const message = error.message || 'Internal server error'
+
+  res.status(status).json({
+    name: error.name || 'Error',
+    message,
+  })
 }
 
 export const tokenExtractor = (req, res, next) => {

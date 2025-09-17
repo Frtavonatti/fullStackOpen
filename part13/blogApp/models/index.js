@@ -2,8 +2,12 @@ import Blog from "./blog.js"
 import User from "./user.js"
 
 // Define associations between models
-Blog.belongsTo(User)
-User.hasMany(Blog)
+User.hasMany(Blog, {
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE'
+});
+
+Blog.belongsTo(User);
 
 // Synchronize models with the database
 // Blog.sync({ alter: true })

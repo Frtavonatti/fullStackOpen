@@ -27,17 +27,17 @@ Blog.init(
     },
     year: {
       type: DataTypes.INTEGER, // Sync with migration
-      defaultValue: new Date().getFullYear()
-    },
-    user_id: { 
-      type: DataTypes.INTEGER, // Sync with migration
-      allowNull: false,
+      defaultValue: new Date().getFullYear(),
+      // validate: {
+      //   min: 1991,
+      //   max: 2025
+      // }
     },
   }, {
     sequelize,
     underscored: true,
-    // timestamps: false,
     modelName: 'blog',
+    // timestamps: false,
   }
 )
 
