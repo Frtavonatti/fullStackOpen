@@ -2,18 +2,18 @@ import { Router } from "express";
 
 import { User } from '../models/index.js';
 import { tokenExtractor, isAdmin } from "../utils/middleware.js";
-import { includeNotes } from "../utils/queries.js";
+import { userQueryOptions } from "../utils/queries.js";
 
 const router = Router();
 
 
 router.get('/', async (req, res) => {
-  const users = await User.findAll(includeNotes);
+  const users = await User.findAll(userQueryOptions);
   res.json(users);
 })
 
 router.get('/:id', async (req, res, next) => {
-  const user = await User.findByPk(req.params.id, includeNotes);
+  const user = await User.findByPk(req.params.id, userQueryOptions);
   if (user) {
     res.json(user);
   } else {

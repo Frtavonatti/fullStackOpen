@@ -28,10 +28,10 @@ Blog.init(
     year: {
       type: DataTypes.INTEGER, // Sync with migration
       defaultValue: new Date().getFullYear(),
-      // validate: {
-      //   min: 1991,
-      //   max: 2025
-      // }
+      validate: {
+        min: 1991,
+        max: 2025
+      }
     },
   }, {
     sequelize,

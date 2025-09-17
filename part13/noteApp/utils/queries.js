@@ -1,7 +1,6 @@
 import { Op } from "sequelize"
-import { User, Note } from "../models/index.js"
+import { User, Note, Team } from "../models/index.js"
 
-// Options to include associated notes when fetching users
 export const includeUser = {
   attributes: { exclude: ['userId'] },
   include: {
@@ -32,10 +31,21 @@ export const notesQueryOptions = (req) => {
   }
 }
 
-// Options to include associated notes when fetching users
-export const includeNotes = {
+/**
+ * Options for querying a user with associated Notes and Teams.
+ * Includes related Note and Team models, excluding 'userId' from Notes and selecting only 'name' and 'id' from Teams.
+ * The 'through' option is important because it omits attributes from the join table in many-to-many relationships.
+ */
+export const userQueryOptions = {
   include: {
     model: Note,
     attributes: { exclude: ['userId'] }
+  },
+  include: {
+    model: Team,
+    attributes: ['name', 'id'],
+    through: { 
+      attributes: []
+    }
   }
 }
