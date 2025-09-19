@@ -1,41 +1,54 @@
+import { User, Blog, Reading_List } from '../models/index.js'
 import { sequelize } from '../utils/db.js'
-import { User, Blog } from '../models/index.js'
 
-const seed = async () => {
-  // await sequelize.sync({ force: true })
-  const now = new Date()
+async function main() {
+  await sequelize.sync({ force: true }) // Borra y recrea todas las tablas
 
-  const user = await User.create({
+  const alice = await User.create({
     name: 'Alice Example',
-    username: 'alice@example.com',
-    created_at: now,
-    updated_at: now
+    username: 'alice@example.com'
   })
 
-  await Blog.create({
-    author: 'Alice Example',
-    url: 'https://example.com/blog1',
-    title: 'First Blog Post',
-    likes: 10,
-    year: 2000,
-    userId: user.dataValues.id,  // Cambiado de user_id a userId
-    created_at: now,
-    updated_at: now
-  })
+  const blogs = await Blog.bulkCreate([
+    {
+      author: 'Alice Example',
+      url: 'https://example.com/blog1',
+      title: 'First Blog Post',
+      likes: 10,
+      userId: alice.id,
+      year: 2000
+    },
+    {
+      author: 'Alice Example',
+      url: 'https://example.com/blog2',
+      title: 'Second Blog Post',
+      likes: 5,
+      userId: alice.id,
+      year: 1991
+    },
+    {
+      author: 'Tech Insights',
+      url: 'https://techinsights.com/rest-apis-nodejs',
+      title: 'Understanding REST APIs in Node.js',
+      likes: 5,
+      userId: alice.id,
+      year: 2025
+    }
+  ])
 
-  await Blog.create({
-    author: 'Alice Example',
-    url: 'https://example.com/blog2',
-    title: 'Second Blog Post',
-    likes: 5,
-    year: 1991,
-    userId: user.dataValues.id,  // Cambiado de user_id a userId
-    created_at: now,
-    updated_at: now
-  })
+  for (const blog of blogs.slice(0, 2)) {
+    await Reading_List.create({
+      userId: alice.id,
+      blogId: blog.id,
+      read: false
+    })
+  }
 
-  console.log('Seed completed')
   await sequelize.close()
 }
 
-seed()
+main().then(() => {
+  console.log('Database populated successfully.')
+}).catch((err) => {
+  console.error('Error populating database:', err)
+})

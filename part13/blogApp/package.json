@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
+    "migrate": "node utils/migrate.js",
+    "rollback": "node utils/migrate.js rollback",
     "drop": "node seeders/dropTables.js",
     "seed": "node seeders/seed.js",
-    "reset": "npm run drop && npm start && npm run seed"
+    "reset": "npm run drop && npm run migrate && npm run seed"
   },
   "author": "frtavonatti",
   "license": "MIT",

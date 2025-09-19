@@ -21,7 +21,7 @@ Note.init(
     date: {
       type: DataTypes.DATE,
     },
-    user_id: { // This was not included on the original project
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

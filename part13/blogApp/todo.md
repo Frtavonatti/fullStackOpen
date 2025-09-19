@@ -59,3 +59,46 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
     ]
     ```
   - **Bonus:** Order the returned data by the number of likes in the database query.
+  
+  # Exercise 13.17: Initialize Database and Timestamps
+  - [x] Delete all tables from the application's database.
+  - [x] Create a migration to initialize the database.
+  - [x] Add `created_at` and `updated_at` timestamp fields to both tables.
+  - [x] Remove `User.sync()` and `Blog.sync()` commands from the code.
+  - [x] If tables are deleted manually, clear the contents of the `migrations` table to allow new migrations.
+
+  # Exercise 13.18: Year Attribute in Blogs
+  - [x] Expand the application via migration so that blogs have a `year` attribute.
+  - [x] The `year` field must be an integer at least 1991 and no greater than the current year.
+  - [x] The application must display an appropriate error message if the year is invalid.
+
+  # Exercise 13.19: Reading List Feature
+  - [x] Allow users to add blogs to their reading list.
+    - When a blog is added, it should be marked as unread by default.
+  - [x] Implement the reading list using a join table (e.g., `ReadingList`).
+    - The join table should include fields for `userId`, `blogId`, and `read` (default: `false`).
+  - [x] Create database migrations to add the join table and necessary fields.
+  - [x] Verify addition and viewing of the reading list directly in the database.
+
+  # Exercise 13.20: Reading List
+  - [ ] Add functionality to support a reading list.
+    - Create the route `POST /api/readinglists` to add a blog to a user's reading list.
+      - The requesti body must include `blogId` and `userId`.
+    - Modify the route `GET /api/users/:id` to return user information along with the reading list in the specified format.
+
+  # Exercise 13.21: Reading Status in the List
+  - [ ] Expand the `GET /api/users/:id` route so that each blog in the reading list includes:
+    - Whether the blog has been read (`read`).
+    - The ID of the corresponding row in the join table (`id`).
+    - The `readinglists` property should be an array containing a single object per blog.
+
+  # Exercise 13.22: Mark Blog as Read
+  - [ ] Implement the route `PUT /api/readinglists/:id` to mark a blog as read.
+    - The request body must include `{ "read": true }`.
+    - Only the owner user can mark their blogs as read, identified by the JWT token.
+
+  # Exercise 13.23: Filter Reading List by Status
+  - [ ] Modify the route `GET /api/users/:id` to allow filtering the reading list:
+    - `GET /api/users/:id` returns the complete reading list.
+    - `GET /api/users/:id?read=true` returns only read blogs.
+    - `GET /api/users/:id?read=false` returns only unread blogs.
