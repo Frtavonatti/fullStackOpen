@@ -30,7 +30,7 @@ router.post('/', tokenExtractor, async (req, res) => {
     const user = await User.findByPk(req.decodedToken.id)
     const newNote = await Note.create({
       ...req.body, 
-      userId: user.id,
+      user_id: user.dataValues.id,
       date: new Date(),
     })
     return res.status(201).json(newNote)
