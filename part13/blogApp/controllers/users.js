@@ -15,7 +15,7 @@ by id and username instead of handling "User not found" directly in the controll
 router.get('/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id, getOneUserOptions)
     if (!user) {
-    const error = new Error('User not found')
+    const error = new Error(`No user found with id ${req.params.id}`)
     error.name = 'NotFoundError'
     throw error
   }
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
 router.put('/:username', async (req, res) => {
   const user = await User.findOne({ where: { username: req.params.username }})
     if (!user) {
-    const error = new Error('User not found')
+    const error = new Error(`No user found with username: ${req.params.username}`)
     error.name = 'NotFoundError'
     throw error
   }

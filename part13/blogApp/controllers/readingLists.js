@@ -26,7 +26,7 @@ readingListRouter.put('/:id', tokenExtractor, async (req, res) => {
     const updatedReadingList = await readingList.update({ read: req.body.read })
     res.status(200).json(updatedReadingList)
   } else {
-    const error = new Error("No changes detected: 'read' value is the same as before.")
+    const error = new Error()
     error.name = "NoChangeError"
     throw error
   }

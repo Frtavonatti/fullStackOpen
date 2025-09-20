@@ -7,19 +7,19 @@ export const errorHandler = (error, req, res, next) => {
   console.error(error)
 
   const errorMap = {
-    SequelizeValidationError: 400,
-    YearValidationError: 400,
-    NoChangeError: 400,
-    NotFoundError: 404,
-    ForbiddenError: 403,
+    SequelizeValidationError: { status: 400, message: 'Validation failed.' },
+    YearValidationError: { status: 400, message: 'Year is invalid.' },
+    NoChangeError: { status: 400, message: "No changes detected: 'read' value is the same as before." },
+    NotFoundError: { status: 404, message: 'Resource not found.' },
+    ForbiddenError: { status: 403, message: 'Access forbidden.' },
   }
 
-  const status = errorMap[error.name] || 500
-  const message = error.message || 'Internal server error'
+  const { status, message } = errorMap[error.name] 
+  || { status: 500, message: 'Internal server error' }
 
   res.status(status).json({
     name: error.name || 'Error',
-    message,
+    message: error.message || error.customMessage || message,
   })
 }
 
