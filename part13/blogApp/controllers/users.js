@@ -1,7 +1,7 @@
 import { Router } from "express";
 
 import { User } from "../models/index.js";
-import { includeBlogs } from "../utils/queries.js";
+import { includeBlogs, getOneUserOptions } from "../utils/queries.js";
 
 const router = Router();
 
@@ -10,10 +10,10 @@ router.get('/', async (req, res) => {
   return res.json(users)
 })
 
-// TODO: As the project grows, consider adding reusable middlewares to find users 
-// by id and username instead of handling "User not found" directly in the controller
+/* TODO: As the project grows, consider adding reusable middlewares to find users 
+by id and username instead of handling "User not found" directly in the controller */
 router.get('/:id', async (req, res, next) => {
-  const user = await User.findByPk(req.params.id, includeBlogs)
+  const user = await User.findByPk(req.params.id, getOneUserOptions)
     if (!user) {
     const error = new Error('User not found')
     error.name = 'NotFoundError'

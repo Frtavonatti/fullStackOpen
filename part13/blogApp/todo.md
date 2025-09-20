@@ -59,7 +59,7 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
     ]
     ```
   - **Bonus:** Order the returned data by the number of likes in the database query.
-  
+
   # Exercise 13.17: Initialize Database and Timestamps
   - [x] Delete all tables from the application's database.
   - [x] Create a migration to initialize the database.
@@ -81,10 +81,10 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
   - [x] Verify addition and viewing of the reading list directly in the database.
 
   # Exercise 13.20: Reading List
-  - [ ] Add functionality to support a reading list.
+  - [x] Add functionality to support a reading list.
     - Create the route `POST /api/readinglists` to add a blog to a user's reading list.
-      - The requesti body must include `blogId` and `userId`.
-    - Modify the route `GET /api/users/:id` to return user information along with the reading list in the specified format.
+      - The request body must include `blogId` and `userId`.
+  - [x] Modify the route `GET /api/users/:id` to return user information along with the reading list in the specified format.
 
   # Exercise 13.21: Reading Status in the List
   - [ ] Expand the `GET /api/users/:id` route so that each blog in the reading list includes:

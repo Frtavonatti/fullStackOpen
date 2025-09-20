@@ -71,9 +71,7 @@ export const oneUsersQueryOptions = {
     {
       model: Team,
       attributes: ['name', 'id'],
-      through: {
-        attributes: []
-      }
+      through: { attributes: [] },
     }
   ]
 }

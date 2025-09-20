@@ -1,0 +1,15 @@
+### Get all reading lists
+GET http://localhost:3001/api/readinglists
+Accept: application/json
+
+###
+
+### Create a new reading list
+POST http://localhost:3001/api/readinglists
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "blogId": 3, 
+  "read": true
+}

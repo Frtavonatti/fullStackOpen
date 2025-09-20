@@ -1,11 +1,23 @@
 import { Op, fn, col } from "sequelize"
-import { User, Blog } from "../models/index.js"
+import { User, Blog, Reading_List } from "../models/index.js"
 
 export const includeBlogs = {
   include: { 
     model: Blog, 
     attributes: ['author', 'title']
   }
+}
+
+export const getOneUserOptions = {
+  attributes: ['name', 'username'],
+  include: [{
+    model: Blog,
+    as: 'readings',
+    attributes: ['id', 'url', 'title', 'author', 'likes', 'year'],
+    through: {
+      attributes: []
+    }
+  }]
 }
 
 export const includeUser = {
