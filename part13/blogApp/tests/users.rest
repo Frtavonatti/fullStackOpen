@@ -14,9 +14,9 @@ Content-Type: application/json
 }
 
 ### Actualizar el nombre de un usuario por username
-PUT http://localhost:3001/api/users/nuevo_usuario
+PUT http://localhost:3001/api/users/user2@mail.com
 Content-Type: application/json
 
 {
-  "name": "Usuario Actualizado"
+  "name": "updated"
 }

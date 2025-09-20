@@ -12,12 +12,12 @@ router.get('/', async (req, res) => {
 
 /* TODO: As the project grows, consider adding reusable middlewares to find users 
 by id and username instead of handling "User not found" directly in the controller */
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id, getOneUserOptions)
     if (!user) {
     const error = new Error('User not found')
     error.name = 'NotFoundError'
-    return next(error)
+    throw error
   }
   return res.json(user)
 })
@@ -28,13 +28,13 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:username', async (req, res) => {
-  const user = await User.findOne({ username: req.params.username }) // Correct: add where
+  const user = await User.findOne({ where: { username: req.params.username }})
     if (!user) {
     const error = new Error('User not found')
     error.name = 'NotFoundError'
-    return next(error)
+    throw error
   }
-  const updatedUser = user.update({ name: req.body.name })
+  const updatedUser = await user.update({ name: req.body.name })
   return res.status(200).json(updatedUser)
 })
 
