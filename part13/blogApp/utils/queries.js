@@ -1,5 +1,5 @@
 import { Op, fn, col } from "sequelize"
-import { User, Blog, Reading_List } from "../models/index.js"
+import { User, Blog } from "../models/index.js"
 
 export const includeBlogs = {
   include: { 
@@ -14,8 +14,8 @@ export const getOneUserOptions = {
     model: Blog,
     as: 'readings',
     attributes: ['id', 'url', 'title', 'author', 'likes', 'year'],
-    through: {
-      attributes: []
+    through: { 
+      attributes: ['id', 'read'] 
     }
   }]
 }
