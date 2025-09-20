@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
 })
 
 router.put('/:username', async (req, res) => {
-  const user = await User.findOne({ username: req.params.username })
+  const user = await User.findOne({ username: req.params.username }) // Correct: add where
     if (!user) {
     const error = new Error('User not found')
     error.name = 'NotFoundError'

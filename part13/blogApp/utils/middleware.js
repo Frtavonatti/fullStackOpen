@@ -9,6 +9,7 @@ export const errorHandler = (error, req, res, next) => {
   const errorMap = {
     SequelizeValidationError: 400,
     YearValidationError: 400,
+    NoChangeError: 400,
     NotFoundError: 404,
     ForbiddenError: 403,
   }

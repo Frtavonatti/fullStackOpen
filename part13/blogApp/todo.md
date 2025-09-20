@@ -87,13 +87,13 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
   - [x] Modify the route `GET /api/users/:id` to return user information along with the reading list in the specified format.
 
   # Exercise 13.21: Reading Status in the List
-  - [ ] Expand the `GET /api/users/:id` route so that each blog in the reading list includes:
+  - [x] Expand the `GET /api/users/:id` route so that each blog in the reading list includes:
     - Whether the blog has been read (`read`).
     - The ID of the corresponding row in the join table (`id`).
     - The `readinglists` property should be an array containing a single object per blog.
 
   # Exercise 13.22: Mark Blog as Read
-  - [ ] Implement the route `PUT /api/readinglists/:id` to mark a blog as read.
+  - [x] Implement the route `PUT /api/readinglists/:id` to mark a blog as read.
     - The request body must include `{ "read": true }`.
     - Only the owner user can mark their blogs as read, identified by the JWT token.
 
