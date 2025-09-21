@@ -98,7 +98,7 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
     - Only the owner user can mark their blogs as read, identified by the JWT token.
 
   # Exercise 13.23: Filter Reading List by Status
-  - [ ] Modify the route `GET /api/users/:id` to allow filtering the reading list:
+  - [x] Modify the route `GET /api/users/:id` to allow filtering the reading list:
     - `GET /api/users/:id` returns the complete reading list.
     - `GET /api/users/:id?read=true` returns only read blogs.
     - `GET /api/users/:id?read=false` returns only unread blogs.

@@ -1,10 +1,16 @@
-### Obtener todos los usuarios
+### Get all users
 GET http://localhost:3001/api/users
 
-### Obtener un usuario por ID
+### Get a user by ID
 GET http://localhost:3001/api/users/2
 
-### Crear un nuevo usuario
+### Get a user by ID with 'read' parameter set to true
+GET http://localhost:3001/api/users/2?read=true
+
+### Get a user by ID with 'read' parameter set to false
+GET http://localhost:3001/api/users/2?read=false
+
+### Create a new user
 POST http://localhost:3001/api/users
 Content-Type: application/json
 
@@ -13,7 +19,7 @@ Content-Type: application/json
   "username": "user2@mail.com"
 }
 
-### Actualizar el nombre de un usuario por username
+### Update a user's name by username
 PUT http://localhost:3001/api/users/user2@mail.com
 Content-Type: application/json
 

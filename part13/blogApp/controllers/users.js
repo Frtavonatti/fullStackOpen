@@ -5,15 +5,13 @@ import { includeBlogs, getOneUserOptions } from "../utils/queries.js";
 
 const router = Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (_req, res) => {
   const users = await User.findAll(includeBlogs)
   return res.json(users)
 })
 
-/* TODO: As the project grows, consider adding reusable middlewares to find users 
-by id and username instead of handling "User not found" directly in the controller */
 router.get('/:id', async (req, res) => {
-  const user = await User.findByPk(req.params.id, getOneUserOptions)
+  const user = await User.findByPk(req.params.id, getOneUserOptions(req))
     if (!user) {
     const error = new Error(`No user found with id ${req.params.id}`)
     error.name = 'NotFoundError'

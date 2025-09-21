@@ -8,16 +8,29 @@ export const includeBlogs = {
   }
 }
 
-export const getOneUserOptions = {
-  attributes: ['name', 'username'],
-  include: [{
-    model: Blog,
-    as: 'readings',
-    attributes: ['id', 'url', 'title', 'author', 'likes', 'year'],
-    through: { 
-      attributes: ['id', 'read'] 
+export const getOneUserOptions = (req) => {
+  const throughWhere = {}
+
+  if (req.query.read !== undefined) {
+    if (req.query.read === 'true') {
+      throughWhere.read = true
+    } else if (req.query.read === 'false') {
+      throughWhere.read = false
     }
-  }]
+  }
+
+  return {
+    attributes: ['name', 'username'],
+      include: [{
+      model: Blog,
+      as: 'readings',
+      attributes: ['id', 'url', 'title', 'author', 'likes', 'year'],
+      through: { 
+        attributes: ['id', 'read'], 
+        where: throughWhere,
+      }
+    }]
+  }
 }
 
 export const includeUser = {
@@ -35,7 +48,7 @@ export const blogQueryOptions = (req) => {
   if (req.query.search !== undefined) {
     // [Op.or] creates a property with a symbol key to combine multiple conditions in an array
     where[Op.or] = [
-      { title: { [Op.iLike]: `%${req.query.search}%` } }, // iLike es case-insensitive en PostgreSQL
+      { title: { [Op.iLike]: `%${req.query.search}%` } }, // iLike is case-insensitive
       { author: { [Op.iLike]: `%${req.query.search}%` } }
     ]
   }
