@@ -12,7 +12,11 @@ export const getOneUserOptions = (req) => {
   const throughWhere = {}
 
   if (req.query.read !== undefined) {
-    throughWhere.read = req.query.read
+    if (req.query.read === 'true') {
+      throughWhere.read = true
+    } else if (req.query.read === 'false') {
+      throughWhere.read = false
+    }
   }
 
   return {
