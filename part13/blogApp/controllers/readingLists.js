@@ -5,7 +5,7 @@ import { tokenExtractor } from "../utils/middleware.js";
 
 const readingListRouter = Router()
 
-readingListRouter.get('/', async (req, res) => {
+readingListRouter.get('/', async (_req, res) => {
   const readinglists = await Reading_List.findAll()
   res.json(readinglists) 
 }) 
