@@ -2,13 +2,25 @@
 GET http://localhost:3001/api/users
 Accept: application/json
 
-###
+### Get admin users
+GET http://localhost:3001/api/users/admin
+Accept: application/json
+
+### Get disabled users
+GET http://localhost:3001/api/users/disabled
+Accept: application/json
+
+### Get users by name (replace :name with a real name or part of it)
+GET http://localhost:3001/api/users/username/testuser
+Accept: application/json
 
 ### Get user by id (replace :id with a real user id)
 GET http://localhost:3001/api/users/1
 Accept: application/json
 
-###
+### Get user and teams by id
+GET http://localhost:3001/api/users/1?teams
+Accept: application/json
 
 ### Create new user
 POST http://localhost:3001/api/users

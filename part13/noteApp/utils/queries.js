@@ -68,10 +68,10 @@ export const oneUsersQueryOptions = {
         attributes: ['name']
       }]
     },
-    {
-      model: Team,
-      attributes: ['name', 'id'],
-      through: { attributes: [] },
-    }
+    // {
+    //   model: Team,
+    //   attributes: ['name', 'id'],
+    //   through: { attributes: [] },
+    // }
   ]
 }
