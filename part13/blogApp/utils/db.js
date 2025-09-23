@@ -28,6 +28,16 @@ export const runMigrations = async () => {
   })
 }
 
+export const runLatestMigration = async () => {
+  const migrator = new Umzug(migrationConf)
+  const [migration] = await migrator.up({ step: 1 })
+  if (migration) {
+    console.log('Ran migration:', migration.name)
+  } else {
+    console.log('No pending migrations.')
+  }
+}
+
 export const rollBackMigrations = async () => {
   await sequelize.authenticate()
   const migrator = new Umzug(migrationConf)

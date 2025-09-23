@@ -1,9 +1,15 @@
-import { runMigrations, rollBackMigrations } from "./db.js";
+import { runMigrations, runLatestMigration, rollBackMigrations } from "./db.js";
 
 const action = process.argv[2];
 
-if (action === "down" || action === "rollback") {
-  await rollBackMigrations();
-} else {
-  await runMigrations();
+switch (action) {
+  case "down":
+  case "rollback":
+    await rollBackMigrations();
+    break;
+  case "latest":
+    await runLatestMigration();
+    break;
+  default:
+    await runMigrations();
 }

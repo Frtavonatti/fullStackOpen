@@ -23,6 +23,7 @@ router.post('/', async (req, res) => {
   }
 
   const token = jwt.sign(userForToken, SECRET)
+  console.log('TOKEN: ', token) // TODO: delete log
   
   return res.status(200).json({ 
     token, 

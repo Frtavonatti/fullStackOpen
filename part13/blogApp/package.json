@@ -8,8 +8,9 @@
     "migrate": "node utils/migrate.js",
     "rollback": "node utils/migrate.js rollback",
     "drop": "node seeders/dropTables.js",
-    "seed": "node seeders/seed.js",
-    "reset": "npm run drop && npm run migrate && npm run seed"
+    "seed": "node seeders/seed_02.js",
+    "reset": "npm run drop && npm run migrate && npm run seed",
+    "postgres": "docker exec -it blogapp-postgres-1 psql -U test -d blogApp"
   },
   "author": "frtavonatti",
   "license": "MIT",

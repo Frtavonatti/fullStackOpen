@@ -107,14 +107,17 @@ It is not necessary to modify the blog fetching endpoints `GET /api/blogs` or us
   - [ ] Expand the authentication system to prevent users with revoked access from performing any actions that require login, even if they still possess a valid token.
 
   ## Requirements
-  - Add a boolean column to the `users` table to indicate if a user is disabled.
+  - [x] Add a boolean column to the `users` table to indicate if a user is disabled.
     - Users can be enabled or disabled directly in the database.
-  - Create a new table to store active sessions.
+
+  - [ ] Create a new table to store active sessions.
     - A session is created when a user logs in (`POST /api/login`).
     - Every request requiring authentication must check for a valid session in this table.
-  - Implement a route to allow users to log out, e.g., `DELETE /api/logout`.
+    
+  - [ ] Implement a route to allow users to log out, e.g., `DELETE /api/logout`.
     - Logging out removes the user's active sessions from the database.
-  - Ensure that actions requiring authentication fail if the token is expired or the session has been deleted (e.g., after logout).
+
+  - [ ] Ensure that actions requiring authentication fail if the token is expired or the session has been deleted
   - Make all necessary database changes using migrations.
   - Optionally, you may use an npm library designed for session management.
 

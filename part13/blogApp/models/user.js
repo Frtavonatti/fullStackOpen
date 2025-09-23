@@ -18,10 +18,12 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate: {
-        isEmail: true,
-      }
+      validate: { isEmail: true }
     },
+    disabled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    }
   },
   {
     sequelize,
