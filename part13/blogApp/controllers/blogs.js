@@ -1,7 +1,7 @@
 import { Router } from "express"
 
 import { Blog } from "../models/index.js"
-import { tokenExtractor, blogFinder, userFinder } from "../utils/middleware.js"
+import { tokenExtractor, sessionValidator, blogFinder, userFinder } from "../utils/middleware.js"
 import { blogQueryOptions } from "../utils/queries.js"
 
 const router = Router()
@@ -16,7 +16,7 @@ router.get('/:id', blogFinder, async (req, res) => {
   return res.json(req.blog)
 })
 
-router.post('/', [tokenExtractor, userFinder], async (req, res) => {
+router.post('/', [tokenExtractor, sessionValidator, userFinder], async (req, res) => {
   req.body.userId = req.user.id
 
   if (req.body.year > new Date().getFullYear() || req.body.year < 1991) {
@@ -34,7 +34,7 @@ router.put('/:id', blogFinder, async (req, res) => {
   return res.status(200).json(updatedBlog)
 })
 
-router.delete('/:id', [tokenExtractor, userFinder, blogFinder], async (req, res) => {
+router.delete('/:id', [tokenExtractor, sessionValidator, userFinder, blogFinder], async (req, res) => {
   if (req.user.id !== req.blog.userId) {
     const error = new Error('You are not authorized to delete this blog')
     error.name = 'ForbiddenError'

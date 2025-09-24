@@ -1,0 +1,10 @@
+### Test logout with valid Bearer token
+DELETE http://localhost:3001/api/logout
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsaWNlQGV4YW1wbGUuY29tIiwiaWQiOjEsImlhdCI6MTc1ODc0NDgxN30.h3i8yQIJPP2O4Y2dX34ETWv-3TqWhC2K48uMSEeA1H8
+
+### Test logout with missing Bearer token
+DELETE http://localhost:3001/api/logout
+
+### Test logout with invalid Bearer token
+DELETE http://localhost:3001/api/logout
+Authorization: Bearer invalid_token

@@ -21,6 +21,14 @@ export async function up ({ context: queryInterface }) {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: { model: 'blogs', key: 'id' }
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updated_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
     }
   })
 }

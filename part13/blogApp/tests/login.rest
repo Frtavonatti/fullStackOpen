@@ -6,3 +6,12 @@ Content-Type: application/json
   "username": "alice@example.com",
   "password": "secret"
 }
+
+### Login with a disabled user
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "user2@mail.com",
+  "password": "secret"
+}
