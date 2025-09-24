@@ -13,7 +13,7 @@ GET http://localhost:3001/api/blogs/10
 ### Create a new blog post
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsaWNlQGV4YW1wbGUuY29tIiwiaWQiOjEsImlhdCI6MTc1ODA1NTQ3OX0.jPFzAgjkluGGyCbeMYKOVEbfTKPO9pTfODF2AckJlhs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsaWNlQGV4YW1wbGUuY29tIiwiaWQiOjEsImlhdCI6MTc1ODY2NTAxMX0.K-4hh8DnvRm_AT9gkCD4eaSkCGuNARrkQX0ntvhGjOI
 
 {
   "title": "Understanding REST APIs in Node.js",
@@ -32,8 +32,8 @@ Content-Type: application/json
 }
 
 ### Delete a blog post by its ID
-DELETE http://localhost:3001/api/blogs/9
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXJAbWFpbC5jb20iLCJpZCI6NSwiaWF0IjoxNzU3MzY4OTc1fQ.UH_pU_j165jWu19gd-4bdMsPUpnPCDa5Yvqs0RkjeUI
+DELETE http://localhost:3001/api/blogs/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFsaWNlQGV4YW1wbGUuY29tIiwiaWQiOjEsImlhdCI6MTc1ODY2NTAxMX0.K-4hh8DnvRm_AT9gkCD4eaSkCGuNARrkQX0ntvhGjOI
 
 ### Update the number of likes for a blog post
 PUT http://localhost:3001/api/blogs/9

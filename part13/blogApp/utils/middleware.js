@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import { Blog, User } from "../models/index.js"
+import { Blog, User, Session } from "../models/index.js"
 import { includeUser, includeBlogs } from "./queries.js"
 import { SECRET } from "./config.js"
 
@@ -28,6 +28,7 @@ export const tokenExtractor = (req, res, next) => {
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
     try {
       req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
+      req.token = authorization.substring(7)
       next()
     } catch (error) {
       return res.status(401).json({ error: 'token invalid' })
@@ -35,6 +36,34 @@ export const tokenExtractor = (req, res, next) => {
   } else {
     return res.status(401).json({ error: 'token missing or invalid' })
   }
+}
+
+export const sessionValidator = async (req, res, next) => {
+  const session = await Session.findOne({ 
+    where: {
+      token: req.token,
+    }
+  })
+
+  if (!session) {
+    return res.status(404).json({ error: 'session not found' })
+  } else if (!session.active) {
+    return res.status(401).json({ error: 'session is inactive' })
+  }
+
+  const user = await User.findByPk(session.userId)
+  if (!user) {
+    return res.status(404).json({ error: 'user not found' })
+  }
+
+  if (user.disabled) {
+    await session.update({ active: false })
+    return res.status(401).json({ error: 'user is disabled' })
+  }
+
+  req.user = user
+  req.session = session
+  next()
 }
 
 export const blogFinder = async (req, res, next) => {

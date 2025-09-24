@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import jwt from 'jsonwebtoken'
 
-import { User } from '../models/index.js'
+import { User, Session } from '../models/index.js'
 import { SECRET } from '../utils/config.js'
 
 const router = Router()
@@ -10,9 +10,11 @@ router.post('/', async (req, res) => {
   const { username, password } = req.body
 
   const user = await User.findOne({ where: {username: username} })
+  if (user.disabled) {
+    return res.status(401).json({ error: 'user is disabled' })
+  }
 
   const passwordCorrect = password === 'secret' // for demonstrations purposes only
-
   if (!(user && passwordCorrect)) {
     return res.status(401).json({ error: 'invalid username or password' })
   }
@@ -23,7 +25,12 @@ router.post('/', async (req, res) => {
   }
 
   const token = jwt.sign(userForToken, SECRET)
-  console.log('TOKEN: ', token) // TODO: delete log
+
+  await Session.create({
+    token,
+    userId: user.id,
+    active: true
+  })
   
   return res.status(200).json({ 
     token, 
