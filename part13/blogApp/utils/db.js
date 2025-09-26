@@ -47,5 +47,7 @@ export const rollBackMigrations = async () => {
 export const connectToDatabase = async () => {
   await sequelize.authenticate()
   console.log('Connected to the database')
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`)
+  console.log(`Database URL: ${DATABASE_URL}`)
   // await runMigrations()
 }

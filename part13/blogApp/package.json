@@ -3,15 +3,20 @@
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js",
-    "migrate": "node utils/migrate.js",
-    "rollback": "node utils/migrate.js rollback",
-    "drop": "node seeders/dropTables.js",
-    "seed": "node seeders/seed_02.js",
-    "reset": "npm run drop && npm run migrate && npm run seed",
-    "postgres": "docker exec -it blogapp-postgres-1 psql -U test -d blogApp"
-  },
+"scripts": {
+  "start": "node index.js",
+  "dev": "nodemon index.js",
+  "db:migrate": "node utils/migrate.js",
+  "db:rollback": "node utils/migrate.js rollback",
+  "db:drop": "node seeders/dropTables.js",
+  "db:seed": "node seeders/seed_02.js",
+  "db:reset": "npm run db:drop && npm run db:migrate && npm run db:seed",
+  "test": "NODE_ENV=test node --test tests/",
+  "test:full": "NODE_ENV=test npm run db:migrate && NODE_ENV=test npm run db:seed && NODE_ENV=test node --test tests/",
+  "test:clean": "NODE_ENV=test npm run db:migrate && NODE_ENV=test npm run db:seed && NODE_ENV=test node --test tests/ && NODE_ENV=test npm run db:drop",
+  "pg": "docker exec -it blogapp-postgres-1 psql -U test -d blogApp",
+  "pg:test": "docker exec -it blogapp-postgres_test-1 psql -U test -d blogApp_test"
+},
   "author": "frtavonatti",
   "license": "MIT",
   "description": "",
@@ -23,5 +28,8 @@
     "pg": "^8.16.3",
     "sequelize": "^6.37.7",
     "umzug": "^3.8.2"
+  },
+  "devDependencies": {
+    "supertest": "^7.1.4"
   }
 }

@@ -1,0 +1,4 @@
+node_modules
+postgres-data
+postgres-test-data
+.env

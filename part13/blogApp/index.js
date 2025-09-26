@@ -24,16 +24,19 @@ app.use('/api/logout', logoutRouter)
 app.use(errorHandler)
 
 // Config
-const start = async () => {
-  try {
-    await connectToDatabase()
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`)
-    })
-  } catch (error) {
-    console.error('Failed to start server:', error)
-    process.exit(1)
+if (process.env.NODE_ENV !== 'test') {
+  const start = async () => {
+    try {
+      await connectToDatabase()
+      app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`)
+      })
+    } catch (error) {
+      console.error('Failed to start server:', error)
+      process.exit(1)
+    }
   }
+  start()
 }
 
-start()
+export default app

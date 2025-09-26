@@ -10,13 +10,13 @@ router.post('/', async (req, res) => {
   const { username, password } = req.body
 
   const user = await User.findOne({ where: {username: username} })
-  if (user.disabled) {
-    return res.status(401).json({ error: 'user is disabled' })
-  }
 
   const passwordCorrect = password === 'secret' // for demonstrations purposes only
+  
   if (!(user && passwordCorrect)) {
     return res.status(401).json({ error: 'invalid username or password' })
+  } else if (user.disabled) {
+    return res.status(401).json({ error: 'user is disabled' })
   }
 
   const userForToken = {
