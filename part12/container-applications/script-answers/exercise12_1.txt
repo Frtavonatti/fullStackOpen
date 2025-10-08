@@ -1,7 +1,197 @@
-<html>
-<head><title>301 Moved Permanently</title></head>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>In English | Tietokone työvälineenä - Lapio</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="In English" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Welcome to the course page of the course Computing tools for CS studies, or Lapio" />
+<meta property="og:description" content="Welcome to the course page of the course Computing tools for CS studies, or Lapio" />
+<link rel="canonical" href="https://tkt-lapio.github.io//en/" />
+<meta property="og:url" content="https://tkt-lapio.github.io//en/" />
+<meta property="og:site_name" content="Tietokone työvälineenä - Lapio" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="1969-12-27T22:04:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="In English" />
+<meta name="google-site-verification" content="O16GEzCu8_885HGbQ4oY7pnXFYoMzNAFR1zheUKqCE8" />
+<meta name="msvalidate.01" content="98ABC70024CB18DDED96036B3344CC0A" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"1969-12-27T22:04:00+00:00","datePublished":"1969-12-27T22:04:00+00:00","description":"Welcome to the course page of the course Computing tools for CS studies, or Lapio","headline":"In English","mainEntityOfPage":{"@type":"WebPage","@id":"https://tkt-lapio.github.io//en/"},"url":"https://tkt-lapio.github.io//en/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://tkt-lapio.github.io//feed.xml" title="Tietokone työvälineenä - Lapio" /></head>
+
+
 <body>
-<center><h1>301 Moved Permanently</h1></center>
-<hr><center>nginx/1.24.0</center>
+
+  <header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Tietokone työvälineenä - Lapio</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/en/">In English</a></div>
+      </nav></div>
+</header>
+
+
+  <main class="page-content" aria-label="Content">
+    <div class="wrapper">
+      <div class="home"><h1 class="page-heading">In English</h1><h1 id="main-title">Welcome to the course page of the course Computing tools for CS studies, or Lapio </h1>
+<p>This course is primarily designed for CS freshmen, and its purpose is to go through the basics of the command line in a Unix-like system, using Git for version control, and building a static website using HTML and CSS. The course’s nickname “lapio” is Finnish, and it simply means “shovel”, as the course teaches the basic use of the essential tools in Computer Science.
+The course is passed with an online exam, which is held in <a href="https://moodle.helsinki.fi/course/view.php?id=62556">Moodle</a>, an e-learning environment widely used in the University. In order to enter the course  in Moodle, you will need to enter a key, which is is <strong>lapio-on-tyovaline</strong>. The exam questions are primarly based on the material provided on this Website, which is divided into three sections, each covering a different subject: the command line, Git and Github, and static websites.</p>
+
+<p>If you have experience of using the command line, Git and HTML/CSS, you are free to take the exam right away, without reading the material or doing the exercises. At the start of each section there is a list of learning goals, which will help you determine whether you should read the material or not. Even if you don’t read the material, make sure to go through <a href="/departments-systems">this page</a> as it provides important information about the department’s IT systems.</p>
+
+<p>However, if you are not familiar with the tools discussed on this course, go through the material carefully. The course will cover skills you will definitely need in your CS studies and in the working life. There are exercises embedded in the material, and doing them will earn you course points. Read the <a href="/exam">grading</a> page for more information.</p>
+
+<h2 id="assistance">Assistance</h2>
+
+<p>Course uses Discord server for remote assistance.
+<a href="https://study.cs.helsinki.fi/discord/join/lapio">Link to Discord servre</a></p>
+
+<p>You are free to ask any questions you have with regards to the exercises, the course, or the exam.</p>
+
+<p>Degrading, discriminatory or offensive language is not allowed, and will result in actions against the commenter.</p>
+
+<p>In addition to Discord server, there will be face-to-face assistance available at some point later. <!--You can find timetable [here](/paja) ---></p>
+
+<h2 id="tools">Tools</h2>
+
+<p>The exercises can be done using any Unix-type operating system. In practice, this often refers to a Linux or a MacOS computer. If possible, we recommend doing all exercises, excluding the SSH exercise in part one, to be done using the department’s lab computers, which have the University’s own Linux distribution, <a href="https://wiki.helsinki.fi/display/it4sci/Cubbli+Linux">Cubbli</a>, installed on them.</p>
+
+<p>If you only have access to a Windows computer, there are several things you can do. Otherwise passing the course doesn’t make much sense, as the point is to get to know using Unix-like systems.</p>
+
+<h3 id="windows-subsystem-for-linux"><strong>Windows Subsystem for Linux</strong></h3>
+
+<p>Windows 10 allows for installation of Ubuntu as an application. This way you can get Linux-environment good for this course without trouble.</p>
+
+<p>Installing Windows Subsystem for Linux:</p>
+
+<ol>
+  <li>Launch <a href="https://www.thewindowsclub.com/how-to-open-an-elevated-powershell-prompt-in-windows-10">Elevated Powershell</a> and copy to window 
+<br /><em>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux</em>
+<br />(Code installs the feature if it’s not yet installed. <strong>NEVER run any code you get online unless you know what it does</strong>)</li>
+  <li>Install ‘Ubuntu’ application <a href="https://www.microsoft.com/fi-fi/p/ubuntu/9nblggh4msv6?activetab=pivot%3Aoverviewtab">From Microsoft Store</a>.</li>
+  <li>Launch Ubuntu application and create user to use in it.</li>
+</ol>
+
+<p>More exact installation guide available <a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">here</a>.</p>
+
+<p>If using only textbased environment feels too scary or for some other reason you can’t or don’t want to use Subsystem you can install Ubuntu in VirtualBox instance.</p>
+
+<h3 id="virtualbox"><strong>VirtualBox</strong></h3>
+
+<p>Before installing VirtualBox, make sure you have at least 512M, preferably 1G of <a href="https://www.computerhope.com/issues/ch000149.htm">free RAM</a> left free on your machine.</p>
+
+<p>Installing VirtualBox</p>
+
+<ol>
+  <li>Download and install VirtualBox from <a href="https://www.virtualbox.org/wiki/Downloads">here</a></li>
+  <li>Download the desktop image (.iso) of Ubuntu 22.04 <a href="http://releases.ubuntu.com/22.04/">here</a>. The contents of the file .iso are similar to a CD which you would use to install an operating system.</li>
+  <li>Follow <a href="http://www.psychocats.net/ubuntu/virtualbox">these</a> instructions in order to create the virtual machine.</li>
+  <li>Launch the virtual machine from VirtualBox.</li>
+</ol>
+
+<p>Don’t be afraid to ask for help, and please give us feedback, if the material can be improved with regards to instructions for Windows users!</p>
+
+<h2 id="before-you-start-reading-the-material">Before you start reading the material</h2>
+
+<p>Passing the course on your personal computer might require installing some software. If you don’t plan on passing the course on the department’s computer labs’ computers, make sure you are able to install software on the computer you will be using.</p>
+
+<p>If you are working on a personal computer, you should install <a href="https://www.eduroam.org/what-is-eduroam/">Eduroam</a>, which will grant you a secure access to the Internet while on campus. <a href="https://helpdesk.it.helsinki.fi/en/instructions/logging-and-connections/networks/setting-eduroam-installer-package">Here</a> are the instructions. Note that you can also use it overseas and on mobile devices.</p>
+
+<h2 id="material-reading-guides">Material reading guides</h2>
+
+<p>The percentage after an exercise states what is its relative weight of that weeks exercises.</p>
+
+<p>The material is built in a way which allows following along the examples. We recommend doing that.</p>
+
+<p>If you find any errors or typos, you can fork <a href="https://github.com/tkt-lapio/tkt-lapio.github.io">this</a> project, and create a pull request. If you don’t know what either of those mean, they are discussed at the end of the second part.</p>
+<h2 class="post-list-heading">Material</h2>
+    <ul class="post-list"><li>
+        <h3>
+          <a class="post-link" href="/command-line/">
+            Part 1 - The Command Line
+          </a>
+        </h3>
+      </li><li>
+        <h3>
+          <a class="post-link" href="/git-en/">
+            Part 2 - Version control: Git and Github
+          </a>
+        </h3>
+      </li><li>
+        <h3>
+          <a class="post-link" href="/websites/">
+            Part 3 - Static Websites
+          </a>
+        </h3>
+      </li></ul>
+
+    <h2 class="post-list-heading">Other Info</h2>
+    <ul class="post-list"><li>
+        <h3>
+          <a class="post-link" href="/about-googling/">
+            About efficient Googling
+          </a>
+        </h3>
+      </li><li>
+        <h3>
+          <a class="post-link" href="/exam/">
+            Exam and grading
+          </a>
+        </h3>
+      </li><li>
+        <h3>
+          <a class="post-link" href="/departments-systems/">
+            The CS department&#39;s systems
+          </a>
+        </h3>
+      </li></ul>
+
+
+    <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p></div>
+    </div>
+  </main>
+
+  <footer class="site-footer h-card">
+  <data class="u-url" href="/%20/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Tietokone työvälineenä - Lapio</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Tietokone työvälineenä - Lapio</li><li><a class="u-email" href="mailto:terho.uotila@helsinki.fi">terho.uotila@helsinki.fi</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/tkt-lapio"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">tkt-lapio</span></a></li></ul>
+</div><div class="footer-col footer-col-3">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
+          <img alt="Creative Commons -lisenssi" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png"
+          />
+        </a>
+        <br/> Materiaali on lisensoitu
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons BY-NC-SA 3.0 -lisenssillä</a>.
+      </div></div>
+
+  </div>
+
+</footer>
+
 </body>
+
 </html>
