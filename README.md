@@ -1,104 +1,106 @@
-# Proyecto Full Stack Open
+# Full Stack Open Project
 
-Este repositorio contiene el desarrollo de múltiples proyectos como parte del curso [Full Stack Open](https://fullstackopen.com/es/) ofrecido por la Universidad de Helsinki. El curso se enfoca en tecnologías modernas de desarrollo web, incluyendo **JavaScript**, **React**, **Node.js**, y **MongoDB**, cubriendo tanto el frontend como el backend de una aplicación completa.
+This repository contains the development of multiple projects as part of the [Full Stack Open](https://fullstackopen.com/en/) course offered by the University of Helsinki. The course focuses on modern web development technologies, including **JavaScript**, **React**, **Node.js**, **MongoDB**, **PostgreSQL**, **Docker**, **React Native**, **TypeScript** and **GraphQL**, covering both the frontend and backend of a complete application.
 
-## Descripción del Proyecto
+## Project Description
 
-Cada carpeta en este repositorio contiene uno o más proyectos destinados a desarrollar las habilidades y tecnologías en las que se enfoca cada capítulo del curso. Estos proyectos abarcan desde la creación de componentes en React hasta la implementación de servidores con Node.js y Express, pruebas automatizadas, gestión avanzada del estado, y más.
+Each folder in this repository contains one or more projects aimed at developing the skills and technologies covered in each chapter of the course. These projects range from creating React components to implementing servers with Node.js and Express, automated testing, advanced state management, mobile development, containerization, relational and non-relational databases, and more.
 
-## Estructura del Proyecto
+## Project Structure
 
-El proyecto está dividido en las siguientes partes:
+The project is divided into the following parts:
 
-<!-- ### 0. Fundamentos de las aplicaciones web
-    - **Carpeta**: `part0`
-    - Introducción a los fundamentos de las aplicaciones web, HTTP, y manejo básico de archivos. -->
+### 1. Introduction to React
 
-### 1. Introducción a React
+    - **Folder**: `part1`
+    - Introduction to **React**: creating components, managing state and events.
 
-    - **Carpeta**: `part1`
-    - Introducción a **React**: creación de componentes, manejo de estado y eventos.
+### 2. Communicating with the server
 
-### 2. Comunicándose con el servidor
+    - **Folder**: `part2`
+    - Setting up communication with a server using **Axios** and **fetch**, and handling APIs.
 
-    - **Carpeta**: `part2`
-    - Configuración de comunicación con un servidor usando **Axios** y **fetch**, y manejo de APIs.
+### 3. Programming a server with NodeJS and Express
 
-### 3. Programando un servidor con NodeJS y Express
+    - **Folder**: `part3`
+    - Creating a server with **Node.js** and **Express**, handling routes and CRUD operations.
 
-    - **Carpeta**: `part3`
-    - Creación de un servidor con **Node.js** y **Express**, con manejo de rutas y operaciones CRUD.
+### 4. Testing Express servers, user management
 
-### 4. Probando servidores Express, administración de usuarios
+    - **Folder**: `part4`
+    - Introduction to automated testing with **Jest** and **Supertest** in Express servers, along with user management.
 
-    - **Carpeta**: `part4`
-    - Introducción a pruebas automatizadas con **Jest** y **Supertest** en servidores Express, junto con administración de usuarios.
+### 5. Testing React applications
 
-### 5. Probando aplicaciones React
+    - **Folder**: `part5`
+    - Setting up unit and integration tests in React applications.
 
-    - **Carpeta**: `part5`
-    - Configuración de pruebas unitarias y de integración en aplicaciones React.
+### 6. Advanced state management
 
-### 6. Gestión avanzada del estado
+    - **Folder**: `part6`
+    - Using **Redux** for advanced state management in React applications.
 
-    - **Carpeta**: `part6`
-    - Uso de **Redux** para el manejo avanzado del estado en aplicaciones React.
+### 7. React router, custom hooks, styling with CSS and webpack
 
-### 7. React router, custom hooks, estilando la aplicación con CSS y webpack
-
-    - **Carpeta**: `part7`
-    - Implementación de navegación con **React Router**, creación de hooks personalizados, estilización avanzada y configuración de **Webpack**.
+    - **Folder**: `part7`
+    - Implementing navigation with **React Router**, creating custom hooks, advanced styling, and **Webpack** configuration.
 
 ### 8. GraphQL
 
-    - **Carpeta**: `part8`
-    - Introducción a **GraphQL** para realizar consultas y manejar datos en una aplicación.
+    - **Folder**: `part8`
+    - Introduction to **GraphQL** for queries and data management in an application.
 
 ### 9. TypeScript
 
-    - **Carpeta**: `part9`
-    - Uso de **TypeScript** para mejorar la robustez y escalabilidad del código.
+    - **Folder**: `part9`
+    - Using **TypeScript** to improve code robustness and scalability.
 
 ### 10. React Native
 
-    - **Carpeta**: `part10`
-    - Desarrollo de una aplicación móvil con **React Native**.
+    - **Folder**: `part10`
+    - Developing a mobile application with **React Native**.
 
-### 11. CI/CD (Disponible en inglés)
+### 11. CI/CD (Available in English)
 
-    - **Carpeta**: `part11`
-    - Configuración de **CI/CD** (Integración y Entrega Continua) para despliegues automáticos.
+    - **Folder**: `part11`
+    - Setting up **CI/CD** (Continuous Integration and Delivery) for automatic deployments.
 
-### 12. Contenedores
+### 12. Containers
 
-    - **Carpeta**: `part12`
-    - Introducción al uso de **contenedores** con Docker para empaquetar y distribuir aplicaciones.
+    - **Folder**: `part12`
+    - Introduction to using **containers** with Docker to package and distribute applications.
 
-### 13. Utilizando bases de datos relacionales
+### 13. Using relational databases
 
-    - **Carpeta**: `part13`
-    - Uso de bases de datos relacionales y **SQL** en aplicaciones full stack.
+    - **Folder**: `part13`
+    - Using relational databases and **SQL** (PostgreSQL) in full stack applications.
 
-### Tecnologías utilizadas
+### Technologies Used
 
-- **Frontend**: React, Redux, JavaScript, CSS
-- **Backend**: Node.js, Express, MongoDB
-- **Cliente HTTP**: Axios (o `fetch` en algunos casos)
+- **Languages**: TypeScript, JavaScript
+- **Frontend**: React, Redux, React Native
+- **Backend**: Node.js, Express
+- **Databases**: MongoDB, PostgreSQL, Redis
+- **Containerization**: Docker
+- **API**: GraphQL, REST
+- **Testing**: Jest, Supertest, Playwright
 
-## Curso Full Stack Open
+## Full Stack Open Course
 
-Este proyecto es parte de las actividades prácticas del curso **Full Stack Open**. Este curso está diseñado para enseñar habilidades prácticas en el desarrollo de aplicaciones web modernas y se enfoca en:
+This project is part of the practical activities of the **Full Stack Open** course. This course is designed to teach practical skills in modern web application development and focuses on:
 
-- Creación de aplicaciones full stack utilizando **React** en el frontend y **Node.js** en el backend.
-- Implementación de servicios RESTful y operaciones CRUD.
-- Conexión de aplicaciones frontend con APIs y manejo de bases de datos con MongoDB.
+- Creating full stack applications using **React** on the frontend and **Node.js** on the backend.
+- Implementing RESTful and GraphQL services, CRUD operations.
+- Connecting frontend applications with APIs and managing databases with MongoDB, PostgreSQL, and Redis.
+- Mobile development with React Native.
+- Containerization with Docker.
 
-Para más información sobre el curso, visita: [Full Stack Open](https://fullstackopen.com/es/)
+For more information about the course, visit: [Full Stack Open](https://fullstackopen.com/en/)
 
-## Licencia
+## License
 
-Este proyecto sigue los términos y condiciones de la [licencia MIT](LICENSE).
+This project follows the terms and conditions of the [MIT license](LICENSE).
 
-## Autor
+## Author
 
-Este proyecto fue desarrollado por [Frtavonatti](https://github.com/Frtavonatti) como parte de la formación en el curso Full Stack Open.
+This project was developed by [Frtavonatti](https://github.com/Frtavonatti) as part of the training in the Full Stack Open course.
