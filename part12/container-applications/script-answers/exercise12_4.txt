@@ -1,0 +1,44 @@
+Script started on 2025-10-09 20:27:10+01:00
+$ docker start -i infallible_cerf 
+root@b1e072c0a44b:/# curl -sL https://deb.nodesource.com/setup_20.x | bash
+bash: curl: command not found
+root@b1e072c0a44b:/# apt install -y nodejs
+
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  ca-certificates libbrotli1 libcares2 libicu74 libnghttp2-14 libnode109 libssl3t64 libuv1t64 node-acorn node-busboy node-cjs-module-lexer node-undici node-xtend nodejs-doc openssl
+Suggested packages:
+  npm
+The following NEW packages will be installed:
+  ca-certificates libbrotli1 libcares2 libicu74 libnghttp2-14 libnode109 libuv1t64 node-acorn node-busboy node-cjs-module-lexer node-undici node-xtend nodejs nodejs-doc openssl
+The following packages will be upgraded:
+  libssl3t64
+1 upgraded, 15 newly installed, 0 to remove and 2 not upgraded.
+Need to get 30.5 MB of archives.
+After this operation, 111 MB of additional disk space will be used.
+Fetched 30.5 MB in 4s (7494 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+debconf: unable to initialize frontend: Dialog
+debconf: falling back to frontend: Readline
+debconf: falling back to frontend: Teletype
+Updating certificates in /etc/ssl/certs...
+146 added, 0 removed; done.
+update-alternatives: using /usr/bin/nodejs to provide /usr/bin/js (js) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/js.1.gz because associated file /usr/share/man/man1/nodejs.1.gz (of link group js) doesn't exist
+Processing triggers for libc-bin (2.39-0ubuntu8.6) ...
+Processing triggers for ca-certificates (20240203) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+
+root@b1e072c0a44b:/usr/src# ls
+index.js
+root@b1e072c0a44b:/usr/src# node index.js 
+Hello world
+root@b1e072c0a44b:/usr/src# exit
+exit
+
+Script done on 2025-10-09 20:28:23+01:00

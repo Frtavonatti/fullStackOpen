@@ -1,0 +1,13 @@
+Script started on 2025-10-09 20:21:37+01:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="190" LINES="58"]
+frtav@Matebook: ~/code/full-stack-app/part12/container-applications/script-answers$ docker start -i infallible_cerf 
+root@b1e072c0a44b:/# cd usr/src/
+root@b1e072c0a44b:/usr/src# nano index.js 
+  GNU nano 7.2  index.js   
+* 
+"Hello world"
+root@b1e072c0a44b:/usr/src# ls
+index.js
+root@b1e072c0a44b:/usr/src# exit
+exit
+frtav@Matebook: ~/code/full-stack-app/part12/container-applications/script-answers$ exit
+exit
