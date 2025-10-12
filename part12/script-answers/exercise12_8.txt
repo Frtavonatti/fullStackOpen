@@ -1,0 +1,62 @@
+Script started on 2025-10-12 13:53:16+01:00 [TERM="xterm-256color" TTY="/dev/pts/4" COLUMNS="190" LINES="56"]
+docker exec -it todo-app-mongo-1 mongosh -u root -p example
+show dbs
+
+admin         100.00 KiB
+config        108.00 KiB
+local          72.00 KiB
+the_database   56.00 KiB
+
+use the_database
+
+switched to db the_database
+
+show collections
+
+todos
+
+db.todos.find({})
+
+[
+  {
+    _id: ObjectId('68eb6dc8d518cedbd6ce5f47'),
+    text: 'Write code',
+    done: false
+  },
+  {
+    _id: ObjectId('68eb6dc8d518cedbd6ce5f48'),
+    text: 'Learn about containers',
+    done: false
+  }
+]
+
+db.todos.insertOne({ text: 'Increase the number of tools in my tool belt', done: false })
+
+{
+  acknowledged: true,
+  insertedId: ObjectId('68eba5832b953cfe0dce5f47')
+}
+
+db.todos.find({})
+
+[
+  {
+    _id: ObjectId('68eb6dc8d518cedbd6ce5f47'),
+    text: 'Write code',
+    done: false
+  },
+  {
+    _id: ObjectId('68eb6dc8d518cedbd6ce5f48'),
+    text: 'Learn about containers',
+    done: false
+  },
+  {
+    _id: ObjectId('68eba5832b953cfe0dce5f47'),
+    text: 'Increase the number of tools in my tool belt',
+    done: false
+  }
+]
+
+exit
+
+Script done on 2025-10-12 13:56:48+01:00 [COMMAND_EXIT_CODE="0"]
