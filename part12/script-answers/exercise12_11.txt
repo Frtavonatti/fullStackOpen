@@ -1,0 +1,36 @@
+Script started on 2025-10-12 16:09:36+01:00 [TERM="xterm-256color" TTY="/dev/pts/5" COLUMNS="190" LINES="56"]
+
+frtav@Matebook:~/code/full-stack-app/part12/script-answers$ docker ps -a
+CONTAINER ID   IMAGE                      COMMAND                  CREATED       STATUS                    PORTS                                           NAMES
+3f79eb8cfca2   initialized-mongo:latest   "docker-entrypoint.s…"   2 hours ago   Up 2 hours                0.0.0.0:3456->27017/tcp, [::]:3456->27017/tcp   todo-app-mongo-1
+f92f6c51b157   redis:latest               "docker-entrypoint.s…"   2 hours ago   Up 2 hours                0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp     todo-app-redis-1
+0db9ddf1c678   nginx                      "/docker-entrypoint.…"   3 hours ago   Exited (0) 2 hours ago                                                    festive_kapitsa
+f52dff4c44b0   nginx                      "/docker-entrypoint.…"   3 hours ago   Exited (0) 2 hours ago                                                    awesome_villani
+0d13745e729b   postgres:16                "docker-entrypoint.s…"   2 weeks ago   Exited (0) 23 hours ago                                                   habyt-postgres
+
+frtav@Matebook:~/code/full-stack-app/part12/script-answers$ docker exec -it todo-app-redis-1 redis-cli
+127.0.0.1:6379> KEYS *
+1) "stats"
+
+127.0.0.1:6379> GET stats
+"1"
+
+127.0.0.1:6379> SET stats 9001
+OK
+
+127.0.0.1:6379> GET stats
+"9001"
+
+127.0.0.1:6379> DEL stats
+(integer) 1
+
+127.0.0.1:6379> GET stats
+(nil)
+
+127.0.0.1:6379> GET stats
+"1"
+
+frtav@Matebook:~/code/full-stack-app/part12/script-answers$ exit
+exit
+
+Script done on 2025-10-12 16:11:56+01:00 [COMMAND_EXIT_CODE="0"]
