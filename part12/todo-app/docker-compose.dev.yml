@@ -14,11 +14,3 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
-
-
-#URLS
-# REDIS_URL=redis://localhost:6379 
-# MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database
-
-#Commands to run
-# REDIS_URL=redis://localhost:6379 MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev

@@ -1,0 +1,11 @@
+### Test POST /todos with valid body
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+  "text": "Test todo item",
+  "done": false
+}
+
+### Test GET /stats
+GET http://localhost:3000/stats
