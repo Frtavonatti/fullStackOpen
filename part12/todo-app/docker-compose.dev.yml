@@ -1,0 +1,14 @@
+services:
+  mongo:
+    image: initialized-mongo:latest
+    ports:
+      - "3456:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: the_database
+    volumes:
+      - ./mongo_data:/data/db # Bind mount for MongoDB data: this mounts the host directory ./mongo_data to /data/db in the container
+
+# volumes:
+#   mongo_data: if used with mongo_data:/data/db, this becomes a named volume
