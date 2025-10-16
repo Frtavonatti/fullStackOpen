@@ -1,4 +1,15 @@
 services:
+  todo-backend:
+    build: ./todo-backend
+    ports:
+      - "3000:3000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MONGO_URL=mongodb://root:example@mongo:27017/the_database?authSource=admin
+    depends_on:
+      - mongo
+      - redis
+
   mongo:
     image: initialized-mongo:latest
     ports:
