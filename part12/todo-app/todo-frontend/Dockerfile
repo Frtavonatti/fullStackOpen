@@ -10,11 +10,11 @@ RUN npm ci
 
 # Testing stage
 FROM build-front AS test-front
-RUN npm ci --include=dev
-CMD [ "npm", "run", "test" ]
+ENV CI=true
+RUN npm run test -- --run
 
 # Production build
-FROM build-front AS prod-front
+FROM test-front AS prod-front
 RUN npm run build
 
 EXPOSE 4173
