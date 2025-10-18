@@ -1,0 +1,13 @@
+services:
+  app:
+    image: todo-front-dev
+    build:
+      context: . 
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 5173:5173
+    container_name: todo-front-dev
+    environment:
+      - VITE_BACKEND_URL=http://localhost:3000
