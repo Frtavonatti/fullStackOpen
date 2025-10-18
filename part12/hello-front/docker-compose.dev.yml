@@ -1,0 +1,11 @@
+services:
+  app:
+    image: hello-front-dev
+    build:
+      context: . # The context uses this directory as the build context
+      dockerfile: dev.Dockerfile # This points to which Dockerfile to use
+    volumes:
+      - ./:/usr/src/app # The path can be relative, so ./ is enough to refer to the same location as the docker-compose.yml
+    ports:
+      - 5173:5173
+    container_name: hello-front-dev # This will name the container hello-front-dev
