@@ -1,6 +1,12 @@
 services:
   todo-backend:
-    build: ./todo-backend
+    image: todo-back-dev
+    container_name: todo-back-dev
+    build: 
+      context: ./todo-backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./todo-backend:/usr/src/app
     ports:
       - "3000:3000"
     environment:
